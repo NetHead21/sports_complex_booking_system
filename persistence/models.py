@@ -20,21 +20,3 @@ class Booking(BaseModel):
     date: date
     time: time
     user: str
-
-
-if __name__ == "__main__":
-    user = {
-        "id": "NetHead21",
-        "password": "helloWorld21",
-        "email": "hello.world@gmail.com",
-    }
-
-    member1 = Member(**user)
-
-    print(member1.id)
-    print(member1.password)
-    print(member1.email)
-    #
-    # book1 = Booking(room_id="AR", date="2024-11-20", time="13:00:00", user=member1.id)
-    #
-    # print(book1)
