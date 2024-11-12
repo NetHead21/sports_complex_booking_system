@@ -25,8 +25,8 @@ class Booking(BaseModel):
 if __name__ == "__main__":
     user = {
         "id": "NetHead21",
-        "password": "$@@v3dr@21",
-        "email": "junivensaavedra@gmail.com",
+        "password": "helloWorld21",
+        "email": "hello.world@gmail.com",
     }
 
     member1 = Member(**user)
