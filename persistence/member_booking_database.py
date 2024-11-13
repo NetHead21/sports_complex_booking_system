@@ -1,7 +1,8 @@
 import mysql
 from mysql.connector.cursor_cext import CMySQLCursor
 
-from persistence import DatabaseManager, Member
+from persistence import DatabaseManager
+from .models import Member
 
 
 class MemberBookingDatabase:
@@ -22,7 +23,7 @@ class MemberBookingDatabase:
             """
             self.db.execute(query, member.id, member.password, member.email)
             self.db.connection.commit()
-            print("Member Registered Successfully!")
+
         except mysql.connector.Error as err:
             print(err)
 
