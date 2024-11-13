@@ -16,30 +16,34 @@ class MemberBookingDatabase:
         :return: None
         """
 
-        query = """
-            class insert_new_member(%s, %s, %s)
-        """
-        self.db.execute(query, member.id, member.password, member.email)
-        self.db.connection.commit()
+        try:
+            query = """
+                call insert_new_member(%s, %s, %s);
+            """
+            self.db.execute(query, member.id, member.password, member.email)
+            self.db.connection.commit()
+            print("Member Registered Successfully!")
+        except mysql.connector.Error as err:
+            print(err)
 
-    def delete_member(self, member_id: int) -> None:
+    def delete_member(self, member_id: str) -> None:
         """
         Deleting a member from the members table
 
-        :param member_id: int
+        :param member_id: str, the member_id or username to be deleted
         :return: None
         """
 
         try:
             query = """
-                call delete_member(%s)
+                call delete_member(%s);
             """
-            self.db.execute(query, (member_id,))
+            self.db.execute(query, member_id)
             self.db.connection.commit()
-        except Exception:
+        except mysql.connector.Error:
             print(f"Member with ID {member_id} does not exist.")
 
-    def update_member_password(self, member_id: int, password: str) -> None:
+    def update_member_password(self, member_id: str, password: str) -> None:
         """
         Update Member Password
 
@@ -48,13 +52,16 @@ class MemberBookingDatabase:
         :return: None
         """
 
-        query = """
-            call update_member_password(%s, %s)
-        """
-        self.db.execute(query, (member_id, password))
-        self.db.connection.commit()
+        try:
+            query = """
+                call update_member_password(%s, %s);
+            """
+            self.db.execute(query, member_id, password)
+            self.db.connection.commit()
+        except mysql.connector.Error:
+            print(f"Member with ID {member_id} does not exist.")
 
-    def update_member_email(self, member_id: int, email: str) -> None:
+    def update_member_email(self, member_id: str, email: str) -> None:
         """
         Update Member Email
 
@@ -63,13 +70,14 @@ class MemberBookingDatabase:
         :return: None
         """
 
-        query = """
-            call update_member_email(%s, %s)
-        """
-        self.db.execute(query, (member_id, email))
-        self.db.connection.commit()
-
-
+        try:
+            query = """
+                call update_member_email(%s, %s);
+            """
+            self.db.execute(query, member_id, email)
+            self.db.connection.commit()
+        except mysql.connector.Error:
+            print(f"Member with ID {member_id} does not exist.")
 
     def show_members(self) -> CMySQLCursor:
         """
@@ -107,3 +115,30 @@ class MemberBookingDatabase:
     #
     # table.align = "l"
     # print(table)
+
+
+if __name__ == "__main__":
+    member_booking = MemberBookingDatabase()
+    # print(member_booking.show_members())
+
+    # Insert new member to members table
+    # member_data = {
+    #     "id": "shalow21",
+    #     "password": "hello_world_21",
+    #     "email": "shalow21@gmail.com"
+    # }
+    # member_booking.create_new_member(Member(**member_data))
+
+    # Delete a member from members table
+    # member_id = "philip.l"
+    # member_booking.delete_member(member_id)
+
+    # Update Member Password
+    # member_id = "shalow21"
+    # new_password = "HelloWorld21"
+    # member_booking.update_member_password(member_id, new_password)
+
+    # Update Member Email
+    # member_id = "shalow21"
+    # new_email = "shalow21@hotmail.com"
+    # member_booking.update_member_email(member_id, new_email)

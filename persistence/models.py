@@ -20,3 +20,8 @@ class Booking(BaseModel):
     date: date
     time: time
     user: str
+
+
+if __name__ == "__main__":
+    member = Member(id="shalow21", password="HelloWorld21", email="shalow21@gmail.com")
+    print(member)
