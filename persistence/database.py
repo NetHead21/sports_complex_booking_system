@@ -26,21 +26,6 @@ class DatabaseManager:
         return cursor
 
 
-    # # Show bookings
-    # query = """
-    #     select
-    #         room_id,
-    #         room_type,
-    #         datetime_of_booking,
-    #         member_id,
-    #         payment_status
-    #     from member_bookings
-    # """
-    #
-    # cursor.execute(query)
-    # results = cursor.fetchall()
-
-
 if __name__ == "__main__":
     database_manager = DatabaseManager()
     query = """
