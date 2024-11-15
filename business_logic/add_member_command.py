@@ -10,14 +10,12 @@ class AddMembersCommand(Command):
         return True, None
 
 
-
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     try:
         member_data = {
             "id": "prince_elle_07",
             "password": "HellImPrince07",
-            "email": "princeelle@gmail.com"
+            "email": "princeelle@gmail.com",
         }
 
         member = Member(**member_data)

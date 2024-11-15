@@ -8,9 +8,7 @@ class DeleteMembersCommand(Command):
         return True, None
 
 
-
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     try:
         member_id = "shalow21"
         delete_member = DeleteMembersCommand()

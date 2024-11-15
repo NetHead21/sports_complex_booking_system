@@ -10,5 +10,3 @@ class ListMembersCommand(Command):
 
     def execute(self, data=None) -> tuple[bool, CMySQLCursor]:
         return True, db.show_members()
-
-
