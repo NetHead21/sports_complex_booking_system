@@ -145,7 +145,15 @@ if __name__ == "__main__":
 
     # booking_date = date(2018, 4, 15)
     # booking_time = time(14, 0, 0)
-    # print(room_booking.search_room("Badminton Court", booking_date, booking_time))
+    #
+    # room_data = {
+    #     "room_type": "Archery Range",
+    #     "book_date": booking_date,
+    #     "book_time": booking_time,
+    # }
+    #
+    # room = SearchRoom(**room_data)
+    # print(room_booking.search_room(room.room_type, room.book_date, room.book_time))
 
     # room_type = "AR"
     # book_date = date(2024, 11, 25)

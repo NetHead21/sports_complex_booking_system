@@ -11,14 +11,14 @@ class Member(BaseModel):
 
 class SearchRoom(BaseModel):
     room_type: str
-    date: date
-    time: time
+    book_date: date
+    book_time: time
 
 
 class Booking(BaseModel):
     room_id: str
-    date: date
-    time: time
+    book_date: date
+    book_time: time
     user: str
 
 
