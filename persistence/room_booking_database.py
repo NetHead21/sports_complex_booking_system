@@ -1,6 +1,7 @@
 from datetime import date, time
+from typing import List, Union
 
-import mysql
+import mysql.connector
 from mysql.connector.cursor_cext import CMySQLCursor
 
 from persistence import DatabaseManager
@@ -31,134 +32,181 @@ class RoomBookingDatabase:
         results = self.db.execute(query)
         return results.fetchall()
 
-    # table = PrettyTable()
-    # field_names: list[str] = [
-    #     "Room_ID",
-    #     "Room_Type",
-    #     "Date and Time",
-    #     "Booked_By",
-    #     "Status"
-    # ]
-    #
-    # table.field_names = field_names
-    #
-    #
-    # for result in results:
-    #     table.add_row(list(result))
-    #
-    # table.align = "l"
-    # print(table)
-
     def search_room(
         self, room_type: str, book_date: date, book_time: time
-    ) -> CMySQLCursor:
+    ) -> List[tuple]:
         """
-        Search for an available sports complex room
-        :param room_type: str, the room_id to book
+        Search for an available sports complex room using enhanced search procedure.
+
+        :param room_type: str, the type of room to search for
         :param book_date: date, the date of booking
         :param book_time: time, the time of booking
-        :return:
+        :return: list of available rooms or empty list if none found
         """
+        try:
+            cursor = self.db.connection.cursor()
 
-        query = """
-            call search_room(%s, %s, %s)
-        """
+            # Prepare the call with proper output variables
+            call_query = """
+                CALL search_room(%s, %s, %s, @status, @message)
+            """
+            
+            # Execute the procedure call
+            cursor.execute(call_query, (room_type, book_date, book_time))
 
-        results = self.db.execute(query, room_type, book_date, book_time)
-        return results.fetchall()
+            # Get the search results first (if any)
+            room_data = []
+            try:
+                # Try to fetch results in case the procedure returns a result set
+                room_data = cursor.fetchall()
+            except:
+                # If no result set, that's fine - some procedures don't return data
+                pass
 
-    #
-    # if results:
-    #     table = PrettyTable()
-    #     field_names: list[str] = [
-    #         "Id",
-    #         "Room_Type",
-    #         "Price"
-    #     ]
-    #
-    #     table.field_names = field_names
-    #
-    #
-    #     for result in results:
-    #         table.add_row(list(result))
-    #
-    #     table.align = "l"
-    #     print(table)
-    # else:
-    #     print("No results found, try another date and time.")
+            # Get the output parameters
+            cursor.execute("SELECT @status, @message")
+            status_result = cursor.fetchone()
+
+            if status_result:
+                status, message = status_result
+                print(f"📋 Search Status: {message}")
+
+                if status == "SUCCESS":
+                    cursor.close()
+                    return room_data
+                else:
+                    cursor.close()
+                    return []
+            else:
+                cursor.close()
+                return room_data
+
+        except mysql.connector.Error as err:
+            print(f"❌ Database Error during room search: {err}")
+            return []
+        except Exception as e:
+            print(f"❌ Unexpected Error during room search: {e}")
+            return []
 
     def book_room(
         self, room_id: str, book_date: date, book_time: time, user_id: str
-    ) -> None:
+    ) -> bool:
         """
-        Book Room or sports complex room
+        Book Room or sports complex room using the enhanced make_booking procedure.
+
+        This method calls the enhanced make_booking stored procedure which includes
+        comprehensive validation and returns detailed status information.
+
         :param room_id: str, the room_id to book
         :param book_date: date, what is the date of booking
         :param book_time: time, what is the time of booking
         :param user_id: str, what user_id book the room
-        :return: None
+        :return: bool, True if booking successful, False otherwise
         """
-
-        query = """
-            call make_booking(%s, %s, %s, %s)
-        """
-
         try:
-            self.db.execute(query, room_id, book_date, book_time, user_id)
-            self.db.connection.commit()
-            print("Room booked successfully!")
-        except mysql.connector.Error as err:
-            print(err)
+            # Call enhanced stored procedure with output parameters
+            cursor = self.db.connection.cursor()
 
-    def cancel_booking(self, booking_id: int) -> None:
+            # Prepare the call with proper output variables
+            call_query = """
+                CALL make_booking(%s, %s, %s, %s, @booking_id, @status, @message)
+            """
+            
+            # Execute the procedure call
+            cursor.execute(call_query, (room_id, book_date, book_time, user_id))
+            
+            # Retrieve the output parameter values
+            cursor.execute("SELECT @booking_id, @status, @message")
+            result = cursor.fetchone()
+
+            if result:
+                booking_id, status, message = result
+
+                if status == "SUCCESS":
+                    print(f"✅ {message}")
+                    print(f"📋 Booking ID: {booking_id}")
+                    self.db.connection.commit()
+                    cursor.close()
+                    return True
+                else:
+                    print(f"❌ Booking failed: {message}")
+                    print(f"📋 Status: {status}")
+                    self.db.connection.rollback()
+                    cursor.close()
+                    return False
+            else:
+                print("❌ Unexpected error: No result from stored procedure")
+                self.db.connection.rollback()
+                cursor.close()
+                return False
+
+        except mysql.connector.Error as err:
+            print(f"❌ Database Error: {err}")
+            if self.db.connection:
+                self.db.connection.rollback()
+            return False
+        except Exception as e:
+            print(f"❌ Unexpected Error: {e}")
+            if self.db.connection:
+                self.db.connection.rollback()
+            return False
+
+    def cancel_booking(self, booking_id: int) -> bool:
         """
-        Cancel Booking
+        Cancel Booking using the enhanced cancel_booking procedure.
+
+        This method calls the cancel_booking stored procedure which includes
+        business logic validation and returns detailed status information.
 
         :param booking_id: int, the booking id to cancel booking
-        :return: None
+        :return: bool, True if cancellation successful, False otherwise
         """
-
-        cancel_booking_query = f"""
-            call cancel_booking({booking_id}, @message);
-        """
-        sql_message_query = """
-            select @message;
-        """
-
         try:
-            self.db.execute(cancel_booking_query)
-            message = self.db.execute(sql_message_query)
-            message = message.fetchone()
-            print(message)
-            self.db.connection.commit()
+            cursor = self.db.connection.cursor()
+
+            # Prepare the call with proper output variables
+            call_query = """
+                CALL cancel_booking(%s, @message)
+            """
+            
+            # Execute the procedure call
+            cursor.execute(call_query, (booking_id,))
+
+            # Retrieve the output parameter value
+            cursor.execute("SELECT @message")
+            result = cursor.fetchone()
+
+            if result:
+                message = result[0]
+
+                # Check if cancellation was successful based on message content
+                if "cancelled" in message.lower() and "error" not in message.lower():
+                    print(f"✅ {message}")
+                    self.db.connection.commit()
+                    cursor.close()
+                    return True
+                else:
+                    print(f"❌ Cancellation failed: {message}")
+                    self.db.connection.rollback()
+                    cursor.close()
+                    return False
+            else:
+                print("❌ Unexpected error: No result from stored procedure")
+                self.db.connection.rollback()
+                cursor.close()
+                return False
+
         except mysql.connector.Error as err:
-            print(err)
+            print(f"❌ Database Error: {err}")
+            if self.db.connection:
+                self.db.connection.rollback()
+            return False
+        except Exception as e:
+            print(f"❌ Unexpected Error: {e}")
+            if self.db.connection:
+                self.db.connection.rollback()
+            return False
 
 
 if __name__ == "__main__":
     room_booking = RoomBookingDatabase()
-    # print(room_booking.show_bookings())
-
-    # booking_date = date(2018, 4, 15)
-    # booking_time = time(14, 0)
-    # print(room_booking.search_room("Badminton Court", booking_date, booking_time))
-
-    # booking_date = date(2018, 4, 15)
-    # booking_time = time(14, 0, 0)
-    #
-    # room_data = {
-    #     "room_type": "Archery Range",
-    #     "book_date": booking_date,
-    #     "book_time": booking_time,
-    # }
-    #
-    # room = SearchRoom(**room_data)
-    # print(room_booking.search_room(room.room_type, room.book_date, room.book_time))
-
-    # room_type = "AR"
-    # book_date = date(2024, 11, 25)
-    # book_time = time(13, 0, 0)
-    # user_id = "NetHead21"
-    # room_booking.book_room(room_type, book_date, book_time, user_id)
-
-    # room_booking.cancel_booking(19)
