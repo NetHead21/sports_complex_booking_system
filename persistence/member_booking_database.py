@@ -27,58 +27,82 @@ class MemberBookingDatabase:
         except mysql.connector.Error as err:
             print(err)
 
-    def delete_member(self, member_id: str) -> None:
+    def delete_member(self, member_id: str) -> bool:
         """
         Deleting a member from the members table
 
         :param member_id: str, the member_id or username to be deleted
-        :return: None
+        :return: bool - True if successful, False if member doesn't exist
         """
 
         try:
             query = """
                 call delete_member(%s);
             """
-            self.db.execute(query, member_id)
+            result = self.db.execute(query, member_id)
+            
+            # Check if any rows were affected
+            if result.rowcount == 0:
+                return False  # No rows affected means member doesn't exist
+            
             self.db.connection.commit()
-        except mysql.connector.Error:
-            print(f"Member with ID {member_id} does not exist.")
+            return True
+            
+        except mysql.connector.Error as err:
+            print(f"Database error: {err}")
+            return False
 
-    def update_member_password(self, member_id: str, password: str) -> None:
+    def update_member_password(self, member_id: str, password: str) -> bool:
         """
         Update Member Password
 
-        :param member_id: int
+        :param member_id: str
         :param password: str
-        :return: None
+        :return: bool - True if successful, False if member doesn't exist
         """
 
         try:
             query = """
                 call update_member_password(%s, %s);
             """
-            self.db.execute(query, member_id, password)
+            result = self.db.execute(query, member_id, password)
+            
+            # Check if any rows were affected
+            if result.rowcount == 0:
+                return False  # No rows affected means member doesn't exist
+            
             self.db.connection.commit()
-        except mysql.connector.Error:
-            print(f"Member with ID {member_id} does not exist.")
+            return True
+            
+        except mysql.connector.Error as err:
+            print(f"Database error: {err}")
+            return False
 
-    def update_member_email(self, member_id: str, email: str) -> None:
+    def update_member_email(self, member_id: str, email: str) -> bool:
         """
         Update Member Email
 
-        :param member_id: int
+        :param member_id: str
         :param email: str
-        :return: None
+        :return: bool - True if successful, False if member doesn't exist
         """
 
         try:
             query = """
                 call update_member_email(%s, %s);
             """
-            self.db.execute(query, member_id, email)
+            result = self.db.execute(query, member_id, email)
+            
+            # Check if any rows were affected
+            if result.rowcount == 0:
+                return False  # No rows affected means member doesn't exist
+            
             self.db.connection.commit()
-        except mysql.connector.Error:
-            print(f"Member with ID {member_id} does not exist.")
+            return True
+            
+        except mysql.connector.Error as err:
+            print(f"Database error: {err}")
+            return False
 
     def show_members(self) -> CMySQLCursor:
         """
@@ -123,12 +147,12 @@ if __name__ == "__main__":
     # print(member_booking.show_members())
 
     # Insert new member to members table
-    # member_data = {
-    #     "id": "shalow21",
-    #     "password": "hello_world_21",
-    #     "email": "shalow21@gmail.com"
-    # }
-    # member_booking.create_new_member(Member(**member_data))
+    member_data = {
+        "id": "shalow21",
+        "password": "hello_world_21",
+        "email": "shalow21@gmail.com",
+    }
+    member_booking.create_new_member(Member(**member_data))
 
     # Delete a member from members table
     # member_id = "philip.l"
