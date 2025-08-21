@@ -47,32 +47,32 @@ class RoomBookingDatabase:
             cursor = self.db.connection.cursor()
 
             # Use callproc which properly handles stored procedures with result sets
-            cursor.callproc('search_room', [room_type, book_date, book_time, '', ''])
-            
+            cursor.callproc("search_room", [room_type, book_date, book_time, "", ""])
+
             # Get the search results from stored_results
             room_data = []
             for result in cursor.stored_results():
                 room_data = result.fetchall()
 
             cursor.close()
-            
+
             # Get output parameters with a separate cursor
             output_cursor = self.db.connection.cursor()
             output_cursor.execute("SELECT @status, @message")
             status_result = output_cursor.fetchone()
-            
+
             if status_result:
                 status, message = status_result
                 if status:  # Only print if status is not None
                     print(f"📋 Search Status: {message}")
-                    
+
                     if status == "SUCCESS":
                         output_cursor.close()
                         return room_data
                     else:
                         output_cursor.close()
                         return []
-                        
+
             output_cursor.close()
             # If no proper status, return the data we found
             return room_data
@@ -107,10 +107,10 @@ class RoomBookingDatabase:
             call_query = """
                 CALL make_booking(%s, %s, %s, %s, @booking_id, @status, @message)
             """
-            
+
             # Execute the procedure call
             cursor.execute(call_query, (room_id, book_date, book_time, user_id))
-            
+
             # Retrieve the output parameter values
             cursor.execute("SELECT @booking_id, @status, @message")
             result = cursor.fetchone()
@@ -164,7 +164,7 @@ class RoomBookingDatabase:
             call_query = """
                 CALL cancel_booking(%s, @message)
             """
-            
+
             # Execute the procedure call
             cursor.execute(call_query, (booking_id,))
 
