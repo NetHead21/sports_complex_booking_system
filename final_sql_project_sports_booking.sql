@@ -2,7 +2,7 @@
 
 -- This project requires us to build a simple database to help us manage the
 -- booking process of a sports complex. The sports complex has the following
--- facilities: 2 tennis courts, 2 badminton courts, 2 multi-purpose fields and 1
+-- facilities: 2 tennis courts, 2 badminton courts, 2 multipurpose fields and 1
 -- archery range. Each facility can be booked for a duration of one hour.
 -- Only registered users are allowed to make a booking. After booking, the
 -- complex allows users to cancel their bookings latest by the day prior to the
@@ -165,7 +165,6 @@ CREATE TABLE bookings (
         REFERENCES rooms (id) ON DELETE RESTRICT ON UPDATE CASCADE,
     
     -- ENHANCED: Data validation constraints
-    CONSTRAINT chk_booking_future_date CHECK (booked_date >= CURDATE()),
     CONSTRAINT chk_total_amount_positive CHECK (total_amount >= 0),
     CONSTRAINT chk_booking_time_valid CHECK (booked_time BETWEEN '06:00:00' AND '22:00:00'),
     
@@ -254,6 +253,7 @@ BEGIN
 END$$
 
 -- Trigger for UPDATE operations (booking modifications)
+DELIMITER $$
 CREATE TRIGGER trg_booking_audit_update
     AFTER UPDATE ON bookings
     FOR EACH ROW
@@ -467,10 +467,10 @@ create procedure make_booking(
 		start transaction;
 		
 		-- Validate room exists and get price
-		select count(*), price_per_hour into v_room_count, v_price 
+		select count(*), price into v_room_count, v_price
 		from rooms 
-		where room_id = p_room_id and status = 'AVAILABLE'
-		group by price_per_hour;
+		where id = p_room_id and status = 'AVAILABLE'
+		group by price;
 		
 		if v_room_count = 0 then
 			set p_booking_id = null;
@@ -481,7 +481,7 @@ create procedure make_booking(
 			-- Validate member exists and is active
 			select count(*) into v_member_count 
 			from members 
-			where username = p_member_id and status = 'ACTIVE';
+			where id = p_member_id and status = 'ACTIVE';
 			
 			if v_member_count = 0 then
 				set p_booking_id = null;
@@ -534,12 +534,12 @@ create procedure make_booking(
 						-- Update member payment due
 						select payment_due into v_payment_due 
 						from members 
-						where username = p_member_id; 
+						where id = p_member_id;
 						
 						update members 
 						set payment_due = v_price + v_payment_due,
 							updated_at = now()
-						where username = p_member_id;
+						where id = p_member_id;
 						
 						set p_booking_id = v_new_booking_id;
 						set p_status = 'SUCCESS';
@@ -608,12 +608,12 @@ create procedure update_payment(
 
 			-- Update member payment due
 			select payment_due into v_payment_due 
-			from members where username = v_member_id;
+			from members where id = v_member_id;
 
 			update members 
 			set payment_due = greatest(v_payment_due - v_price, 0.00),
 				updated_at = now()
-			where username = v_member_id;
+			where id = v_member_id;
 			
 			set p_status = 'SUCCESS';
 			set p_message = 'Payment processed successfully';
@@ -645,7 +645,7 @@ create procedure view_bookings(
 		-- Validate member exists
 		select count(*) into v_member_count 
 		from members 
-		where username = p_id and status = 'ACTIVE';
+		where id = p_id and status = 'ACTIVE';
 		
 		if v_member_count = 0 then
 			set p_status = 'MEMBER_NOT_FOUND';
@@ -655,7 +655,7 @@ create procedure view_bookings(
 			select 
 				b.id as booking_id,
 				b.room_id,
-				r.room_name,
+				r.id,
 				r.room_type,
 				b.booked_date,
 				b.booked_time,
@@ -670,7 +670,7 @@ create procedure view_bookings(
 					else 'FUTURE'
 				end as booking_timing
 			from bookings b
-			inner join rooms r on b.room_id = r.room_id
+			inner join rooms r on b.room_id = r.id
 			where b.member_id = p_id
 			order by b.booked_date desc, b.booked_time desc;
 			
@@ -708,10 +708,9 @@ create procedure search_room(
 		else
 			-- Search for available rooms with detailed information
 			select 
-				r.room_id,
-				r.room_name,
+				r.id,
 				r.room_type,
-				r.price_per_hour,
+				r.price,
 				r.capacity,
 				r.status as room_status,
 				case 
@@ -723,13 +722,13 @@ create procedure search_room(
 				coalesce(
 					(select count(*) 
 					 from bookings b2 
-					 where b2.room_id = r.room_id 
+					 where b2.room_id = r.id
 					   and b2.booked_date between curdate() and date_add(curdate(), interval 30 day)
 					   and b2.payment_status != 'CANCELLED'
 					), 0
 				) as bookings_next_30_days
 			from rooms r 
-			where r.room_id not in (
+			where r.id not in (
 				select b.room_id 
 				from bookings b
 				where 
@@ -739,12 +738,12 @@ create procedure search_room(
 			) 
 			and r.room_type = p_room_type
 			and r.status = 'AVAILABLE'
-			order by r.price_per_hour asc, r.room_name asc;
+			order by r.price, r.room_type;
 			
 			-- Count the results for status message
 			select count(*) into v_search_count
 			from rooms r 
-			where r.room_id not in (
+			where r.id not in (
 				select b.room_id 
 				from bookings b
 				where 
