@@ -1,5 +1,3 @@
-from collections import OrderedDict
-
 from business_logic import (
     ListMembersCommand,
     AddMembersCommand,
@@ -14,49 +12,40 @@ from business_logic import (
 from presentation import Option
 from prompt_toolkit import prompt
 
-member_options = OrderedDict(
-    {
-        "A": Option("View All Members", ListMembersCommand()),
-        "B": Option("Add New Member", AddMembersCommand()),
-        "C": Option("Update Member Email", UpdateMembersEmailCommand()),
-        "D": Option("Update Member Password", UpdateMembersPasswordCommand()),
-        "E": Option("Delete A Member", DeleteMembersCommand()),
-    }
-)
+member_options = {
+    "A": Option("View All Members", ListMembersCommand()),
+    "B": Option("Add New Member", AddMembersCommand()),
+    "C": Option("Update Member Email", UpdateMembersEmailCommand()),
+    "D": Option("Update Member Password", UpdateMembersPasswordCommand()),
+    "E": Option("Delete A Member", DeleteMembersCommand()),
+}
 
-room_options = OrderedDict(
-    {
-        "A": Option("View All Rooms", ListRoomCommand()),
-        "B": Option("Search A Room", SearchRoomCommand()),
-        "C": Option("Book A Room", BookRoomCommand()),
-        "D": Option("Cancel Booking", CancelBookRoomCommand()),
-    }
-)
+room_options = {
+    "A": Option("View All Rooms", ListRoomCommand()),
+    "B": Option("Search A Room", SearchRoomCommand()),
+    "C": Option("Book A Room", BookRoomCommand()),
+    "D": Option("Cancel Booking", CancelBookRoomCommand()),
+}
 
-
-menu_options = OrderedDict(
-    {
-        "A": ("Member Management", member_options),
-        "B": ("Room Management", room_options),
-    }
-)
-
-
+menu_options = {
+    "A": ("Member Management", member_options),
+    "B": ("Room Management", room_options),
+}
 
 
 def main_menu():
     while True:
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("🏟️  SPORTS COMPLEX BOOKING SYSTEM")
-        print("="*50)
+        print("=" * 50)
         print("Main Menu:")
         for key, (menu_name, _) in menu_options.items():
             print(f"  {key}: {menu_name}")
         print("  Q: Quit")
-        print("-"*50)
+        print("-" * 50)
 
         choice = prompt("Select an option: ").upper()
-        
+
         if choice in menu_options:
             menu_name, sub_options = menu_options[choice]
             sub_menu(menu_name, sub_options)
@@ -67,18 +56,18 @@ def main_menu():
             print("❌ Invalid option. Please try again.")
 
 
-def sub_menu(menu_name: str, options: OrderedDict):
+def sub_menu(menu_name: str, options: dict):
     while True:
-        print(f"\n" + "="*50)
+        print(f"\n" + "=" * 50)
         print(f"📋 {menu_name}")
-        print("="*50)
+        print("=" * 50)
         for key, option in options.items():
             print(f"  {key}: {option.name}")
         print("  X: Back to Main Menu")
-        print("-"*50)
+        print("-" * 50)
 
         choice = prompt("Select an option: ").upper()
-        
+
         if choice in options:
             try:
                 print(f"\n🔄 Executing: {options[choice].name}")
@@ -92,4 +81,3 @@ def sub_menu(menu_name: str, options: OrderedDict):
         else:
             print("❌ Invalid option. Please try again.")
             input("Press Enter to continue...")
-
