@@ -17,7 +17,7 @@ member_options = {
     "B": Option("Add New Member", AddMembersCommand(), success_message=""),
     "C": Option("Update Member Email", UpdateMembersEmailCommand(), success_message=""),
     "D": Option("Update Member Password", UpdateMembersPasswordCommand(), success_message=""),
-    "E": Option("Delete A Member", DeleteMembersCommand()),
+    "E": Option("Delete A Member", DeleteMembersCommand(), success_message=""),
 }
 
 room_options = {
