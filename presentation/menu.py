@@ -8,6 +8,7 @@ from business_logic import (
     SearchRoomCommand,
     BookRoomCommand,
     CancelBookRoomCommand,
+    QuitCommand,
 )
 from presentation import Option, get_options_choice
 
@@ -29,6 +30,7 @@ room_options = {
 menu_options = {
     "A": ("Member Management", member_options),
     "B": ("Room Management", room_options),
+    "Q": ("Quit", {"Q": Option("Quit Application", QuitCommand(), success_message="")}),
 }
 
 
@@ -39,15 +41,16 @@ def main_menu():
     This function provides the main entry point for user interaction, displaying
     the available menu categories (Member Management, Room Management) and handling
     user navigation choices. It uses the get_options_choice utility for robust
-    input validation and automatically loops until the user chooses to quit.
+    input validation and follows the Command pattern consistently for all actions.
     
     Menu Structure:
         - A: Member Management (leads to member_options submenu)
         - B: Room Management (leads to room_options submenu)  
-        - Q: Quit (exits the application)
+        - Q: Quit (executes QuitCommand to terminate application)
     
     The function automatically handles invalid input by re-prompting the user
     until a valid choice is made using the get_options_choice utility.
+    All menu actions follow the Command pattern for architectural consistency.
     """
     while True:
         print("\n" + "=" * 50)
@@ -56,24 +59,17 @@ def main_menu():
         print("Main Menu:")
         for key, (menu_name, _) in menu_options.items():
             print(f"  {key}: {menu_name}")
-        print("  Q: Quit")
         print("-" * 50)
 
         # Create choices dictionary for get_options_choice
         main_choices = {
-            **{key: (menu_name, sub_options) for key, (menu_name, sub_options) in menu_options.items()},
-            "Q": ("Quit", None)
+            key: (menu_name, sub_options) for key, (menu_name, sub_options) in menu_options.items()
         }
         
         # Use get_options_choice for automatic validation
         choice_result = get_options_choice(main_choices)
-        
-        if choice_result[0] == "Quit":
-            print("Thank you for using Sports Complex Booking System!")
-            break
-        else:
-            menu_name, sub_options = choice_result
-            sub_menu(menu_name, sub_options)
+        menu_name, sub_options = choice_result
+        sub_menu(menu_name, sub_options)
 
 
 def sub_menu(menu_name: str, options: dict):
