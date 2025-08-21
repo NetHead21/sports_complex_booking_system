@@ -1,21 +1,45 @@
-from business_logic import Command
-from business_logic.member_database_manager import db
+from .command import Command
+from .member_database_manager import db
+from .member_input_service import MemberInputService
 
 
 class UpdateMembersEmailCommand(Command):
-    def execute(self, member_data: dict) -> tuple[bool, any]:
-        db.update_member_email(member_data["member_id"], member_data["email"])
-        return True, None
+    """Command responsible for updating member email addresses in the database."""
+    
+    def execute(self, data=None) -> tuple[bool, any]:
+        """
+        Execute the update member email command.
+        
+        Single responsibility: Execute the database operation for updating member email.
+        Input collection and validation are delegated to MemberInputService.
+        """
+        try:
+            # Delegate input collection to service
+            email_data = MemberInputService.collect_member_email_update_data()
+            
+            if email_data is None:
+                return False, "Email update cancelled or failed"
+            
+            member_id, new_email = email_data
+            
+            # Focus solely on database execution
+            success = db.update_member_email(member_id, new_email)
+            
+            # Display appropriate message using service utility
+            if success:
+                MemberInputService.display_operation_result("Email Update", member_id, True)
+                return True, None
+            else:
+                MemberInputService.display_operation_result("Email Update", member_id, False, "Member not found")
+                return False, f"Member '{member_id}' does not exist"
+            
+        except Exception as e:
+            print(f"❌ Database Error: {e}")
+            return False, str(e)
 
 
 if __name__ == "__main__":
-    try:
-        data: dict[str, str] = {
-            "member_id": "prince_elle_07",
-            "email": "prince_elle@hotmail.com",
-        }
-        update_member = UpdateMembersEmailCommand()
-        update_member.execute(data)
-
-    except Exception as e:
-        print(e)
+    # Test the command
+    update_email = UpdateMembersEmailCommand()
+    success, result = update_email.execute()
+    print(f"Command result: Success={success}, Result={result}")
