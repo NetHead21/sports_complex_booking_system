@@ -1,31 +1,66 @@
-from datetime import datetime, timedelta, time
-
 from mysql.connector.cursor_cext import CMySQLCursor
 
-from business_logic import Command
+from business_logic.command import Command
 from business_logic.room_database_manager import db
-from persistence.models import SearchRoom
+from business_logic.booking_input_service import BookingInputService
 
 
 class SearchRoomCommand(Command):
-    def execute(self, room: SearchRoom) -> tuple[bool, CMySQLCursor]:
-        return True, db.search_room(room.room_type, room.book_date, room.book_time)
+    """Command responsible for searching available rooms."""
+
+    def execute(self, data=None) -> tuple[bool, any]:
+        """
+        Execute the search room command.
+
+        Single responsibility: Execute the database operation for searching rooms.
+        Input collection and search criteria creation are delegated to BookingInputService.
+        """
+        try:
+            # Delegate input collection and search criteria creation to service
+            search_criteria = BookingInputService.collect_room_search_data()
+
+            if search_criteria is None:
+                return False, "Room search cancelled or failed"
+
+            # Focus solely on database execution
+            cursor_result = db.search_room(
+                search_criteria.room_type,
+                search_criteria.book_date,
+                search_criteria.book_time,
+            )
+
+            if cursor_result:
+                print(
+                    f"✅ Search completed for {search_criteria.room_type} on {search_criteria.book_date} at {search_criteria.book_time}"
+                )
+                return True, cursor_result
+            else:
+                print("❌ No rooms found matching your criteria.")
+                return False, "No search results"
+
+        except Exception as e:
+            print(f"❌ Search Error: {e}")
+            return False, str(e)
 
 
 if __name__ == "__main__":
+    """
+    Test the SearchRoomCommand with the new BookingInputService.
+    This demonstrates the separation of concerns - the command now focuses
+    solely on execution while the service handles all input collection.
+    """
     try:
-        five_days = datetime.today() + timedelta(days=5)
+        print("Testing SearchRoomCommand with BookingInputService")
+        print("=" * 50)
 
-        room_data = {
-            "room_type": "Archery Range",
-            "book_date": five_days.strftime("%Y-%m-%d"),
-            "book_time": time(13, 0, 0),
-        }
+        search_command = SearchRoomCommand()
+        success, result = search_command.execute()
 
-        room = SearchRoom(**room_data)
-
-        search_room = SearchRoomCommand()
-        print(search_room.execute(room))
+        if success:
+            print("✅ Test completed successfully")
+            print(f"Search results: {result}")
+        else:
+            print(f"❌ Test failed: {result}")
 
     except Exception as e:
-        print(e)
+        print(f"❌ Test error: {e}")
