@@ -1,0 +1,18 @@
+[project]
+name = "sports-booking"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "annotated-types==0.7.0",
+    "mysql-connector-python==9.1.0",
+    "prettytable==3.12.0",
+    "prompt-toolkit==3.0.51",
+    "pydantic==2.9.2",
+    "pydantic-core==2.23.4",
+    "python-dotenv==1.0.1",
+    "typing-extensions==4.12.2",
+    "uv==0.8.12",
+    "wcwidth==0.2.13",
+]
