@@ -46,40 +46,36 @@ class RoomBookingDatabase:
         try:
             cursor = self.db.connection.cursor()
 
-            # Prepare the call with proper output variables
-            call_query = """
-                CALL search_room(%s, %s, %s, @status, @message)
-            """
+            # Use callproc which properly handles stored procedures with result sets
+            cursor.callproc('search_room', [room_type, book_date, book_time, '', ''])
             
-            # Execute the procedure call
-            cursor.execute(call_query, (room_type, book_date, book_time))
-
-            # Get the search results first (if any)
+            # Get the search results from stored_results
             room_data = []
-            try:
-                # Try to fetch results in case the procedure returns a result set
-                room_data = cursor.fetchall()
-            except:
-                # If no result set, that's fine - some procedures don't return data
-                pass
+            for result in cursor.stored_results():
+                room_data = result.fetchall()
 
-            # Get the output parameters
-            cursor.execute("SELECT @status, @message")
-            status_result = cursor.fetchone()
-
+            cursor.close()
+            
+            # Get output parameters with a separate cursor
+            output_cursor = self.db.connection.cursor()
+            output_cursor.execute("SELECT @status, @message")
+            status_result = output_cursor.fetchone()
+            
             if status_result:
                 status, message = status_result
-                print(f"📋 Search Status: {message}")
-
-                if status == "SUCCESS":
-                    cursor.close()
-                    return room_data
-                else:
-                    cursor.close()
-                    return []
-            else:
-                cursor.close()
-                return room_data
+                if status:  # Only print if status is not None
+                    print(f"📋 Search Status: {message}")
+                    
+                    if status == "SUCCESS":
+                        output_cursor.close()
+                        return room_data
+                    else:
+                        output_cursor.close()
+                        return []
+                        
+            output_cursor.close()
+            # If no proper status, return the data we found
+            return room_data
 
         except mysql.connector.Error as err:
             print(f"❌ Database Error during room search: {err}")
