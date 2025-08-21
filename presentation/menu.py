@@ -13,15 +13,15 @@ from presentation import Option
 from prompt_toolkit import prompt
 
 member_options = {
-    "A": Option("View All Members", ListMembersCommand()),
-    "B": Option("Add New Member", AddMembersCommand()),
-    "C": Option("Update Member Email", UpdateMembersEmailCommand()),
-    "D": Option("Update Member Password", UpdateMembersPasswordCommand()),
+    "A": Option("View All Members", ListMembersCommand(), success_message=""),
+    "B": Option("Add New Member", AddMembersCommand(), success_message=""),
+    "C": Option("Update Member Email", UpdateMembersEmailCommand(), success_message=""),
+    "D": Option("Update Member Password", UpdateMembersPasswordCommand(), success_message=""),
     "E": Option("Delete A Member", DeleteMembersCommand()),
 }
 
 room_options = {
-    "A": Option("View All Rooms", ListRoomCommand()),
+    "A": Option("View All Rooms", ListRoomCommand(), success_message=""),
     "B": Option("Search A Room", SearchRoomCommand()),
     "C": Option("Book A Room", BookRoomCommand()),
     "D": Option("Cancel Booking", CancelBookRoomCommand()),
