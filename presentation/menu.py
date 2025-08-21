@@ -9,8 +9,7 @@ from business_logic import (
     BookRoomCommand,
     CancelBookRoomCommand,
 )
-from presentation import Option
-from prompt_toolkit import prompt
+from presentation import Option, get_options_choice
 
 member_options = {
     "A": Option("View All Members", ListMembersCommand(), success_message=""),
@@ -34,6 +33,22 @@ menu_options = {
 
 
 def main_menu():
+    """
+    Display and handle the main menu navigation for the sports booking system.
+    
+    This function provides the main entry point for user interaction, displaying
+    the available menu categories (Member Management, Room Management) and handling
+    user navigation choices. It uses the get_options_choice utility for robust
+    input validation and automatically loops until the user chooses to quit.
+    
+    Menu Structure:
+        - A: Member Management (leads to member_options submenu)
+        - B: Room Management (leads to room_options submenu)  
+        - Q: Quit (exits the application)
+    
+    The function automatically handles invalid input by re-prompting the user
+    until a valid choice is made using the get_options_choice utility.
+    """
     while True:
         print("\n" + "=" * 50)
         print("🏟️  SPORTS COMPLEX BOOKING SYSTEM")
@@ -44,19 +59,48 @@ def main_menu():
         print("  Q: Quit")
         print("-" * 50)
 
-        choice = prompt("Select an option: ").upper()
-
-        if choice in menu_options:
-            menu_name, sub_options = menu_options[choice]
-            sub_menu(menu_name, sub_options)
-        elif choice == "Q":
+        # Create choices dictionary for get_options_choice
+        main_choices = {
+            **{key: (menu_name, sub_options) for key, (menu_name, sub_options) in menu_options.items()},
+            "Q": ("Quit", None)
+        }
+        
+        # Use get_options_choice for automatic validation
+        choice_result = get_options_choice(main_choices)
+        
+        if choice_result[0] == "Quit":
             print("Thank you for using Sports Complex Booking System!")
             break
         else:
-            print("❌ Invalid option. Please try again.")
+            menu_name, sub_options = choice_result
+            sub_menu(menu_name, sub_options)
 
 
 def sub_menu(menu_name: str, options: dict):
+    """
+    Display and handle submenu navigation for specific menu categories.
+    
+    This function manages the display and interaction for submenu items within
+    a specific category (like Member Management or Room Management). It uses
+    the get_options_choice utility for input validation and handles command
+    execution with proper error handling.
+    
+    Args:
+        menu_name (str): The name of the submenu category to display in the header.
+        options (dict): Dictionary of menu options where keys are choice letters
+                       and values are Option objects containing commands to execute.
+    
+    Menu Behavior:
+        - Displays all available options for the category
+        - X: Back to Main Menu (returns to parent menu)
+        - Executes selected commands and handles any errors gracefully
+        - Uses get_options_choice for automatic input validation
+        - Waits for user confirmation before returning to menu
+    
+    Error Handling:
+        - Catches and displays any exceptions during command execution
+        - Prompts user to continue after errors or successful operations
+    """
     while True:
         print(f"\n" + "=" * 50)
         print(f"📋 {menu_name}")
@@ -66,18 +110,22 @@ def sub_menu(menu_name: str, options: dict):
         print("  X: Back to Main Menu")
         print("-" * 50)
 
-        choice = prompt("Select an option: ").upper()
-
-        if choice in options:
+        # Create choices dictionary including back option
+        submenu_choices = {
+            **options,
+            "X": Option("Back to Main Menu", None)
+        }
+        
+        # Use get_options_choice for automatic validation
+        selected_option = get_options_choice(submenu_choices)
+        
+        if selected_option.name == "Back to Main Menu":
+            break
+        else:
             try:
-                print(f"\n🔄 Executing: {options[choice].name}")
-                options[choice].choose()
+                print(f"\n🔄 Executing: {selected_option.name}")
+                selected_option.choose()
                 input("\nPress Enter to continue...")
             except Exception as e:
                 print(f"❌ Error: {e}")
                 input("Press Enter to continue...")
-        elif choice == "X":
-            break
-        else:
-            print("❌ Invalid option. Please try again.")
-            input("Press Enter to continue...")
