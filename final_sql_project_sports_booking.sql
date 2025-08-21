@@ -216,6 +216,163 @@ CREATE TABLE booking_audit (
     INDEX idx_booking_audit_user (changed_by)
 );
 
+-- ENHANCED: Audit triggers for automatic booking_audit population
+-- Trigger for INSERT operations (new bookings)
+DELIMITER $$
+CREATE TRIGGER trg_booking_audit_insert
+    AFTER INSERT ON bookings
+    FOR EACH ROW
+BEGIN
+    INSERT INTO booking_audit (
+        booking_id,
+        action,
+        old_values,
+        new_values,
+        changed_by,
+        ip_address,
+        user_agent
+    ) VALUES (
+        NEW.id,
+        'INSERT',
+        NULL,  -- No old values for INSERT
+        JSON_OBJECT(
+            'id', NEW.id,
+            'room_id', NEW.room_id,
+            'booked_date', NEW.booked_date,
+            'booked_time', NEW.booked_time,
+            'member_id', NEW.member_id,
+            'datetime_of_booking', NEW.datetime_of_booking,
+            'payment_status', NEW.payment_status,
+            'total_amount', NEW.total_amount,
+            'created_at', NEW.created_at,
+            'updated_at', NEW.updated_at
+        ),
+        COALESCE(USER(), 'SYSTEM'),           -- Database user or system
+        COALESCE(@audit_ip_address, 'N/A'),  -- Set via session variable
+        COALESCE(@audit_user_agent, 'N/A')   -- Set via session variable
+    );
+END$$
+
+-- Trigger for UPDATE operations (booking modifications)
+CREATE TRIGGER trg_booking_audit_update
+    AFTER UPDATE ON bookings
+    FOR EACH ROW
+BEGIN
+    INSERT INTO booking_audit (
+        booking_id,
+        action,
+        old_values,
+        new_values,
+        changed_by,
+        ip_address,
+        user_agent
+    ) VALUES (
+        NEW.id,
+        'UPDATE',
+        JSON_OBJECT(
+            'id', OLD.id,
+            'room_id', OLD.room_id,
+            'booked_date', OLD.booked_date,
+            'booked_time', OLD.booked_time,
+            'member_id', OLD.member_id,
+            'datetime_of_booking', OLD.datetime_of_booking,
+            'payment_status', OLD.payment_status,
+            'total_amount', OLD.total_amount,
+            'created_at', OLD.created_at,
+            'updated_at', OLD.updated_at
+        ),
+        JSON_OBJECT(
+            'id', NEW.id,
+            'room_id', NEW.room_id,
+            'booked_date', NEW.booked_date,
+            'booked_time', NEW.booked_time,
+            'member_id', NEW.member_id,
+            'datetime_of_booking', NEW.datetime_of_booking,
+            'payment_status', NEW.payment_status,
+            'total_amount', NEW.total_amount,
+            'created_at', NEW.created_at,
+            'updated_at', NEW.updated_at
+        ),
+        COALESCE(USER(), 'SYSTEM'),
+        COALESCE(@audit_ip_address, 'N/A'),
+        COALESCE(@audit_user_agent, 'N/A')
+    );
+END$$
+
+-- Trigger for DELETE operations (booking deletions)
+CREATE TRIGGER trg_booking_audit_delete
+    AFTER DELETE ON bookings
+    FOR EACH ROW
+BEGIN
+    INSERT INTO booking_audit (
+        booking_id,
+        action,
+        old_values,
+        new_values,
+        changed_by,
+        ip_address,
+        user_agent
+    ) VALUES (
+        OLD.id,
+        'DELETE',
+        JSON_OBJECT(
+            'id', OLD.id,
+            'room_id', OLD.room_id,
+            'booked_date', OLD.booked_date,
+            'booked_time', OLD.booked_time,
+            'member_id', OLD.member_id,
+            'datetime_of_booking', OLD.datetime_of_booking,
+            'payment_status', OLD.payment_status,
+            'total_amount', OLD.total_amount,
+            'created_at', OLD.created_at,
+            'updated_at', OLD.updated_at
+        ),
+        NULL,  -- No new values for DELETE
+        COALESCE(USER(), 'SYSTEM'),
+        COALESCE(@audit_ip_address, 'N/A'),
+        COALESCE(@audit_user_agent, 'N/A')
+    );
+END$$
+
+-- Special trigger for CANCEL action (when payment_status changes to CANCELLED)
+CREATE TRIGGER trg_booking_audit_cancel
+    AFTER UPDATE ON bookings
+    FOR EACH ROW
+BEGIN
+    -- Only trigger when payment status changes to CANCELLED
+    IF OLD.payment_status != 'CANCELLED' AND NEW.payment_status = 'CANCELLED' THEN
+        INSERT INTO booking_audit (
+            booking_id,
+            action,
+            old_values,
+            new_values,
+            changed_by,
+            ip_address,
+            user_agent
+        ) VALUES (
+            NEW.id,
+            'CANCEL',
+            JSON_OBJECT(
+                'payment_status', OLD.payment_status,
+                'cancelled_at', NULL
+            ),
+            JSON_OBJECT(
+                'payment_status', NEW.payment_status,
+                'cancelled_at', NOW()
+            ),
+            COALESCE(USER(), 'SYSTEM'),
+            COALESCE(@audit_ip_address, 'N/A'),
+            COALESCE(@audit_user_agent, 'N/A')
+        );
+    END IF;
+END$$
+DELIMITER ;
+
+-- Example of how to set audit context in your application:
+-- SET @audit_ip_address = '192.168.1.100';
+-- SET @audit_user_agent = 'Python Sports Booking App v1.0';
+-- Then perform your booking operations...
+
 
 -- create views
 CREATE VIEW member_bookings AS
@@ -611,6 +768,90 @@ delimiter ;
 
 call search_room('Tennis Court', '2025-12-26', '13:00:00', @status, @message);
 select @status as status, @message as message;
+
+-- ENHANCED: Audit Trail Query Procedure
+delimiter $$
+create procedure get_booking_audit_trail(
+	in p_booking_id int,
+	in p_date_from date,
+	in p_date_to date,
+	out p_status varchar(20),
+	out p_message varchar(255)
+	)
+	begin
+		declare v_audit_count int default 0;
+		
+		declare exit handler for sqlexception
+		begin
+			set p_status = 'ERROR';
+			set p_message = 'Database error occurred while retrieving audit trail';
+		end;
+		
+		-- Validate date range if provided
+		if p_date_from is not null and p_date_to is not null and p_date_from > p_date_to then
+			set p_status = 'INVALID_INPUT';
+			set p_message = 'Start date cannot be after end date';
+		else
+			-- Get audit trail with optional filtering
+			select 
+				ba.id as audit_id,
+				ba.booking_id,
+				ba.action,
+				ba.old_values,
+				ba.new_values,
+				ba.changed_by,
+				ba.ip_address,
+				ba.user_agent,
+				ba.changed_at,
+				-- Extract key information from JSON for easier reading
+				case 
+					when ba.action = 'INSERT' then concat('New booking created for member: ', JSON_UNQUOTE(JSON_EXTRACT(ba.new_values, '$.member_id')))
+					when ba.action = 'UPDATE' then concat('Booking updated - Status changed from ', JSON_UNQUOTE(JSON_EXTRACT(ba.old_values, '$.payment_status')), ' to ', JSON_UNQUOTE(JSON_EXTRACT(ba.new_values, '$.payment_status')))
+					when ba.action = 'CANCEL' then 'Booking cancelled'
+					when ba.action = 'DELETE' then 'Booking deleted'
+					else 'Unknown action'
+				end as summary_description,
+				-- Calculate time since change
+				case 
+					when timestampdiff(minute, ba.changed_at, now()) < 60 then concat(timestampdiff(minute, ba.changed_at, now()), ' minutes ago')
+					when timestampdiff(hour, ba.changed_at, now()) < 24 then concat(timestampdiff(hour, ba.changed_at, now()), ' hours ago')
+					else concat(timestampdiff(day, ba.changed_at, now()), ' days ago')
+				end as time_since_change
+			from booking_audit ba
+			where 
+				(p_booking_id is null or ba.booking_id = p_booking_id)
+				and (p_date_from is null or date(ba.changed_at) >= p_date_from)
+				and (p_date_to is null or date(ba.changed_at) <= p_date_to)
+			order by ba.changed_at desc, ba.id desc;
+			
+			-- Count results for status message
+			select count(*) into v_audit_count
+			from booking_audit ba
+			where 
+				(p_booking_id is null or ba.booking_id = p_booking_id)
+				and (p_date_from is null or date(ba.changed_at) >= p_date_from)
+				and (p_date_to is null or date(ba.changed_at) <= p_date_to);
+			
+			if v_audit_count = 0 then
+				set p_status = 'NO_RECORDS';
+				set p_message = 'No audit records found for the specified criteria';
+			else
+				set p_status = 'SUCCESS';
+				set p_message = concat(v_audit_count, ' audit record(s) found');
+			end if;
+		end if;
+	end $$
+delimiter ;
+
+-- Example calls for audit trail queries:
+-- Get all audit records for a specific booking:
+-- call get_booking_audit_trail(1, null, null, @status, @message);
+-- 
+-- Get all audit records for a date range:
+-- call get_booking_audit_trail(null, '2025-08-01', '2025-08-31', @status, @message);
+-- 
+-- Get all audit records for a specific booking within a date range:
+-- call get_booking_audit_trail(5, '2025-08-01', '2025-08-31', @status, @message);
 
 -- Making Cancel Booking
 delimiter $$
