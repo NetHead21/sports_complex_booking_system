@@ -28,9 +28,9 @@ Version: 1.0
 Last Modified: August 2025
 """
 
-from .command import Command
-from .member_database_manager import db
-from .member_input_service import MemberInputService
+from business_logic.base.command import Command
+from business_logic.member_database_manager import db
+from business_logic.services.member_input_service import MemberInputService
 
 
 class AddMembersCommand(Command):

@@ -11,7 +11,7 @@ Classes:
 
 import sys
 
-from business_logic.command import Command
+from business_logic.base.command import Command
 
 
 class QuitCommand(Command):

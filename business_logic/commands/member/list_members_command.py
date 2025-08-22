@@ -1,6 +1,6 @@
 from mysql.connector.cursor_cext import CMySQLCursor
 
-from business_logic.command import Command
+from business_logic.base.command import Command
 from business_logic.member_database_manager import db
 from presentation.table_formatter import format_member_table
 

@@ -1,6 +1,6 @@
-from business_logic.command import Command
+from business_logic.base.command import Command
 from business_logic.room_database_manager import db
-from business_logic.booking_input_service import BookingInputService
+from business_logic.services.booking_input_service import BookingInputService
 
 
 class CancelBookRoomCommand(Command):

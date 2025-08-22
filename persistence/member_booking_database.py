@@ -62,10 +62,6 @@ Example:
     >>> members = db.show_members()
     >>> for member in members:
     ...     print(f"Member: {member[0]}, Email: {member[1]}")
-
-Author: Sports Booking System Development Team
-Date: August 2025
-Version: 2.0 (Enhanced with success/failure return values)
 """
 
 import mysql
