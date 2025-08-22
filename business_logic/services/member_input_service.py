@@ -50,10 +50,6 @@ Example:
     >>> if update_data:
     ...     member_id, new_email = update_data
     ...     print(f"Updating {member_id} email to {new_email}")
-
-Author: Sports Booking System Development Team
-Date: August 2025
-Version: 2.0 (Refactored for Single Responsibility Principle)
 """
 
 from persistence.models import Member
