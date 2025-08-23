@@ -32,7 +32,7 @@ Architecture:
     - BookRoomCommand handles business logic execution
     - BookingInputService handles input collection and validation
     - room_database_manager handles data persistence
-    
+
 Author: Sports Booking System Team
 Version: 2.0
 Last Modified: August 2025
@@ -46,24 +46,24 @@ from business_logic.services.booking_input_service import BookingInputService
 class BookRoomCommand(Command):
     """
     Command for booking sports facility rooms in the booking system.
-    
+
     This class implements the Command pattern and adheres to the Single Responsibility
     Principle by focusing exclusively on executing the database operation for room
     booking. All input collection, validation, and booking object creation are
     delegated to the BookingInputService to maintain clear separation of concerns.
-    
+
     The command handles the complete booking workflow including:
     - Delegating data collection to BookingInputService
     - Executing the database booking operation
     - Providing user feedback on operation results
     - Comprehensive error handling and reporting
-    
+
     Attributes:
         None (inherits from Command base class)
-    
+
     Methods:
         execute(data=None): Execute the room booking operation
-    
+
     Example:
         >>> booking_command = BookRoomCommand()
         >>> success, error_msg = booking_command.execute()
@@ -71,12 +71,12 @@ class BookRoomCommand(Command):
         ...     print("✅ Room successfully booked!")
         ... else:
         ...     print(f"❌ Booking failed: {error_msg}")
-    
+
     Integration:
         - Uses BookingInputService for input collection and validation
         - Uses room_database_manager for database operations
         - Follows the established command pattern in the sports booking system
-    
+
     Note:
         This command requires:
         - Valid database connection through room_database_manager
@@ -87,30 +87,30 @@ class BookRoomCommand(Command):
     def execute(self, data=None) -> tuple[bool, any]:
         """
         Execute the room booking command.
-        
+
         This method orchestrates the complete room booking process by delegating
         input collection to BookingInputService and executing the database operation
         through the room database manager. It provides comprehensive error handling
         and user feedback throughout the process.
-        
+
         Single responsibility: Execute the database operation for booking a room.
         Input collection and booking creation are delegated to BookingInputService.
-        
+
         Args:
             data (any, optional): Additional data for command execution.
                 Currently not used in this implementation but maintained for
                 interface compatibility with the Command base class.
                 Defaults to None.
-        
+
         Returns:
             tuple[bool, any]: A tuple containing:
                 - bool: True if room was successfully booked, False otherwise
                 - any: None if successful, error message string if failed
-        
+
         Raises:
             Exception: Any booking-related exceptions are caught and converted
                 to return values for graceful error handling.
-        
+
         Example:
             >>> command = BookRoomCommand()
             >>> success, error = command.execute()
@@ -118,14 +118,14 @@ class BookRoomCommand(Command):
             ...     print("Room booking completed successfully")
             >>> else:
             ...     print(f"Booking process failed: {error}")
-        
+
         Flow:
             1. Delegate booking data collection to BookingInputService
             2. Validate that booking object was created successfully
             3. Execute database operation to book the room
             4. Provide detailed user feedback on operation result
             5. Return success status and any error information
-        
+
         Database Operations:
             The method calls db.book_room() which handles:
             - Room availability validation
@@ -133,12 +133,12 @@ class BookRoomCommand(Command):
             - Booking conflict detection
             - Payment status initialization
             - Audit trail creation
-        
+
         User Feedback:
             - Success: Displays confirmation with booking details
             - Failure: Shows specific error messages for troubleshooting
             - Cancellation: Handles user cancellation gracefully
-        
+
         Note:
             The method prints status messages directly to the console for
             immediate user feedback, following the established UX pattern
