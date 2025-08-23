@@ -20,10 +20,10 @@ Dependencies:
 Example:
     >>> # Collect required user input
     >>> name = get_user_input("Enter your name", required=True)
-    
+
     >>> # Collect optional input
     >>> phone = get_user_input("Phone number (optional)", required=False)
-    
+
     >>> # Handle menu choices
     >>> options = {"A": add_member, "B": book_room, "Q": quit}
     >>> choice = get_options_choice(options)
