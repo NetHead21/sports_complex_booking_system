@@ -75,58 +75,58 @@ from business_logic.services.booking_input_service import BookingInputService
 class SearchRoomCommand(Command):
     """
     Command implementation for comprehensive room availability search operations.
-    
+
     This command provides an advanced interface for searching available rooms in
     the sports complex system based on multiple criteria including room type,
     date, and time requirements. It implements the Command Pattern to encapsulate
     search logic while maintaining strict separation between data collection and
     search execution concerns.
-    
+
     The command serves as a critical component for room discovery and booking
     planning, enabling users to find optimal facilities that match their specific
     requirements. It integrates seamlessly with the service layer for input
     collection and the database layer for efficient search operations.
-    
+
     Architecture Role:
         - Implements Command Pattern for room search operations
         - Integrates with service layer for secure data collection
         - Manages database operations through room_database_manager
         - Provides flexible search interface for diverse user needs
         - Supports both interactive and programmatic search workflows
-    
+
     Search Functionality:
         - Multi-criteria room filtering with flexible parameters
         - Real-time availability verification and conflict detection
         - Efficient database queries with optimized performance
         - Comprehensive result formatting and presentation
         - Advanced search algorithms for complex requirements
-    
+
     Business Logic Features:
         - Room type categorization and filtering capabilities
         - Date and time slot availability verification
         - Booking conflict detection and prevention
         - Resource utilization analysis and optimization
         - User preference matching and recommendation logic
-    
+
     Integration Points:
         - BookingInputService: Secure search criteria collection
         - Database Manager: Optimized search query execution
         - Room Management: Real-time inventory and availability
         - User Interface: Results presentation and interaction
         - Booking System: Availability verification for reservations
-    
+
     Performance Characteristics:
         - Efficient indexed database queries for fast results
         - Intelligent caching for frequently searched criteria
         - Optimized filtering algorithms for large inventories
         - Minimal resource usage with scalable performance
         - Fast response times suitable for interactive use
-    
+
     Example Usage:
         >>> # Standard room search workflow
         >>> search_command = SearchRoomCommand()
         >>> success, results = search_command.execute()
-        >>> 
+        >>>
         >>> if success:
         ...     print(f"✅ Search completed successfully")
         ...     print(f"📊 Found {len(results)} available rooms")
@@ -134,13 +134,13 @@ class SearchRoomCommand(Command):
         ...         print(f"🏢 Room: {room['name']} - Type: {room['type']}")
         ... else:
         ...     print(f"❌ Search failed: No matching rooms found")
-        
+
         >>> # Programmatic search with criteria
         >>> search_command = SearchRoomCommand()
         >>> # Service will collect: room_type="Conference", date="2025-08-24", time="10:00"
         >>> success, results = search_command.execute()
         >>> assert success is True or success is False  # Both valid outcomes
-    
+
     Error Handling:
         Comprehensive error scenarios covered:
         - Invalid search criteria or parameter formats
@@ -148,18 +148,18 @@ class SearchRoomCommand(Command):
         - Empty search results with no matching rooms
         - Service layer input collection failures
         - System exceptions and unexpected errors
-    
+
     Return Value Patterns:
         Success scenarios:
         - (True, cursor_result): Rooms found matching search criteria
           - cursor_result contains list of available rooms
           - Each room includes details like type, availability, features
-        
+
         Failure scenarios:
         - (False, "Room search cancelled or failed"): User cancelled input
         - (False, "No search results"): No rooms match criteria
         - (False, str(exception)): System or database errors
-    
+
     Search Criteria Supported:
         Room Type Filtering:
             - Conference rooms for meetings and presentations
@@ -167,26 +167,26 @@ class SearchRoomCommand(Command):
             - Training facilities for fitness and coaching
             - Multi-purpose rooms for various events
             - Specialized facilities with specific equipment
-        
+
         Date and Time Parameters:
             - Specific date selection for availability checking
             - Time slot preferences with duration consideration
             - Recurring booking pattern support
             - Peak and off-peak time slot identification
             - Conflict detection with existing reservations
-    
+
     Security Features:
         - Input validation and sanitization through service delegation
         - Parameterized database queries preventing injection attacks
         - Authorization verification for room access permissions
         - Comprehensive audit logging for search activity monitoring
         - Safe data presentation without sensitive information exposure
-    
+
     Thread Safety:
         This command is stateless and thread-safe. Multiple concurrent
         search operations are fully supported through database-level
         transaction management and proper isolation mechanisms.
-    
+
     Note:
         The command maintains separation of concerns by delegating input
         collection to BookingInputService while focusing on search execution
