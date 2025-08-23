@@ -56,48 +56,48 @@ from business_logic.services.booking_input_service import BookingInputService
 class CancelBookRoomCommand(Command):
     """
     Command implementation for secure booking cancellation operations.
-    
+
     This command provides a comprehensive interface for cancelling existing room
     bookings in the sports complex system. It implements the Command Pattern to
     encapsulate cancellation logic while maintaining strict security measures
     and business rule enforcement.
-    
+
     The command follows clean architecture principles by separating concerns:
     input collection is handled by BookingInputService, while this command
     focuses solely on the cancellation execution and database operations.
-    
+
     Architecture Role:
         - Implements Command Pattern for booking cancellation
         - Integrates with service layer for input collection
         - Manages database operations through room_database_manager
         - Provides consistent error handling and user feedback
         - Supports audit trail and security logging
-    
+
     Security Features:
         - Dual-factor verification (booking ID + member ID)
         - Authorization validation through database procedures
         - Input sanitization and validation
         - Comprehensive audit logging
         - Error handling that prevents information leakage
-    
+
     Business Logic:
         - Validates booking existence and ownership
         - Enforces cancellation policies and timing restrictions
         - Handles refund processing triggers
         - Updates room availability upon successful cancellation
         - Maintains data consistency through transaction management
-    
+
     Integration Points:
         - BookingInputService: Secure data collection
         - Database Manager: Cancellation execution
         - Audit System: Security and operation logging
         - Notification System: Cancellation confirmations
-    
+
     Example Usage:
         >>> # Standard cancellation workflow
         >>> cancel_command = CancelBookRoomCommand()
         >>> success, result = cancel_command.execute()
-        >>> 
+        >>>
         >>> if success:
         ...     print("✅ Booking cancelled successfully")
         ...     # Trigger confirmation notifications
@@ -106,7 +106,7 @@ class CancelBookRoomCommand(Command):
         ...     print(f"❌ Cancellation failed: {result}")
         ...     # Log failure for analysis
         ...     audit_logger.log_cancellation_failure(result)
-    
+
     Error Handling:
         Comprehensive error scenarios covered:
         - Invalid booking ID or member ID
@@ -115,27 +115,27 @@ class CancelBookRoomCommand(Command):
         - Database connection or transaction failures
         - Business rule violations (cancellation policies)
         - System exceptions and unexpected errors
-    
+
     Return Value Patterns:
         Success scenarios:
         - (True, None): Successful cancellation with confirmation displayed
-        
+
         Failure scenarios:
         - (False, "Booking cancellation cancelled or failed"): User cancelled input
         - (False, "Cancellation operation failed"): Database operation failed
         - (False, str(exception)): System or unexpected errors
-    
+
     Performance Considerations:
         - Efficient database operations with proper indexing
         - Minimal user interaction time through service delegation
         - Optimized transaction boundaries for data consistency
         - Fast authorization verification through stored procedures
-    
+
     Thread Safety:
         This command is stateless and thread-safe. Multiple concurrent
         cancellation operations are supported through database-level
         transaction management and proper locking mechanisms.
-    
+
     Note:
         The command maintains separation of concerns by delegating input
         collection to BookingInputService while focusing on execution
@@ -410,22 +410,26 @@ if __name__ == "__main__":
         print("✅ Command instance created successfully")
         print("🚀 Executing cancellation workflow...")
         print()
-        
+
         success, result = cancel_command.execute()
 
         print("\n" + "=" * 50)
         print("📊 EXECUTION RESULTS")
         print("=" * 50)
-        
+
         if success:
             print("✅ Test completed successfully")
             print("📋 Status: Cancellation operation executed successfully")
-            print("🎯 Architecture: Command pattern and service integration working correctly")
+            print(
+                "🎯 Architecture: Command pattern and service integration working correctly"
+            )
         else:
             print(f"❌ Test failed: {result}")
             print("📋 Status: Cancellation operation encountered issues")
-            print("🔍 Analysis: Check booking ID, member authorization, or system status")
-        
+            print(
+                "🔍 Analysis: Check booking ID, member authorization, or system status"
+            )
+
         print("\n💡 Demo completed - showcasing clean architecture separation")
         print("   Input Collection: BookingInputService")
         print("   Business Logic: CancelBookRoomCommand")
