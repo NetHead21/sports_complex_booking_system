@@ -124,15 +124,15 @@ class ListRoomCommand(Command):
         >>> # ╔═══════════════════════════════════════════════════════╗
         >>> # ║                 ROOM BOOKINGS                         ║
         >>> # ╠═══════════════════════════════════════════════════════╣
-        >>> # ║ Booking ID │ Room │ Member │ Date       │ Time       ║
+        >>> # ║ Booking ID │ Room │ Member │ Date       │ Time        ║
         >>> # ╠═══════════════════════════════════════════════════════╣
-        >>> # ║ 12345      │ A101 │ user1  │ 2025-08-24 │ 10:00-11:00║
-        >>> # ║ 12346      │ B202 │ user2  │ 2025-08-24 │ 14:00-15:00║
+        >>> # ║ 12345      │ A101 │ user1  │ 2025-08-24 │ 10:00-11:00 ║
+        >>> # ║ 12346      │ B202 │ user2  │ 2025-08-24 │ 14:00-15:00 ║
         >>> # ╚═══════════════════════════════════════════════════════╝
         >>> 
         >>> assert success is True
         >>> print("✅ Booking information displayed successfully")
-    
+
     Error Handling:
         Minimal error scenarios due to read-only nature:
         - Database connection failures handled gracefully
@@ -280,7 +280,7 @@ class ListRoomCommand(Command):
             >>> # ╔═══════════════════════════════════════════════════════╗
             >>> # ║                 ROOM BOOKINGS                         ║
             >>> # ╠═══════════════════════════════════════════════════════╣
-            >>> # ║ Booking ID │ Room │ Member │ Date       │ Time       ║
+            >>> # ║ Booking ID │ Room │ Member │ Date       │ Time        ║
             >>> # ╚═══════════════════════════════════════════════════════╝
             >>> assert success is True
 
