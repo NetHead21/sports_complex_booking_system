@@ -68,115 +68,115 @@ from business_logic.base.command import Command
 class QuitCommand(Command):
     """
     Command implementation for graceful application termination operations.
-    
+
     This command provides a comprehensive interface for shutting down the sports
     complex system in a controlled and professional manner. It implements the
     Command Pattern to encapsulate termination logic while maintaining consistency
     with the architectural design and ensuring proper resource cleanup throughout
     the shutdown process.
-    
+
     The command serves as the central point for application exit workflows, providing
     extensible shutdown procedures and ensuring consistent behavior across the entire
     system lifecycle. It handles user experience, resource management, and system
     state preservation during the termination process.
-    
+
     Architecture Role:
         - Implements Command Pattern for application termination operations
         - Provides centralized shutdown logic and resource management
         - Ensures consistent termination behavior across system components
         - Supports extensible cleanup procedures and resource management
         - Maintains architectural consistency with other system commands
-    
+
     Termination Features:
         - Graceful application shutdown with proper resource cleanup
         - Professional user experience with farewell messaging
         - Database connection termination and transaction cleanup
         - Memory cleanup and sensitive data protection
         - System state preservation and audit logging
-    
+
     Business Logic:
         - Controlled application exit with user-friendly feedback
         - Resource cleanup ensuring no memory leaks or data corruption
         - Database connection graceful closure and transaction completion
         - User session termination and logout procedures
         - System audit logging for termination tracking and compliance
-    
+
     Integration Points:
         - System Exit: Clean application termination through sys.exit()
         - Database Manager: Connection cleanup and transaction finalization
         - Audit System: Termination logging and tracking
         - User Interface: Professional farewell messaging and feedback
         - Resource Manager: Memory cleanup and resource deallocation
-    
+
     Extensibility Features:
         - Modular cleanup procedures for future enhancement
         - Configurable termination workflows and customization
         - Plugin architecture for additional shutdown operations
         - Event-driven cleanup for component-specific requirements
         - Flexible resource management and cleanup procedures
-    
+
     Example Usage:
         >>> # Standard application termination
         >>> quit_command = QuitCommand()
         >>> quit_command.execute()
         >>> # Application terminates gracefully with cleanup
-        
+
         >>> # Programmatic termination with cleanup
         >>> quit_command = QuitCommand()
         >>> # Automatic cleanup procedures executed
         >>> quit_command.execute()  # System shuts down cleanly
-    
+
     Termination Workflow:
         1. User Notification Phase:
            - Display professional farewell message to user
            - Provide clear indication of termination process
            - Thank user for system usage and engagement
-        
+
         2. Cleanup Phase (Future Enhancement):
            - Database connection cleanup and transaction completion
            - Temporary file cleanup and system state preservation
            - Memory cleanup and sensitive data protection
            - Resource deallocation and memory management
-        
+
         3. Audit Phase (Future Enhancement):
            - Log termination event for audit trail and monitoring
            - Record user session end time and duration
            - Track system usage statistics and metrics
-        
+
         4. Termination Phase:
            - Execute system exit with proper exit code
            - Ensure clean application shutdown and process termination
            - Maintain system integrity during shutdown process
-    
+
     Error Handling:
         Minimal error scenarios due to termination nature:
         - System exit operations are guaranteed to succeed
         - Cleanup procedures handle exceptions gracefully
         - Resource deallocation failures logged but do not prevent exit
         - Emergency termination procedures for critical failures
-    
+
     Return Value Patterns:
         Termination scenarios:
         - None: Application terminates successfully (method does not return)
-        
+
         Note: This command terminates the application and does not return
         control to the caller. It represents the final operation in the
         application lifecycle.
-    
+
     Security Considerations:
         - Secure session termination and user logout procedures
         - Proper cleanup of sensitive data from memory
         - Safe termination preventing data corruption or unauthorized access
         - Audit logging for security monitoring and compliance
         - Clean exit preventing security vulnerabilities or data exposure
-    
+
     Performance Characteristics:
         - Immediate termination with minimal resource overhead
         - Efficient cleanup procedures with optimized resource management
         - Fast user feedback with professional messaging display
         - Minimal memory footprint during termination process
         - Clean system state preservation during shutdown operations
-    
+
     Future Enhancements:
         Planned improvements for comprehensive termination:
             - Database connection cleanup and transaction finalization
@@ -186,12 +186,12 @@ class QuitCommand(Command):
             - User confirmation prompts for accidental termination prevention
             - Graceful shutdown procedures for long-running operations
             - Resource cleanup for network connections and file handles
-    
+
     Thread Safety:
         This command is thread-safe as it performs a final system operation.
         Once executed, the application terminates and no further operations
         are possible, eliminating any concurrency concerns.
-    
+
     Note:
         The command provides a clean termination point for the application
         while maintaining architectural consistency and providing opportunities
@@ -440,7 +440,7 @@ if __name__ == "__main__":
         print("✅ Command instance created successfully")
         print("🚀 Executing application termination workflow...")
         print()
-        
+
         # Execute the quit command (this will terminate the application)
         quit_command.execute()
 
