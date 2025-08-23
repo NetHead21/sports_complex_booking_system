@@ -5,13 +5,13 @@ from .member import (
     DeleteMembersCommand,
     ListMembersCommand,
     UpdateMembersEmailCommand,
-    UpdateMembersPasswordCommand
+    UpdateMembersPasswordCommand,
 )
 from .booking import (
     BookRoomCommand,
     CancelBookRoomCommand,
     ListRoomCommand,
-    SearchRoomCommand
+    SearchRoomCommand,
 )
 from .system import QuitCommand
 
@@ -19,7 +19,7 @@ __all__ = [
     # Member commands
     "AddMembersCommand",
     "DeleteMembersCommand",
-    "ListMembersCommand", 
+    "ListMembersCommand",
     "UpdateMembersEmailCommand",
     "UpdateMembersPasswordCommand",
     # Booking commands
@@ -28,5 +28,5 @@ __all__ = [
     "ListRoomCommand",
     "SearchRoomCommand",
     # System commands
-    "QuitCommand"
+    "QuitCommand",
 ]

@@ -8,6 +8,6 @@ from .search_rooms_command import SearchRoomCommand
 __all__ = [
     "BookRoomCommand",
     "CancelBookRoomCommand",
-    "ListRoomCommand", 
-    "SearchRoomCommand"
+    "ListRoomCommand",
+    "SearchRoomCommand",
 ]

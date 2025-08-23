@@ -8,8 +8,8 @@ from .update_password_command import UpdateMembersPasswordCommand
 
 __all__ = [
     "AddMembersCommand",
-    "DeleteMembersCommand", 
+    "DeleteMembersCommand",
     "ListMembersCommand",
     "UpdateMembersEmailCommand",
-    "UpdateMembersPasswordCommand"
+    "UpdateMembersPasswordCommand",
 ]

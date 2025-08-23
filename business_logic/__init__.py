@@ -11,22 +11,19 @@ from .commands.member import (
     DeleteMembersCommand,
     ListMembersCommand,
     UpdateMembersEmailCommand,
-    UpdateMembersPasswordCommand
+    UpdateMembersPasswordCommand,
 )
 
 from .commands.booking import (
     BookRoomCommand,
     CancelBookRoomCommand,
     ListRoomCommand,
-    SearchRoomCommand
+    SearchRoomCommand,
 )
 
 from .commands.system import QuitCommand
 
-from .services import (
-    MemberInputService,
-    BookingInputService
-)
+from .services import MemberInputService, BookingInputService
 
 from .base import Command
 
@@ -36,11 +33,11 @@ __all__ = [
     "AddMembersCommand",
     "DeleteMembersCommand",
     "ListMembersCommand",
-    "UpdateMembersEmailCommand", 
+    "UpdateMembersEmailCommand",
     "UpdateMembersPasswordCommand",
     # Booking commands
     "BookRoomCommand",
-    "CancelBookRoomCommand", 
+    "CancelBookRoomCommand",
     "ListRoomCommand",
     "SearchRoomCommand",
     # System commands
@@ -49,5 +46,5 @@ __all__ = [
     "MemberInputService",
     "BookingInputService",
     # Base
-    "Command"
+    "Command",
 ]
