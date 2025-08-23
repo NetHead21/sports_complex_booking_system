@@ -70,56 +70,56 @@ from presentation.table_formatter import format_booking_table
 class ListRoomCommand(Command):
     """
     Command implementation for displaying comprehensive room booking information.
-    
+
     This command provides a read-only interface for retrieving and displaying all
     current room bookings in the sports complex system. It implements the Command
     Pattern to encapsulate the listing operation while maintaining clean separation
     between data retrieval and presentation concerns.
-    
+
     The command focuses on information display and visualization, making it an
     essential component for booking management, room utilization analysis, and
     administrative oversight. It provides users with a clear, comprehensive view
     of all active bookings in the system.
-    
+
     Architecture Role:
         - Implements Command Pattern for booking data display
         - Integrates with database manager for data retrieval
         - Leverages presentation layer for professional formatting
         - Provides read-only access to booking information
         - Supports administrative and user-facing workflows
-    
+
     Data Display Features:
         - Comprehensive booking information presentation
         - Professional table formatting with aligned columns
         - Clear headers and readable row organization
         - Optimized for terminal and console viewing
         - Consistent formatting across different data volumes
-    
+
     Business Value:
         - Room utilization oversight and analysis
         - Booking conflict identification and resolution
         - Administrative reporting and management
         - User information access for planning purposes
         - System transparency and data visibility
-    
+
     Integration Points:
         - Database Manager: Secure data retrieval operations
         - Table Formatter: Professional presentation formatting
         - Command Pattern: Consistent execution interface
         - User Interface: Direct console output display
-    
+
     Performance Characteristics:
         - Efficient database queries with minimal resource usage
         - Fast data retrieval through optimized procedures
         - Lightweight formatting operations
         - Scalable display handling for large datasets
         - Responsive user experience with immediate results
-    
+
     Example Usage:
         >>> # Display all current bookings
         >>> list_command = ListRoomCommand()
         >>> success, result = list_command.execute()
-        >>> 
+        >>>
         >>> # Expected console output:
         >>> # ╔═══════════════════════════════════════════════════════╗
         >>> # ║                 ROOM BOOKINGS                         ║
@@ -129,7 +129,7 @@ class ListRoomCommand(Command):
         >>> # ║ 12345      │ A101 │ user1  │ 2025-08-24 │ 10:00-11:00 ║
         >>> # ║ 12346      │ B202 │ user2  │ 2025-08-24 │ 14:00-15:00 ║
         >>> # ╚═══════════════════════════════════════════════════════╝
-        >>> 
+        >>>
         >>> assert success is True
         >>> print("✅ Booking information displayed successfully")
 
@@ -139,38 +139,39 @@ class ListRoomCommand(Command):
         - Empty result sets displayed with appropriate messaging
         - Formatting errors managed with fallback displays
         - System exceptions logged and reported appropriately
-    
+
     Return Value Patterns:
         Success scenarios:
         - (True, None): Bookings displayed successfully, data presented to user
-        
+
         Note: This command always returns success as it's a display operation.
         Any data retrieval issues are handled internally with appropriate
         user messaging, maintaining consistent command pattern behavior.
-    
+
     Security Considerations:
         - Read-only database operations with no data modification risk
         - No user input validation required for display-only functionality
         - Safe data presentation without sensitive information exposure
         - Audit-friendly operations with minimal security impact
         - No authentication required for general booking visibility
-    
+
     Data Integrity:
         - No data modification operations performed
         - Transactional consistency maintained through read-only access
         - Real-time data display reflecting current system state
         - Accurate information presentation without data transformation
-    
+
     Thread Safety:
         This command is stateless and completely thread-safe. Multiple
         concurrent listing operations are fully supported without any
         synchronization concerns or data consistency issues.
-    
+
     Note:
         The command maintains separation of concerns by delegating data
         formatting to the presentation layer while focusing solely on
         the execution logic and database coordination.
     """
+
     def execute(self, data=None) -> tuple[bool, None]:
         """
         Execute the room listing command to display all current bookings.
@@ -448,32 +449,37 @@ if __name__ == "__main__":
         print("✅ Command instance created successfully")
         print("🚀 Executing room listing workflow...")
         print()
-        
+
         print("📊 CURRENT ROOM BOOKINGS")
         print("=" * 48)
-        
+
         import time
+
         start_time = time.time()
-        
+
         success, result = list_command.execute()
-        
+
         end_time = time.time()
         execution_time = end_time - start_time
 
         print("\n" + "=" * 48)
         print("📊 EXECUTION RESULTS")
         print("=" * 48)
-        
+
         if success:
             print("✅ Test completed successfully")
             print("📋 Status: Room booking information displayed successfully")
-            print(f"⚡ Performance: Data retrieved and formatted in {execution_time:.3f} seconds")
-            print("🎯 Architecture: Command pattern and database integration working correctly")
+            print(
+                f"⚡ Performance: Data retrieved and formatted in {execution_time:.3f} seconds"
+            )
+            print(
+                "🎯 Architecture: Command pattern and database integration working correctly"
+            )
         else:
             print(f"❌ Test encountered issues: {result}")
             print("📋 Status: Display operation handled gracefully")
             print("🔍 Analysis: Check database connection or system status")
-        
+
         print("\n💡 Demo completed - showcasing read-only data access")
         print("   Data Retrieval: RoomDatabaseManager")
         print("   Business Logic: ListRoomCommand")
