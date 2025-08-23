@@ -22,10 +22,6 @@ Example:
     ...     print("Member added successfully")
     ... else:
     ...     print(f"Failed to add member: {error}")
-
-Author: Sports Booking System Team
-Version: 1.0
-Last Modified: August 2025
 """
 
 from business_logic.base.command import Command
