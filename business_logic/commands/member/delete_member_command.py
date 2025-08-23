@@ -72,57 +72,57 @@ from business_logic.services.member_input_service import MemberInputService
 class DeleteMembersCommand(Command):
     """
     Command implementation for secure member deletion operations.
-    
+
     This command provides a comprehensive interface for safely removing existing
     members from the sports complex system. It implements the Command Pattern to
     encapsulate deletion logic while maintaining strict security measures, data
     integrity validation, and comprehensive audit trail management.
-    
+
     The command follows clean architecture principles by separating deletion
     execution from input collection and confirmation workflows. This separation
     ensures optimal security, maintainability, and user experience while providing
     robust error handling and recovery mechanisms.
-    
+
     Architecture Role:
         - Implements Command Pattern for member deletion operations
         - Integrates with service layer for secure input collection
         - Manages database operations through member_database_manager
         - Provides comprehensive safety measures and validation
         - Supports audit trail and compliance requirements
-    
+
     Security Features:
         - Multi-step confirmation process for deletion authorization
         - Input validation and sanitization through service delegation
         - Referential integrity checking before deletion execution
         - Comprehensive audit logging for security monitoring
         - Safe deletion procedures with rollback capabilities
-    
+
     Business Logic:
         - Member existence validation before deletion attempts
         - Active booking handling and cascade deletion rules
         - Data integrity preservation throughout deletion process
         - Compliance requirements for audit trail maintenance
         - Authorization verification and permission checking
-    
+
     Integration Points:
         - MemberInputService: Secure data collection and confirmation
         - Database Manager: Safe deletion execution with validation
         - Audit System: Comprehensive deletion tracking and logging
         - Notification System: Deletion confirmations and alerts
         - Backup System: Data protection and recovery support
-    
+
     Data Protection Measures:
         - Referential integrity validation before deletion
         - Cascade deletion handling for related records (bookings, history)
         - Soft deletion options for data preservation requirements
         - Backup verification before permanent deletion
         - Recovery procedures for accidental deletion scenarios
-    
+
     Example Usage:
         >>> # Standard member deletion workflow
         >>> delete_command = DeleteMembersCommand()
         >>> success, result = delete_command.execute()
-        >>> 
+        >>>
         >>> if success:
         ...     print("✅ Member deleted successfully")
         ...     # Trigger cleanup notifications
@@ -131,13 +131,13 @@ class DeleteMembersCommand(Command):
         ...     print(f"❌ Deletion failed: {result}")
         ...     # Log failure for analysis
         ...     audit_logger.log_deletion_failure(result)
-        
+
         >>> # Programmatic deletion with validation
         >>> delete_command = DeleteMembersCommand()
         >>> # Service will collect member ID and confirm deletion
         >>> success, result = delete_command.execute()
         >>> assert success in [True, False]  # Both outcomes valid
-    
+
     Error Handling:
         Comprehensive error scenarios covered:
         - Invalid member ID or non-existent members
@@ -145,68 +145,68 @@ class DeleteMembersCommand(Command):
         - Database connection or transaction failures
         - Referential integrity violations with active bookings
         - System exceptions and unexpected errors
-    
+
     Return Value Patterns:
         Success scenarios:
         - (True, None): Member deleted successfully with confirmation displayed
-        
+
         Failure scenarios:
         - (False, "Member deletion cancelled or failed"): User cancelled deletion
         - (False, "Member '{member_id}' does not exist"): Member not found
         - (False, str(exception)): Database or system errors
-    
+
     Deletion Workflow Phases:
         1. Input Collection Phase:
            - Collect member ID through secure input service
            - Validate member ID format and existence
            - Handle user cancellation gracefully
-        
+
         2. Validation Phase:
            - Verify member existence in database
            - Check for active bookings and dependencies
            - Validate deletion permissions and authorization
-        
+
         3. Confirmation Phase:
            - Present deletion summary to user
            - Collect explicit confirmation for deletion
            - Handle confirmation cancellation appropriately
-        
+
         4. Execution Phase:
            - Execute database deletion with transaction safety
            - Handle cascade deletion for related records
            - Verify deletion completion and data consistency
-        
+
         5. Feedback Phase:
            - Provide immediate user feedback and confirmation
            - Display success messages or error guidance
            - Log operation for audit and monitoring purposes
-    
+
     Security Considerations:
         - Multi-factor confirmation prevents accidental deletions
         - Input sanitization prevents injection attacks
         - Authorization verification ensures proper permissions
         - Comprehensive audit logging for security monitoring
         - Safe error handling preventing information leakage
-    
+
     Business Rule Enforcement:
         - Member existence verification before deletion attempts
         - Active booking validation and cascade handling
         - Data integrity maintenance throughout process
         - Compliance requirements for audit trail preservation
         - Authorization verification for deletion permissions
-    
+
     Performance Characteristics:
         - Efficient database operations with proper indexing
         - Minimal user interaction time through service delegation
         - Optimized validation procedures with fast lookups
         - Transaction boundaries optimized for consistency
         - Fast confirmation workflows suitable for interactive use
-    
+
     Thread Safety:
         This command is stateless and thread-safe. Multiple concurrent
         deletion operations are supported through database-level transaction
         management and proper isolation mechanisms.
-    
+
     Note:
         The command maintains separation of concerns by delegating input
         collection and confirmation to MemberInputService while focusing
@@ -511,23 +511,25 @@ if __name__ == "__main__":
         print("✅ Command instance created successfully")
         print("🚀 Executing member deletion workflow...")
         print()
-        
+
         success, result = delete_member.execute()
 
         print("\n" + "=" * 51)
         print("📊 EXECUTION RESULTS")
         print("=" * 51)
-        
+
         if success:
             print("✅ Test completed successfully")
             print("📋 Status: Member deletion operation executed successfully")
-            print("🎯 Architecture: Command pattern and service integration working correctly")
+            print(
+                "🎯 Architecture: Command pattern and service integration working correctly"
+            )
             print("🔒 Security: Multi-step confirmation and validation completed")
         else:
             print(f"❌ Test result: {result}")
             print("📋 Status: Member deletion operation handled appropriately")
             print("🔍 Analysis: Check member existence, permissions, or system status")
-        
+
         print(f"\n💡 Command result: Success={success}, Result={result}")
         print("\n🏗️ Demo completed - showcasing clean architecture separation:")
         print("   Input Collection: MemberInputService")
