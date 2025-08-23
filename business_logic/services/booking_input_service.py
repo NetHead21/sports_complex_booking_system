@@ -41,12 +41,12 @@ Example:
     >>> booking = booking_service.collect_new_booking_data()
     >>> if booking:
     ...     print(f"Booking created for {booking.room_id} on {booking.book_date}")
-    
+
     >>> # Collect search criteria
     >>> search_criteria = booking_service.collect_room_search_data()
     >>> if search_criteria:
     ...     print(f"Searching for {search_criteria.room_type}")
-    
+
     >>> # Collect cancellation data
     >>> cancellation_data = booking_service.collect_booking_cancellation_data()
     >>> if cancellation_data:
@@ -130,13 +130,13 @@ class BookingInputService:
         >>> if booking:
         ...     print(f"New booking: {booking.room_id} on {booking.book_date}")
         ...     print(f"Time: {booking.book_time}, Member: {booking.user}")
-        
+
         >>> # Search for available rooms
         >>> search = BookingInputService.collect_room_search_data()
         >>> if search:
         ...     print(f"Searching: {search.room_type}")
         ...     print(f"Date: {search.book_date}, Time: {search.book_time}")
-        
+
         >>> # Handle booking cancellation
         >>> cancellation = BookingInputService.collect_booking_cancellation_data()
         >>> if cancellation:
@@ -187,19 +187,19 @@ class BookingInputService:
                 - Automatically converted to uppercase for consistency
                 - Length between 1-10 characters
                 - Basic format validation for room identifier patterns
-            
+
             Book Date:
                 - Must be a future date (not today or past)
                 - ISO format required (YYYY-MM-DD)
                 - Validates against calendar constraints
                 - Business day validation (if applicable)
-            
+
             Book Time:
                 - Valid time format required (HH:MM)
                 - Business hours validation (06:00-22:00)
                 - 24-hour format enforcement
                 - Time slot availability consideration
-            
+
             User/Member ID:
                 - Non-empty string required
                 - Minimum 3 characters for security
@@ -359,13 +359,13 @@ class BookingInputService:
                 - Options: Tennis Court, Badminton Court, Archery Range, Multi-Purpose Field
                 - User-friendly menu selection interface
                 - Validation against available facility types in the system
-            
+
             Search Date:
                 - Target date for availability checking
                 - Must be today or future date (no past date searches)
                 - ISO format validation (YYYY-MM-DD)
                 - Business day and holiday consideration
-            
+
             Search Time:
                 - Preferred time slot for facility usage
                 - Business hours validation (06:00-22:00)
@@ -378,13 +378,13 @@ class BookingInputService:
                 - Calendar date format validation
                 - Business day vs weekend consideration
                 - Holiday schedule integration (if applicable)
-            
+
             Time Validation:
                 - Facility operating hours compliance
                 - Time format standardization
                 - Booking window alignment
                 - Peak hours identification
-            
+
             Room Type Validation:
                 - Valid facility type verification
                 - Availability status checking
@@ -532,7 +532,7 @@ class BookingInputService:
                 - Non-empty validation with clear error messaging
                 - Format validation to prevent invalid ID submission
                 - Existence verification preparation for downstream processing
-            
+
             Member ID:
                 - Owner verification for booking authorization
                 - Must match the original booking creator
@@ -547,7 +547,7 @@ class BookingInputService:
                 - Reasonable length constraints
                 - Format consistency checking
                 - Injection attack prevention
-            
+
             Member ID Validation:
                 - Standard user ID format compliance
                 - Length constraints (3-50 characters)
@@ -803,7 +803,7 @@ class BookingInputService:
                 - Proper calendar date validation
                 - Leap year consideration
                 - Month/day boundary validation
-            
+
             Business Rules:
                 - Future dates only (not today or past)
                 - Calendar validity checking
@@ -871,13 +871,13 @@ class BookingInputService:
                 - Proper hour/minute boundary validation
                 - Leading zero requirement for single digits
                 - Colon separator enforcement
-            
+
             Business Hours:
                 - Operating hours: 06:00 to 22:00 (6 AM to 10 PM)
                 - No overnight bookings allowed
                 - Consistent with facility management policies
                 - Maintenance window avoidance
-            
+
             Time Slot Alignment:
                 - Standard booking increment alignment (if applicable)
                 - Consistent time slot boundaries
@@ -948,13 +948,13 @@ class BookingInputService:
                 - Maximum 50 characters to prevent abuse
                 - Non-empty string requirement
                 - Whitespace trimming and validation
-            
+
             Security Requirements:
                 - Basic format validation for identifier patterns
                 - Length-based security enforcement
                 - Input sanitization for injection prevention
                 - Character set validation (if applicable)
-            
+
             Format Standards:
                 - Consistent identifier formatting
                 - Case sensitivity handling
