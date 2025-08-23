@@ -32,21 +32,21 @@ from business_logic.services.member_input_service import MemberInputService
 class AddMembersCommand(Command):
     """
     Command for adding new members to the sports booking system database.
-    
+
     This class implements the Command pattern and follows the Single Responsibility
     Principle by focusing solely on executing the database operation for adding
     a new member. Input collection, validation, and member object creation are
     delegated to the MemberInputService.
-    
+
     The command handles all database-related errors and provides clear feedback
     about the operation's success or failure.
-    
+
     Attributes:
         None (inherits from Command base class)
-    
+
     Methods:
         execute(data=None): Execute the add member operation
-    
+
     Example:
         >>> add_command = AddMembersCommand()
         >>> success, error_msg = add_command.execute()
@@ -54,7 +54,7 @@ class AddMembersCommand(Command):
         ...     print("Member successfully added to database")
         ... else:
         ...     print(f"Failed to add member: {error_msg}")
-    
+
     Note:
         This command requires a valid database connection through the
         member_database_manager module. The actual member data collection
@@ -64,29 +64,29 @@ class AddMembersCommand(Command):
     def execute(self, data=None) -> tuple[bool, any]:
         """
         Execute the add member command.
-        
+
         This method orchestrates the process of adding a new member to the database.
         It delegates input collection to MemberInputService and handles the database
         operation execution with proper error handling.
-        
+
         Single Responsibility: Execute the database operation for adding a member.
         Input collection and member creation are delegated to MemberInputService.
-        
+
         Args:
             data (any, optional): Additional data for the command execution.
                 Currently not used in this implementation but maintained for
                 interface compatibility with the Command base class.
                 Defaults to None.
-        
+
         Returns:
             tuple[bool, any]: A tuple containing:
                 - bool: True if member was successfully added, False otherwise
                 - any: None if successful, error message string if failed
-        
+
         Raises:
             Exception: Any database-related exceptions are caught and converted
                 to return values for graceful error handling.
-        
+
         Example:
             >>> command = AddMembersCommand()
             >>> success, error = command.execute()
@@ -94,14 +94,14 @@ class AddMembersCommand(Command):
             ...     print("✅ Member added successfully!")
             ... else:
             ...     print(f"❌ Error adding member: {error}")
-        
+
         Flow:
             1. Delegate member data collection to MemberInputService
             2. Validate that member object was created successfully
             3. Execute database operation to create new member
             4. Provide user feedback on operation result
             5. Return success status and any error information
-        
+
         Note:
             The method prints status messages directly to the console for
             immediate user feedback. This follows the established pattern
