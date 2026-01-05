@@ -236,3 +236,10 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
 
         # Execute
         result = BookingInputService.collect_room_search_data()
+
+        # Verify
+        self.assertIsNotNone(result)
+        self.assertIsInstance(result, SearchRoom)
+        self.assertEqual(result.room_type, "Tennis Court")
+        self.assertEqual(result.book_date, date(2026, 12, 25))
+        self.assertEqual(result.book_time, time(14, 30))
