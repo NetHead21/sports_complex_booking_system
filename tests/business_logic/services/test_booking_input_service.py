@@ -190,3 +190,9 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         self, mock_room_id, mock_clear
     ):
         """Test handling of Ctrl+C (KeyboardInterrupt)."""
+
+        mock_room_id.side_effect = KeyboardInterrupt()
+
+        result = BookingInputService.collect_new_booking_data()
+
+        self.assertIsNone(result)
