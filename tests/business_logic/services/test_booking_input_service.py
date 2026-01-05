@@ -59,3 +59,10 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         self.assertEqual(result.book_date, date(2026, 12, 25))
         self.assertEqual(result.book_time, time(14, 30))
         self.assertEqual(result.user, "user123")
+
+        # Verify all helper methods were called
+        mock_clear.assert_called_once()
+        mock_room_id.assert_called_once()
+        mock_date.assert_called_once()
+        mock_time.assert_called_once()
+        mock_user_id.assert_called_once()
