@@ -203,3 +203,9 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
     )
     def test_collect_new_booking_data_exception(self, mock_room_id, mock_clear):
         """Test handling of unexpected exceptions."""
+
+        mock_room_id.side_effect = Exception("Unexpected error")
+
+        result = BookingInputService.collect_new_booking_data()
+
+        self.assertIsNone(result)
