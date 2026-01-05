@@ -181,3 +181,12 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         result = BookingInputService.collect_new_booking_data()
 
         self.assertIsNone(result)
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_room_id"
+    )
+    def test_collect_new_booking_data_keyboard_interrupt(
+        self, mock_room_id, mock_clear
+    ):
+        """Test handling of Ctrl+C (KeyboardInterrupt)."""
