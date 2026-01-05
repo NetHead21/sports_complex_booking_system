@@ -99,9 +99,16 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         # Verify
         self.assertIsNone(result)
 
-
-
-    @patch('business_logic.services.booking_input_service.clear_screen')
-    @patch('business_logic.services.booking_input_service.BookingInputService._collect_room_id')
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_room_id"
+    )
     def test_collect_new_booking_data_room_id_cancelled(self, mock_room_id, mock_clear):
         """Test cancellation during room ID collection."""
+
+        mock_room_id.return_value = None
+
+        result = BookingInputService.collect_new_booking_data()
+
+        self.assertIsNone(result)
+        mock_room_id.assert_called_once()
