@@ -41,3 +41,10 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         self, mock_input, mock_user_id, mock_time, mock_date, mock_room_id, mock_clear
     ):
         """Test successful collection of new booking data with user confirmation."""
+
+        # Setup mock returns
+        mock_room_id.return_value = "T1"
+        mock_date.return_value = date(2026, 12, 25)
+        mock_time.return_value = time(14, 30)
+        mock_user_id.return_value = "user123"
+        mock_input.return_value = "y"  # User confirms
