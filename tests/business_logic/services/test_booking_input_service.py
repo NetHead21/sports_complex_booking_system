@@ -51,3 +51,11 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
 
         # Execute
         result = BookingInputService.collect_new_booking_data()
+
+        # Verify
+        self.assertIsNotNone(result)
+        self.assertIsInstance(result, Booking)
+        self.assertEqual(result.room_id, "T1")
+        self.assertEqual(result.book_date, date(2026, 12, 25))
+        self.assertEqual(result.book_time, time(14, 30))
+        self.assertEqual(result.user, "user123")
