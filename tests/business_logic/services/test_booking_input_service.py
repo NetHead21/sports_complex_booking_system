@@ -258,3 +258,9 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
         self, mock_room_type, mock_clear
     ):
         """Test cancellation during room type selection."""
+
+        mock_room_type.return_value = None
+
+        result = BookingInputService.collect_room_search_data()
+
+        self.assertIsNone(result)
