@@ -48,3 +48,6 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         mock_time.return_value = time(14, 30)
         mock_user_id.return_value = "user123"
         mock_input.return_value = "y"  # User confirms
+
+        # Execute
+        result = BookingInputService.collect_new_booking_data()
