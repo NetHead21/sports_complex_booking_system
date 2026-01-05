@@ -18,3 +18,6 @@ from unittest.mock import patch, MagicMock, call
 
 from business_logic.services.booking_input_service import BookingInputService
 from persistence.models import Booking, SearchRoom
+
+class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
+    """Test cases for collect_new_booking_data method."""
