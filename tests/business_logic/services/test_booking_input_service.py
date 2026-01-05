@@ -11,3 +11,10 @@ covering all input collection and validation methods including:
 The tests use mocking to simulate user input and verify validation logic,
 error handling, and data formatting functionality.
 """
+
+import unittest
+from datetime import datetime, date, time
+from unittest.mock import patch, MagicMock, call
+
+from business_logic.services.booking_input_service import BookingInputService
+from persistence.models import Booking, SearchRoom
