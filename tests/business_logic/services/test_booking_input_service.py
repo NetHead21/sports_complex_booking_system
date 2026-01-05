@@ -306,3 +306,12 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
         result = BookingInputService.collect_room_search_data()
 
         self.assertIsNone(result)
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_room_type"
+    )
+    def test_collect_room_search_data_keyboard_interrupt(
+        self, mock_room_type, mock_clear
+    ):
+        """Test handling of Ctrl+C during search data collection."""
