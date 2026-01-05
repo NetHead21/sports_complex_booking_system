@@ -209,3 +209,7 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         result = BookingInputService.collect_new_booking_data()
 
         self.assertIsNone(result)
+
+
+class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
+    """Test cases for collect_room_search_data method."""
