@@ -213,3 +213,18 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
 
 class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
     """Test cases for collect_room_search_data method."""
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_room_type"
+    )
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_book_date"
+    )
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_book_time"
+    )
+    def test_collect_room_search_data_success(
+        self, mock_time, mock_date, mock_room_type, mock_clear
+    ):
+        """Test successful collection of room search criteria."""
