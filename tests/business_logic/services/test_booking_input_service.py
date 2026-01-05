@@ -243,3 +243,9 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
         self.assertEqual(result.room_type, "Tennis Court")
         self.assertEqual(result.book_date, date(2026, 12, 25))
         self.assertEqual(result.book_time, time(14, 30))
+
+        # Verify all helper methods were called
+        mock_clear.assert_called_once()
+        mock_room_type.assert_called_once()
+        mock_date.assert_called_once_with("search date")
+        mock_time.assert_called_once_with("search time")
