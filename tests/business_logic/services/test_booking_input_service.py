@@ -112,3 +112,15 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
 
         self.assertIsNone(result)
         mock_room_id.assert_called_once()
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_room_id"
+    )
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_book_date"
+    )
+    def test_collect_new_booking_data_date_cancelled(
+        self, mock_date, mock_room_id, mock_clear
+    ):
+        """Test cancellation during date collection."""
