@@ -315,3 +315,9 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
         self, mock_room_type, mock_clear
     ):
         """Test handling of Ctrl+C during search data collection."""
+
+        mock_room_type.side_effect = KeyboardInterrupt()
+
+        result = BookingInputService.collect_room_search_data()
+
+        self.assertIsNone(result)
