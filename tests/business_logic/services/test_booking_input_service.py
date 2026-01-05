@@ -249,3 +249,12 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
         mock_room_type.assert_called_once()
         mock_date.assert_called_once_with("search date")
         mock_time.assert_called_once_with("search time")
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_room_type"
+    )
+    def test_collect_room_search_data_room_type_cancelled(
+        self, mock_room_type, mock_clear
+    ):
+        """Test cancellation during room type selection."""
