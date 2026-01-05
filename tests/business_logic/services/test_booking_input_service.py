@@ -146,3 +146,11 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         self, mock_time, mock_date, mock_room_id, mock_clear
     ):
         """Test cancellation during time collection."""
+
+        mock_room_id.return_value = "T1"
+        mock_date.return_value = date(2026, 12, 25)
+        mock_time.return_value = None
+
+        result = BookingInputService.collect_new_booking_data()
+
+        self.assertIsNone(result)
