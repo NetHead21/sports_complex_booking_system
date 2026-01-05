@@ -233,3 +233,6 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
         mock_room_type.return_value = "Tennis Court"
         mock_date.return_value = date(2026, 12, 25)
         mock_time.return_value = time(14, 30)
+
+        # Execute
+        result = BookingInputService.collect_room_search_data()
