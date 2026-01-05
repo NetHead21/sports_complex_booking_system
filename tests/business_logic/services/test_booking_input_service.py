@@ -95,3 +95,6 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
 
         # Execute
         result = BookingInputService.collect_new_booking_data()
+
+        # Verify
+        self.assertIsNone(result)
