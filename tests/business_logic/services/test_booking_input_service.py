@@ -66,3 +66,15 @@ class TestBookingInputServiceCollectNewBookingData(unittest.TestCase):
         mock_date.assert_called_once()
         mock_time.assert_called_once()
         mock_user_id.assert_called_once()
+
+
+    @patch('business_logic.services.booking_input_service.clear_screen')
+    @patch('business_logic.services.booking_input_service.BookingInputService._collect_room_id')
+    @patch('business_logic.services.booking_input_service.BookingInputService._collect_book_date')
+    @patch('business_logic.services.booking_input_service.BookingInputService._collect_book_time')
+    @patch('business_logic.services.booking_input_service.BookingInputService._collect_user_id')
+    @patch('business_logic.services.booking_input_service.get_user_input')
+    def test_collect_new_booking_data_user_declines_confirmation(
+        self, mock_input, mock_user_id, mock_time, mock_date, mock_room_id, mock_clear
+    ):
+        """Test user declines confirmation after entering booking data."""
