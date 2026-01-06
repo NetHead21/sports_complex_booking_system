@@ -376,3 +376,10 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
 
         self.assertIsNotNone(result)
         self.assertEqual(result[0], "12345")
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    def test_collect_booking_cancellation_data_non_numeric_booking_id(
+        self, mock_input, mock_clear
+    ):
+        """Test validation that booking ID must be numeric."""
