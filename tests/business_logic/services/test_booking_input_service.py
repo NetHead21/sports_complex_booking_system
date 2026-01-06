@@ -383,3 +383,10 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
         self, mock_input, mock_clear
     ):
         """Test validation that booking ID must be numeric."""
+
+        mock_input.side_effect = ["ABC123", "12345"]
+        mock_user_id_patcher = patch(
+            'business_logic.services.booking_input_service.BookingInputService._collect_user_id',
+            return_value="user123"
+        )
+        
