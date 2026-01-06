@@ -322,7 +322,15 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
 
         self.assertIsNone(result)
 
-    @patch('business_logic.services.booking_input_service.clear_screen')
-    @patch('business_logic.services.booking_input_service.BookingInputService._collect_room_type')
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_room_type"
+    )
     def test_collect_room_search_data_exception(self, mock_room_type, mock_clear):
         """Test handling of unexpected exceptions during search."""
+
+        mock_room_type.side_effect = Exception("Unexpected error")
+
+        result = BookingInputService.collect_room_search_data()
+
+        self.assertIsNone(result)
