@@ -418,3 +418,9 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
         self, mock_input, mock_clear
     ):
         """Test handling of Ctrl+C during cancellation data collection."""
+
+        mock_input.side_effect = KeyboardInterrupt()
+
+        result = BookingInputService.collect_booking_cancellation_data()
+
+        self.assertIsNone(result)
