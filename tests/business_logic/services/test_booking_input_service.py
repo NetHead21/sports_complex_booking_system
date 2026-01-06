@@ -395,3 +395,13 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
 
         self.assertIsNotNone(result)
         self.assertEqual(result[0], "12345")
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_user_id"
+    )
+    def test_collect_booking_cancellation_data_member_id_cancelled(
+        self, mock_user_id, mock_input, mock_clear
+    ):
+        """Test cancellation during member ID collection."""
