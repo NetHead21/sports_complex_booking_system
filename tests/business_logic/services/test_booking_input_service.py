@@ -335,5 +335,16 @@ class TestBookingInputServiceCollectRoomSearchData(unittest.TestCase):
 
         self.assertIsNone(result)
 
+
 class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
     """Test cases for collect_booking_cancellation_data method."""
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    @patch(
+        "business_logic.services.booking_input_service.BookingInputService._collect_user_id"
+    )
+    def test_collect_booking_cancellation_data_success(
+        self, mock_user_id, mock_input, mock_clear
+    ):
+        """Test successful collection of booking cancellation data."""
