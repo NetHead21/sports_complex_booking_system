@@ -348,3 +348,8 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
         self, mock_user_id, mock_input, mock_clear
     ):
         """Test successful collection of booking cancellation data."""
+
+        mock_input.return_value = "12345"
+        mock_user_id.return_value = "user123"
+
+        result = BookingInputService.collect_booking_cancellation_data()
