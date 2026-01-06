@@ -405,3 +405,9 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
         self, mock_user_id, mock_input, mock_clear
     ):
         """Test cancellation during member ID collection."""
+        mock_input.return_value = "12345"
+        mock_user_id.return_value = None
+
+        result = BookingInputService.collect_booking_cancellation_data()
+
+        self.assertIsNone(result)
