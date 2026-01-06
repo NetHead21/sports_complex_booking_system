@@ -424,3 +424,8 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
         result = BookingInputService.collect_booking_cancellation_data()
 
         self.assertIsNone(result)
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    def test_collect_booking_cancellation_data_exception(self, mock_input, mock_clear):
+        """Test handling of unexpected exceptions during cancellation."""
