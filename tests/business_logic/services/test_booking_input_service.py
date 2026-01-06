@@ -353,3 +353,8 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
         mock_user_id.return_value = "user123"
 
         result = BookingInputService.collect_booking_cancellation_data()
+
+        self.assertIsNotNone(result)
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(result[0], "12345")  # booking_id
+        self.assertEqual(result[1], "user123")  # member_id
