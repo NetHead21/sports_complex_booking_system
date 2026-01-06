@@ -370,3 +370,9 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
             "business_logic.services.booking_input_service.BookingInputService._collect_user_id",
             return_value="user123",
         )
+
+        with mock_user_id_patcher:
+            result = BookingInputService.collect_booking_cancellation_data()
+
+        self.assertIsNotNone(result)
+        self.assertEqual(result[0], "12345")
