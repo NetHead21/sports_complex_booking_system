@@ -358,3 +358,10 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
         self.assertIsInstance(result, tuple)
         self.assertEqual(result[0], "12345")  # booking_id
         self.assertEqual(result[1], "user123")  # member_id
+
+    @patch("business_logic.services.booking_input_service.clear_screen")
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    def test_collect_booking_cancellation_data_empty_booking_id(
+        self, mock_input, mock_clear
+    ):
+        """Test validation of empty booking ID."""
