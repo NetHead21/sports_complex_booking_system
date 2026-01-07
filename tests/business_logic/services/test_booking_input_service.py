@@ -435,3 +435,7 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
         result = BookingInputService.collect_booking_cancellation_data()
 
         self.assertIsNone(result)
+
+
+class TestBookingInputServiceCollectRoomId(unittest.TestCase):
+    """Test cases for _collect_room_id private method."""
