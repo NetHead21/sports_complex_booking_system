@@ -443,3 +443,9 @@ class TestBookingInputServiceCollectRoomId(unittest.TestCase):
     @patch("business_logic.services.booking_input_service.get_user_input")
     def test_collect_room_id_valid_input(self, mock_input):
         """Test collection of valid room ID."""
+
+        mock_input.return_value = "t1"
+
+        result = BookingInputService._collect_room_id()
+
+        self.assertEqual(result, "T1")  # Should be uppercase
