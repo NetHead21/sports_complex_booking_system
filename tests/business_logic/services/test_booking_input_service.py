@@ -501,3 +501,7 @@ class TestBookingInputServiceCollectRoomId(unittest.TestCase):
         result = BookingInputService._collect_room_id()
 
         self.assertEqual(result, "1234567890")
+
+
+class TestBookingInputServiceCollectRoomType(unittest.TestCase):
+    """Test cases for _collect_room_type private method."""
