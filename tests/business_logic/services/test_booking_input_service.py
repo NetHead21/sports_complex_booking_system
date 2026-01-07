@@ -463,3 +463,10 @@ class TestBookingInputServiceCollectRoomId(unittest.TestCase):
     @patch("business_logic.services.booking_input_service.get_user_input")
     def test_collect_room_id_empty_then_valid(self, mock_input):
         """Test rejection of empty room ID then acceptance of valid input."""
+
+        mock_input.side_effect = ["", "T1"]
+
+        result = BookingInputService._collect_room_id()
+
+        self.assertEqual(result, "T1")
+        self.assertEqual(mock_input.call_count, 2)
