@@ -491,3 +491,7 @@ class TestBookingInputServiceCollectRoomId(unittest.TestCase):
 
         self.assertEqual(result, "T1")
         self.assertEqual(mock_input.call_count, 2)
+
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    def test_collect_room_id_maximum_valid_length(self, mock_input):
+        """Test room ID with exactly 10 characters (boundary test)."""
