@@ -519,3 +519,9 @@ class TestBookingInputServiceCollectRoomType(unittest.TestCase):
     @patch("business_logic.services.booking_input_service.get_user_input")
     def test_collect_room_type_badminton_court(self, mock_input):
         """Test selection of Badminton Court."""
+
+        mock_input.return_value = "2"
+
+        result = BookingInputService._collect_room_type()
+
+        self.assertEqual(result, "Badminton Court")
