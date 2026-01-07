@@ -459,3 +459,7 @@ class TestBookingInputServiceCollectRoomId(unittest.TestCase):
         result = BookingInputService._collect_room_id()
 
         self.assertEqual(result, "AR")
+
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    def test_collect_room_id_empty_then_valid(self, mock_input):
+        """Test rejection of empty room ID then acceptance of valid input."""
