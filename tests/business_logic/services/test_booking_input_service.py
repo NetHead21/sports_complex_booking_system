@@ -474,3 +474,9 @@ class TestBookingInputServiceCollectRoomId(unittest.TestCase):
     @patch("business_logic.services.booking_input_service.get_user_input")
     def test_collect_room_id_too_short(self, mock_input):
         """Test validation of room ID minimum length (edge case: 0 chars after strip)."""
+
+        mock_input.side_effect = ["   ", "T1"]
+
+        result = BookingInputService._collect_room_id()
+
+        self.assertEqual(result, "T1")
