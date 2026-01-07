@@ -449,3 +449,7 @@ class TestBookingInputServiceCollectRoomId(unittest.TestCase):
         result = BookingInputService._collect_room_id()
 
         self.assertEqual(result, "T1")  # Should be uppercase
+
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    def test_collect_room_id_uppercase_conversion(self, mock_input):
+        """Test automatic uppercase conversion of room ID."""
