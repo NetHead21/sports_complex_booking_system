@@ -439,3 +439,7 @@ class TestBookingInputServiceCollectBookingCancellationData(unittest.TestCase):
 
 class TestBookingInputServiceCollectRoomId(unittest.TestCase):
     """Test cases for _collect_room_id private method."""
+
+    @patch("business_logic.services.booking_input_service.get_user_input")
+    def test_collect_room_id_valid_input(self, mock_input):
+        """Test collection of valid room ID."""
