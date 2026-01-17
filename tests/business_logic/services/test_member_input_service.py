@@ -75,3 +75,7 @@ class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
 
 class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
     """Test cases for collect_member_email_update_data method."""
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_email_update_data_success(self, mock_input):
+        """Test successful collection of email update data."""
