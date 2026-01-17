@@ -59,3 +59,7 @@ class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
         result = MemberInputService.collect_new_member_data()
 
         self.assertIsNone(result)
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_new_member_data_empty_fields(self, mock_input):
+        """Test handling of empty fields (should be caught by required=True)."""
