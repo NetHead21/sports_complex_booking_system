@@ -112,3 +112,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_email_update_data_no_at_or_dot(self, mock_input):
         """Test rejection of email without @ and dot."""
+
+        mock_input.side_effect = ["testuser", "invalidemail"]
+
+        result = MemberInputService.collect_member_email_update_data()
