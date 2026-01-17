@@ -20,3 +20,7 @@ from unittest.mock import patch, MagicMock, call
 
 from business_logic.services.member_input_service import MemberInputService
 from persistence.models import Member
+
+
+class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
+    """Test cases for collect_new_member_data method."""
