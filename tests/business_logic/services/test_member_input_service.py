@@ -53,3 +53,9 @@ class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_new_member_data_exception(self, mock_input):
         """Test handling of unexpected exceptions."""
+
+        mock_input.side_effect = Exception("Unexpected error")
+
+        result = MemberInputService.collect_new_member_data()
+
+        self.assertIsNone(result)
