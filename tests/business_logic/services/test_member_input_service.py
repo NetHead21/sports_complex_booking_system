@@ -43,3 +43,9 @@ class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_new_member_data_keyboard_interrupt(self, mock_input):
         """Test handling of user cancellation via Ctrl+C."""
+
+        mock_input.side_effect = KeyboardInterrupt()
+
+        result = MemberInputService.collect_new_member_data()
+
+        self.assertIsNone(result)
