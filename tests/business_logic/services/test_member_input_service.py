@@ -14,3 +14,9 @@ covering all input collection, validation, and display methods including:
 The tests use mocking to simulate user input and verify validation logic,
 error handling, security workflows, and data formatting functionality.
 """
+
+import unittest
+from unittest.mock import patch, MagicMock, call
+
+from business_logic.services.member_input_service import MemberInputService
+from persistence.models import Member
