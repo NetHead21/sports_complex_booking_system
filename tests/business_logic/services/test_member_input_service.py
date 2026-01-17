@@ -118,3 +118,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
         result = MemberInputService.collect_member_email_update_data()
 
         self.assertIsNone(result)
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_email_update_data_valid_complex_email(self, mock_input):
+        """Test acceptance of complex but valid email."""
