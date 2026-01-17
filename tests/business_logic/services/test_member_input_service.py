@@ -88,3 +88,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
         self.assertIsInstance(result, tuple)
         self.assertEqual(result[0], "testuser")
         self.assertEqual(result[1], "newemail@example.com")
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_email_update_data_missing_at_symbol(self, mock_input):
+        """Test rejection of email without @ symbol."""
