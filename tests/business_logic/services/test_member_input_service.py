@@ -24,3 +24,7 @@ from persistence.models import Member
 
 class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
     """Test cases for collect_new_member_data method."""
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_new_member_data_success(self, mock_input):
+        """Test successful collection of new member data."""
