@@ -83,3 +83,8 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
         mock_input.side_effect = ["testuser", "newemail@example.com"]
 
         result = MemberInputService.collect_member_email_update_data()
+
+        self.assertIsNotNone(result)
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(result[0], "testuser")
+        self.assertEqual(result[1], "newemail@example.com")
