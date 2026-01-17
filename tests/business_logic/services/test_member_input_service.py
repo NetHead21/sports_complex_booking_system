@@ -71,3 +71,7 @@ class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
 
         self.assertIsNotNone(result)
         self.assertEqual(result.id, "user123")
+
+
+class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
+    """Test cases for collect_member_email_update_data method."""
