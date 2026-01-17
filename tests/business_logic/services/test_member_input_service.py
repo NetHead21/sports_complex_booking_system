@@ -92,3 +92,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_email_update_data_missing_at_symbol(self, mock_input):
         """Test rejection of email without @ symbol."""
+
+        mock_input.side_effect = ["testuser", "invalidemail.com"]
+
+        result = MemberInputService.collect_member_email_update_data()
