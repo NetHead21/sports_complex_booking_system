@@ -129,3 +129,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
 
         self.assertIsNotNone(result)
         self.assertEqual(result[1], "user.name+tag@example.co.uk")
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_email_update_data_keyboard_interrupt(self, mock_input):
+        """Test handling of Ctrl+C during email update collection."""
