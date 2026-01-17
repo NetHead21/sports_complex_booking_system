@@ -39,3 +39,7 @@ class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
         self.assertEqual(result.password, "password123")
         self.assertEqual(result.email, "test@email.com")
         self.assertEqual(mock_input.call_count, 3)
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_new_member_data_keyboard_interrupt(self, mock_input):
+        """Test handling of user cancellation via Ctrl+C."""
