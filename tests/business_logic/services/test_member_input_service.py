@@ -133,3 +133,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_email_update_data_keyboard_interrupt(self, mock_input):
         """Test handling of Ctrl+C during email update collection."""
+
+        mock_input.side_effect = KeyboardInterrupt()
+
+        result = MemberInputService.collect_member_email_update_data()
