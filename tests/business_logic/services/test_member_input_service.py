@@ -28,3 +28,7 @@ class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_new_member_data_success(self, mock_input):
         """Test successful collection of new member data."""
+
+        mock_input.side_effect = ["testuser", "password123", "test@email.com"]
+
+        result = MemberInputService.collect_new_member_data()
