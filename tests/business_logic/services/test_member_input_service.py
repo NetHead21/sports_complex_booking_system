@@ -79,3 +79,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_email_update_data_success(self, mock_input):
         """Test successful collection of email update data."""
+
+        mock_input.side_effect = ["testuser", "newemail@example.com"]
+
+        result = MemberInputService.collect_member_email_update_data()
