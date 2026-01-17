@@ -68,3 +68,6 @@ class TestMemberInputServiceCollectNewMemberData(unittest.TestCase):
         mock_input.side_effect = ["user123", "pass123", "test@example.com"]
 
         result = MemberInputService.collect_new_member_data()
+
+        self.assertIsNotNone(result)
+        self.assertEqual(result.id, "user123")
