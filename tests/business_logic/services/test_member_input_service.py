@@ -193,3 +193,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_password_update_data_five_chars(self, mock_input):
         """Test rejection of password with exactly 5 characters (boundary)."""
+
+        mock_input.side_effect = ["testuser", "pass1"]
+
+        result = MemberInputService.collect_member_password_update_data()
