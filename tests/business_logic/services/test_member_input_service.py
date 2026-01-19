@@ -226,3 +226,5 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
         mock_input.side_effect = ["testuser", "password123", "password123 "]
 
         result = MemberInputService.collect_member_password_update_data()
+
+        self.assertIsNone(result)
