@@ -178,3 +178,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
         self.assertIsNone(result)
         # Should only call get_user_input twice (username + password)
         self.assertEqual(mock_input.call_count, 2)
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_password_update_data_exactly_six_chars(self, mock_input):
+        """Test acceptance of password with exactly 6 characters (boundary)."""
