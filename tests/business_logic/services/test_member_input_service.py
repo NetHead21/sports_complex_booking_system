@@ -218,3 +218,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
         result = MemberInputService.collect_member_password_update_data()
 
         self.assertIsNone(result)
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_password_update_data_whitespace_difference(self, mock_input):
+        """Test that whitespace differences cause mismatch."""
