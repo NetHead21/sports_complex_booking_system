@@ -174,3 +174,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
         mock_input.side_effect = ["testuser", "short"]
 
         result = MemberInputService.collect_member_password_update_data()
+
+        self.assertIsNone(result)
+        # Should only call get_user_input twice (username + password)
+        self.assertEqual(mock_input.call_count, 2)
