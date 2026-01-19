@@ -157,3 +157,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_password_update_data_success(self, mock_input):
         """Test successful password update with matching confirmation."""
+
+        mock_input.side_effect = ["testuser", "newpass123", "newpass123"]
+
+        result = MemberInputService.collect_member_password_update_data()
