@@ -149,3 +149,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
         result = MemberInputService.collect_member_email_update_data()
 
         self.assertIsNone(result)
+
+
+class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
+    """Test cases for collect_member_password_update_data method."""
