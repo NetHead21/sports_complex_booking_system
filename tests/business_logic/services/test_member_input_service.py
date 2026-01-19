@@ -203,3 +203,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_password_update_data_mismatch(self, mock_input):
         """Test rejection when passwords don't match."""
+
+        mock_input.side_effect = ["testuser", "password123", "password456"]
+
+        result = MemberInputService.collect_member_password_update_data()
