@@ -189,3 +189,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
 
         self.assertIsNotNone(result)
         self.assertEqual(result[1], "pass12")
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_password_update_data_five_chars(self, mock_input):
+        """Test rejection of password with exactly 5 characters (boundary)."""
