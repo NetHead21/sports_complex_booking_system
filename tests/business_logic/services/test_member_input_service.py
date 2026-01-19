@@ -153,3 +153,7 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
 
 class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     """Test cases for collect_member_password_update_data method."""
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_password_update_data_success(self, mock_input):
+        """Test successful password update with matching confirmation."""
