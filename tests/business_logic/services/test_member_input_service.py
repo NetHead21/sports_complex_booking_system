@@ -147,3 +147,5 @@ class TestMemberInputServiceCollectEmailUpdateData(unittest.TestCase):
         mock_input.side_effect = Exception("Unexpected error")
 
         result = MemberInputService.collect_member_email_update_data()
+
+        self.assertIsNone(result)
