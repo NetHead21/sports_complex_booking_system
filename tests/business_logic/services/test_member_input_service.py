@@ -170,3 +170,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_password_update_data_too_short(self, mock_input):
         """Test rejection of password shorter than 6 characters."""
+
+        mock_input.side_effect = ["testuser", "short"]
+
+        result = MemberInputService.collect_member_password_update_data()
