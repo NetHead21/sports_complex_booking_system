@@ -182,3 +182,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_password_update_data_exactly_six_chars(self, mock_input):
         """Test acceptance of password with exactly 6 characters (boundary)."""
+
+        mock_input.side_effect = ["testuser", "pass12", "pass12"]
+
+        result = MemberInputService.collect_member_password_update_data()
