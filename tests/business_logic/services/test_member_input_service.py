@@ -222,3 +222,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_password_update_data_whitespace_difference(self, mock_input):
         """Test that whitespace differences cause mismatch."""
+
+        mock_input.side_effect = ["testuser", "password123", "password123 "]
+
+        result = MemberInputService.collect_member_password_update_data()
