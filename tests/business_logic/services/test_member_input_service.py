@@ -268,3 +268,7 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_member_id_for_deletion_success(self, mock_input):
         """Test successful deletion with correct confirmation."""
+
+        mock_input.side_effect = ["testuser", "DELETE"]
+
+        result = MemberInputService.collect_member_id_for_deletion()
