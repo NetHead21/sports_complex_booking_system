@@ -282,3 +282,5 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
         mock_input.side_effect = ["testuser", "delete"]
 
         result = MemberInputService.collect_member_id_for_deletion()
+
+        self.assertIsNone(result)
