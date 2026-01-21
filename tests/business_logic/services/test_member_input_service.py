@@ -246,3 +246,5 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
         mock_input.side_effect = Exception("Unexpected error")
 
         result = MemberInputService.collect_member_password_update_data()
+
+        self.assertIsNone(result)
