@@ -236,3 +236,5 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
         mock_input.side_effect = KeyboardInterrupt()
 
         result = MemberInputService.collect_member_password_update_data()
+
+        self.assertIsNone(result)
