@@ -232,3 +232,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_password_update_data_keyboard_interrupt(self, mock_input):
         """Test handling of Ctrl+C during password update."""
+
+        mock_input.side_effect = KeyboardInterrupt()
+
+        result = MemberInputService.collect_member_password_update_data()
