@@ -274,3 +274,7 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
         result = MemberInputService.collect_member_id_for_deletion()
 
         self.assertEqual(result, "testuser")
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_member_id_for_deletion_wrong_confirmation(self, mock_input):
+        """Test rejection when confirmation text is incorrect."""
