@@ -278,3 +278,7 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_member_id_for_deletion_wrong_confirmation(self, mock_input):
         """Test rejection when confirmation text is incorrect."""
+
+        mock_input.side_effect = ["testuser", "delete"]
+
+        result = MemberInputService.collect_member_id_for_deletion()
