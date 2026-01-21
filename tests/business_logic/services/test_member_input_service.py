@@ -284,3 +284,7 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
         result = MemberInputService.collect_member_id_for_deletion()
 
         self.assertIsNone(result)
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_member_id_for_deletion_lowercase_confirmation(self, mock_input):
+        """Test case sensitivity of confirmation (lowercase should fail)."""
