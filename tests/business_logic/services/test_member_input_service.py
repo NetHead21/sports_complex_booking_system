@@ -260,3 +260,7 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
 
         self.assertIsNotNone(result)
         self.assertEqual(result[1], long_password)
+
+
+class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
+    """Test cases for collect_member_id_for_deletion method."""
