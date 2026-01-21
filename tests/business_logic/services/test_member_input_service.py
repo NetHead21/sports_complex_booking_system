@@ -252,3 +252,8 @@ class TestMemberInputServiceCollectPasswordUpdateData(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_password_update_data_long_password(self, mock_input):
         """Test acceptance of very long password."""
+
+        long_password = "a" * 100
+        mock_input.side_effect = ["testuser", long_password, long_password]
+
+        result = MemberInputService.collect_member_password_update_data()
