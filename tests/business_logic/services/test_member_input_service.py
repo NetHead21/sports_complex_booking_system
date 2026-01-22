@@ -308,3 +308,7 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
     @patch("business_logic.services.member_input_service.get_user_input")
     def test_collect_member_id_for_deletion_empty_confirmation(self, mock_input):
         """Test rejection of empty confirmation."""
+
+        mock_input.side_effect = ["testuser", ""]
+
+        result = MemberInputService.collect_member_id_for_deletion()
