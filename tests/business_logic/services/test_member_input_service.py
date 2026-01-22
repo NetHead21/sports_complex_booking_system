@@ -350,3 +350,7 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
 
 class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
     """Test cases for collect_member_id_for_lookup method."""
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_member_id_for_lookup_success(self, mock_input):
+        """Test successful member ID collection for lookup."""
