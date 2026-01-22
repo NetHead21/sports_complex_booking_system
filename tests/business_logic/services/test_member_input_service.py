@@ -378,3 +378,5 @@ class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
         mock_input.side_effect = KeyboardInterrupt()
 
         result = MemberInputService.collect_member_id_for_lookup()
+
+        self.assertIsNone(result)
