@@ -346,3 +346,7 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
         result = MemberInputService.collect_member_id_for_deletion()
 
         self.assertIsNone(result)
+
+
+class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
+    """Test cases for collect_member_id_for_lookup method."""
