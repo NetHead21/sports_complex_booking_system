@@ -320,3 +320,7 @@ class TestMemberInputServiceCollectMemberIdForDeletion(unittest.TestCase):
         self, mock_input
     ):
         """Test that whitespace in confirmation causes failure."""
+
+        mock_input.side_effect = ["testuser", " DELETE "]
+
+        result = MemberInputService.collect_member_id_for_deletion()
