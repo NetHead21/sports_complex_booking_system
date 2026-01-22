@@ -370,3 +370,7 @@ class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
         result = MemberInputService.collect_member_id_for_lookup()
 
         self.assertEqual(result, "test user")
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_member_id_for_lookup_keyboard_interrupt(self, mock_input):
+        """Test handling of Ctrl+C during lookup."""
