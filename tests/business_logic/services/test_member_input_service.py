@@ -368,3 +368,5 @@ class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
         mock_input.return_value = "test user"
 
         result = MemberInputService.collect_member_id_for_lookup()
+
+        self.assertEqual(result, "test user")
