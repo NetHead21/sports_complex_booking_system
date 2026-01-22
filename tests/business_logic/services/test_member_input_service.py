@@ -360,3 +360,7 @@ class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
         result = MemberInputService.collect_member_id_for_lookup()
 
         self.assertEqual(result, "testuser")
+
+    @patch("business_logic.services.member_input_service.get_user_input")
+    def test_collect_member_id_for_lookup_with_spaces(self, mock_input):
+        """Test member ID with spaces (if allowed)."""
