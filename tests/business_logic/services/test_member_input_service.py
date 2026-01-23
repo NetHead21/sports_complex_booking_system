@@ -432,3 +432,8 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
     @patch("builtins.print")
     def test_display_operation_result_different_operations(self, mock_print):
         """Test display with various operation names."""
+
+        operations = [
+            ("Member Deletion", "user1", True, None),
+            ("Email Verification", "user2", False, "Invalid email"),
+        ]
