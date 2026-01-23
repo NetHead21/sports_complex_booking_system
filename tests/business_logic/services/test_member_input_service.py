@@ -390,3 +390,7 @@ class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
         result = MemberInputService.collect_member_id_for_lookup()
 
         self.assertIsNone(result)
+
+
+class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
+    """Test cases for display_operation_result method."""
