@@ -398,3 +398,9 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
     @patch("builtins.print")
     def test_display_operation_result_success(self, mock_print):
         """Test display of successful operation."""
+
+        MemberInputService.display_operation_result("Email Update", "testuser", True)
+
+        mock_print.assert_called_once_with(
+            "✅ Email Update successful for member 'testuser'!"
+        )
