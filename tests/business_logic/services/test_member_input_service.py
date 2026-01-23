@@ -459,3 +459,5 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_valid_id_only(self):
         """Test validation of only member ID."""
+
+        is_valid, error = MemberInputService.validate_member_data("testuser")
