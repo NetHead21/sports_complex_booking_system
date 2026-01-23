@@ -449,3 +449,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_valid_complete(self):
         """Test validation of complete valid member data."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", "test@email.com", "password123"
+        )
