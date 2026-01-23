@@ -461,3 +461,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
         """Test validation of only member ID."""
 
         is_valid, error = MemberInputService.validate_member_data("testuser")
+
+        self.assertTrue(is_valid)
+        self.assertEqual(error, "")
