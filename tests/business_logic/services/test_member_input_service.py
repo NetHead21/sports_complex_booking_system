@@ -394,3 +394,7 @@ class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
 
 class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
     """Test cases for display_operation_result method."""
+
+    @patch("builtins.print")
+    def test_display_operation_result_success(self, mock_print):
+        """Test display of successful operation."""
