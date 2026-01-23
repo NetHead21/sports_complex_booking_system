@@ -437,3 +437,8 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
             ("Member Deletion", "user1", True, None),
             ("Email Verification", "user2", False, "Invalid email"),
         ]
+
+        for op, user, success, error in operations:
+            mock_print.reset_mock()
+            MemberInputService.display_operation_result(op, user, success, error)
+            self.assertEqual(mock_print.call_count, 1)
