@@ -464,3 +464,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertTrue(is_valid)
         self.assertEqual(error, "")
+
+    def test_validate_member_data_valid_id_and_email(self):
+        """Test validation of member ID and email only."""
