@@ -446,3 +446,6 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
 
 class TestMemberInputServiceValidateMemberData(unittest.TestCase):
     """Test cases for validate_member_data method."""
+
+    def test_validate_member_data_valid_complete(self):
+        """Test validation of complete valid member data."""
