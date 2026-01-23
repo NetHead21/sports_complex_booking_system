@@ -408,3 +408,11 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
     @patch("builtins.print")
     def test_display_operation_result_failure_no_error_msg(self, mock_print):
         """Test display of failed operation without error message."""
+
+        MemberInputService.display_operation_result(
+            "Password Update", "testuser", False
+        )
+
+        mock_print.assert_called_once_with(
+            "❌ Password Update failed for member 'testuser'"
+        )
