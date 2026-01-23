@@ -420,3 +420,11 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
     @patch("builtins.print")
     def test_display_operation_result_failure_with_error_msg(self, mock_print):
         """Test display of failed operation with error message."""
+
+        MemberInputService.display_operation_result(
+            "Member Creation", "testuser", False, "Database connection failed"
+        )
+
+        mock_print.assert_called_once_with(
+            "❌ Member Creation failed for member 'testuser': Database connection failed"
+        )
