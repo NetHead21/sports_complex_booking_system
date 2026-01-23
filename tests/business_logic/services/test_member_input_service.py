@@ -467,3 +467,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_valid_id_and_email(self):
         """Test validation of member ID and email only."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", email="test@email.com"
+        )
