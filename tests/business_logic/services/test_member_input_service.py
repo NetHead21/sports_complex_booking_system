@@ -442,3 +442,7 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
             mock_print.reset_mock()
             MemberInputService.display_operation_result(op, user, success, error)
             self.assertEqual(mock_print.call_count, 1)
+
+
+class TestMemberInputServiceValidateMemberData(unittest.TestCase):
+    """Test cases for validate_member_data method."""
