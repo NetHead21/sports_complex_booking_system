@@ -428,3 +428,7 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
         mock_print.assert_called_once_with(
             "❌ Member Creation failed for member 'testuser': Database connection failed"
         )
+
+    @patch("builtins.print")
+    def test_display_operation_result_different_operations(self, mock_print):
+        """Test display with various operation names."""
