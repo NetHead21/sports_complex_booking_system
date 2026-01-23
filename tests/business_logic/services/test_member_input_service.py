@@ -404,3 +404,7 @@ class TestMemberInputServiceDisplayOperationResult(unittest.TestCase):
         mock_print.assert_called_once_with(
             "✅ Email Update successful for member 'testuser'!"
         )
+
+    @patch("builtins.print")
+    def test_display_operation_result_failure_no_error_msg(self, mock_print):
+        """Test display of failed operation without error message."""
