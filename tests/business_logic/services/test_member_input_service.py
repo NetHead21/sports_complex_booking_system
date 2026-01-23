@@ -388,3 +388,5 @@ class TestMemberInputServiceCollectMemberIdForLookup(unittest.TestCase):
         mock_input.side_effect = Exception("Unexpected error")
 
         result = MemberInputService.collect_member_id_for_lookup()
+
+        self.assertIsNone(result)
