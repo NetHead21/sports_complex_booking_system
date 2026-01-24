@@ -501,3 +501,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
     def test_validate_member_data_member_id_exactly_three_chars(self):
         """Test acceptance of member ID with exactly 3 characters (boundary)."""
         is_valid, error = MemberInputService.validate_member_data("abc")
+
+        self.assertTrue(is_valid)
+        self.assertEqual(error, "")
