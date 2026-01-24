@@ -507,3 +507,5 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_member_id_two_chars(self):
         """Test rejection of member ID with exactly 2 characters (boundary)."""
+
+        is_valid, error = MemberInputService.validate_member_data("ab")
