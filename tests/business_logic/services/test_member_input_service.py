@@ -494,3 +494,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
     def test_validate_member_data_member_id_too_short(self):
         """Test rejection of member ID shorter than 3 characters."""
         is_valid, error = MemberInputService.validate_member_data("ab")
+
+        self.assertFalse(is_valid)
+        self.assertEqual(error, "Member ID must be at least 3 characters long")
