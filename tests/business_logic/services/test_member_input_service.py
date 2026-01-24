@@ -504,3 +504,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertTrue(is_valid)
         self.assertEqual(error, "")
+
+    def test_validate_member_data_member_id_two_chars(self):
+        """Test rejection of member ID with exactly 2 characters (boundary)."""
