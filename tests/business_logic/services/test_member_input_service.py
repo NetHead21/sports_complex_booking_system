@@ -512,3 +512,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertFalse(is_valid)
         self.assertIn("at least 3 characters", error)
+
+    def test_validate_member_data_invalid_email_no_at(self):
+        """Test rejection of email without @ symbol."""
