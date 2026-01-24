@@ -477,3 +477,5 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_empty_member_id(self):
         """Test rejection of empty member ID."""
+
+        is_valid, error = MemberInputService.validate_member_data("")
