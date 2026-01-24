@@ -482,3 +482,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertFalse(is_valid)
         self.assertEqual(error, "Member ID cannot be empty")
+
+    def test_validate_member_data_whitespace_only_member_id(self):
+        """Test rejection of whitespace-only member ID."""
