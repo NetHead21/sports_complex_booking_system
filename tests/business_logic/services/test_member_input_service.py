@@ -532,3 +532,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertFalse(is_valid)
         self.assertEqual(error, "Invalid email format")
+
+    def test_validate_member_data_email_too_short(self):
+        """Test rejection of email shorter than 5 characters."""
