@@ -515,3 +515,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_invalid_email_no_at(self):
         """Test rejection of email without @ symbol."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", email="invalidemail.com"
+        )
