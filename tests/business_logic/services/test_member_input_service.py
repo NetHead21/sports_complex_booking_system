@@ -522,3 +522,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertFalse(is_valid)
         self.assertEqual(error, "Invalid email format")
+
+    def test_validate_member_data_invalid_email_no_dot(self):
+        """Test rejection of email without dot."""
