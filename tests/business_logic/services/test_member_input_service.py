@@ -535,3 +535,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_email_too_short(self):
         """Test rejection of email shorter than 5 characters."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", email="a@b."
+        )
