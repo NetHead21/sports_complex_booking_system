@@ -509,3 +509,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
         """Test rejection of member ID with exactly 2 characters (boundary)."""
 
         is_valid, error = MemberInputService.validate_member_data("ab")
+
+        self.assertFalse(is_valid)
+        self.assertIn("at least 3 characters", error)
