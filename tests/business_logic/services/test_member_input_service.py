@@ -575,3 +575,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_password_exactly_six_chars(self):
         """Test acceptance of password with exactly 6 characters (boundary)."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", password="pass12"
+        )
