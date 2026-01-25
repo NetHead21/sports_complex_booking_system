@@ -647,3 +647,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertTrue(is_valid)
         self.assertEqual(error, "")
+
+
+if __name__ == "__main__":
+    unittest.main()
