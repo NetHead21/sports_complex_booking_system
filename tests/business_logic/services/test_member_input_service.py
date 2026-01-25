@@ -623,3 +623,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
         self.assertFalse(is_valid)
         # Should return the first validation error (member ID)
         self.assertEqual(error, "Member ID cannot be empty")
+
+    def test_validate_member_data_complex_valid_email(self):
+        """Test acceptance of complex but valid email format."""
