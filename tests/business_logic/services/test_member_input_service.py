@@ -595,3 +595,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_password_only_whitespace(self):
         """Test rejection of password containing only whitespace."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", password="      "
+        )
