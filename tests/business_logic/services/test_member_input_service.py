@@ -549,3 +549,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
         is_valid, error = MemberInputService.validate_member_data(
             "testuser", email="a@b.c"
         )
+
+        self.assertTrue(is_valid)
+        self.assertEqual(error, "")
