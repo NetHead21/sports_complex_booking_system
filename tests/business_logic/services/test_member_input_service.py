@@ -592,3 +592,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertFalse(is_valid)
         self.assertIn("at least 6 characters", error)
+
+    def test_validate_member_data_password_only_whitespace(self):
+        """Test rejection of password containing only whitespace."""
