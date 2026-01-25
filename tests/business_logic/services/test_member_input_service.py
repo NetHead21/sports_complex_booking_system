@@ -562,3 +562,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertFalse(is_valid)
         self.assertEqual(error, "Email too short")
+
+    def test_validate_member_data_password_too_short(self):
+        """Test rejection of password shorter than 6 characters."""
