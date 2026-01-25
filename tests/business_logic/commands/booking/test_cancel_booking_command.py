@@ -19,3 +19,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 
 from business_logic.commands.booking.cancel_booking_command import CancelBookRoomCommand
+
+
+class TestCancelBookRoomCommandExecute(unittest.TestCase):
+    """Test cases for CancelBookRoomCommand execute method."""
