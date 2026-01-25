@@ -615,3 +615,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_all_invalid(self):
         """Test validation when all fields are invalid (returns first error)."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "", email="invalid", password="short"
+        )
