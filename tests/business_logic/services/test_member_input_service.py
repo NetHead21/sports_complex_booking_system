@@ -626,3 +626,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_complex_valid_email(self):
         """Test acceptance of complex but valid email format."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", email="user.name+tag@example.co.uk"
+        )
