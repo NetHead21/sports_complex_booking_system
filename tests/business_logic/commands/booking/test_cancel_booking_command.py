@@ -58,3 +58,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Arrange
         mock_input_service.collect_booking_cancellation_data.return_value = None
         command = CancelBookRoomCommand()
+
+        # Act
+        success, error = command.execute()
+
+        # Assert
+        self.assertFalse(success)
+        self.assertEqual(error, "Booking cancellation cancelled or failed")
+        mock_input_service.collect_booking_cancellation_data.assert_called_once()
+        mock_db.cancel_booking.assert_not_called()
