@@ -602,3 +602,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertFalse(is_valid)
         self.assertEqual(error, "Password cannot contain only whitespace")
+
+    def test_validate_member_data_password_with_spaces(self):
+        """Test acceptance of password with spaces (but not only spaces)."""
