@@ -54,3 +54,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test when user cancels cancellation data collection."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = None
+        command = CancelBookRoomCommand()
