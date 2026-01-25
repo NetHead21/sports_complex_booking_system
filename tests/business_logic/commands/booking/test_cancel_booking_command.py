@@ -14,3 +14,8 @@ covering all aspects of the booking cancellation command execution including:
 The tests use mocking to isolate the command logic from external dependencies
 like the database and input service, ensuring fast and reliable unit testing.
 """
+
+import unittest
+from unittest.mock import patch, MagicMock
+
+from business_logic.commands.booking.cancel_booking_command import CancelBookRoomCommand
