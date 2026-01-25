@@ -612,3 +612,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertTrue(is_valid)
         self.assertEqual(error, "")
+
+    def test_validate_member_data_all_invalid(self):
+        """Test validation when all fields are invalid (returns first error)."""
