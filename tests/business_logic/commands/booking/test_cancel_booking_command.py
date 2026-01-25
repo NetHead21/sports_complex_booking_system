@@ -47,3 +47,10 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertIsNone(error)
         mock_input_service.collect_booking_cancellation_data.assert_called_once()
         mock_db.cancel_booking.assert_called_once_with(int(booking_id))
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_cancellation_data_collection_cancelled(
+        self, mock_input_service, mock_db
+    ):
+        """Test when user cancels cancellation data collection."""
