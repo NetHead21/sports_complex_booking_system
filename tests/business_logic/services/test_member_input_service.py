@@ -644,3 +644,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
         is_valid, error = MemberInputService.validate_member_data(
             long_id, email=long_email, password=long_password
         )
+
+        self.assertTrue(is_valid)
+        self.assertEqual(error, "")
