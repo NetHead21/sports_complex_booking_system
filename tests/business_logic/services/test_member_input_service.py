@@ -572,3 +572,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertFalse(is_valid)
         self.assertEqual(error, "Password must be at least 6 characters long")
+
+    def test_validate_member_data_password_exactly_six_chars(self):
+        """Test acceptance of password with exactly 6 characters (boundary)."""
