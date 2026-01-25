@@ -552,3 +552,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertTrue(is_valid)
         self.assertEqual(error, "")
+
+    def test_validate_member_data_email_four_chars(self):
+        """Test rejection of email with exactly 4 characters (boundary)."""
