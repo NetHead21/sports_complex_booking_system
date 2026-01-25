@@ -545,3 +545,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_email_exactly_five_chars(self):
         """Test acceptance of email with exactly 5 characters (boundary)."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", email="a@b.c"
+        )
