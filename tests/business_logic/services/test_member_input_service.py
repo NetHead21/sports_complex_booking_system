@@ -599,3 +599,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
         is_valid, error = MemberInputService.validate_member_data(
             "testuser", password="      "
         )
+
+        self.assertFalse(is_valid)
+        self.assertEqual(error, "Password cannot contain only whitespace")
