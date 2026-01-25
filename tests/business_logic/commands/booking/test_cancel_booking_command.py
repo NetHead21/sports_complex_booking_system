@@ -23,3 +23,8 @@ from business_logic.commands.booking.cancel_booking_command import CancelBookRoo
 
 class TestCancelBookRoomCommandExecute(unittest.TestCase):
     """Test cases for CancelBookRoomCommand execute method."""
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_success(self, mock_input_service, mock_db):
+        """Test successful booking cancellation execution."""
