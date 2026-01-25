@@ -605,3 +605,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_password_with_spaces(self):
         """Test acceptance of password with spaces (but not only spaces)."""
+
+        is_valid, error = MemberInputService.validate_member_data(
+            "testuser", password="pass word 123"
+        )
