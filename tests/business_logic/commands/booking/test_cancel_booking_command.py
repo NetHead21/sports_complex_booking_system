@@ -67,3 +67,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertEqual(error, "Booking cancellation cancelled or failed")
         mock_input_service.collect_booking_cancellation_data.assert_called_once()
         mock_db.cancel_booking.assert_not_called()
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_database_cancellation_fails(self, mock_input_service, mock_db):
+        """Test when database cancellation operation fails."""
