@@ -589,3 +589,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
         is_valid, error = MemberInputService.validate_member_data(
             "testuser", password="pass1"
         )
+
+        self.assertFalse(is_valid)
+        self.assertIn("at least 6 characters", error)
