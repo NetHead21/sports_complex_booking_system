@@ -640,3 +640,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
         long_id = "a" * 50
         long_email = "user@" + "domain" * 10 + ".com"
         long_password = "p" * 100
+
+        is_valid, error = MemberInputService.validate_member_data(
+            long_id, email=long_email, password=long_password
+        )
