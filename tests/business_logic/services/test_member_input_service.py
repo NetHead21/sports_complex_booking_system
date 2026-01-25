@@ -582,3 +582,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertTrue(is_valid)
         self.assertEqual(error, "")
+
+    def test_validate_member_data_password_five_chars(self):
+        """Test rejection of password with exactly 5 characters (boundary)."""
