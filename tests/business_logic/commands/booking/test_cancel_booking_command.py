@@ -72,3 +72,14 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_database_cancellation_fails(self, mock_input_service, mock_db):
         """Test when database cancellation operation fails."""
+
+        # Arrange
+        booking_id = "12345"
+        member_id = "testuser"
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            booking_id,
+            member_id,
+        )
+        mock_db.cancel_booking.return_value = False
+
+        command = CancelBookRoomCommand()
