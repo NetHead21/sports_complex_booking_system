@@ -636,3 +636,7 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
     def test_validate_member_data_long_inputs(self):
         """Test validation with very long valid inputs."""
+
+        long_id = "a" * 50
+        long_email = "user@" + "domain" * 10 + ".com"
+        long_password = "p" * 100
