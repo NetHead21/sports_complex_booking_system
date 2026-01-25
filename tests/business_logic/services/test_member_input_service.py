@@ -633,3 +633,6 @@ class TestMemberInputServiceValidateMemberData(unittest.TestCase):
 
         self.assertTrue(is_valid)
         self.assertEqual(error, "")
+
+    def test_validate_member_data_long_inputs(self):
+        """Test validation with very long valid inputs."""
