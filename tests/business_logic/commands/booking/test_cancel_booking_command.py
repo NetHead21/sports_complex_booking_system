@@ -165,3 +165,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert - should work normally, data is ignored
         self.assertTrue(success)
         self.assertIsNone(error)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_exception_in_input_service(self, mock_input_service, mock_db):
+        """Test exception handling when input service raises error."""
