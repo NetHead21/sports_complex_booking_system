@@ -125,3 +125,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         """Test cancellation with different member IDs."""
 
         member_ids = ["user123", "member_test", "john_doe", "a" * 50]
+
+        for member_id in member_ids:
+            with self.subTest(member_id=member_id):
+                # Arrange
