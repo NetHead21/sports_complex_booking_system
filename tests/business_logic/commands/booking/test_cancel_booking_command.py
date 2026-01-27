@@ -161,3 +161,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act - pass data parameter
         success, error = command.execute(data={"some": "data"})
+
+        # Assert - should work normally, data is ignored
+        self.assertTrue(success)
+        self.assertIsNone(error)
