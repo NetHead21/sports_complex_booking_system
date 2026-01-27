@@ -140,3 +140,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
                 # Act
                 success, error = command.execute()
+
+                # Assert
+                self.assertTrue(success)
+                self.assertIsNone(error)
