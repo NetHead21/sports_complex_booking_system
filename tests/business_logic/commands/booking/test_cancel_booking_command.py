@@ -91,3 +91,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(error, "Cancellation operation failed")
         mock_db.cancel_booking.assert_called_once()
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_with_different_booking_ids(self, mock_input_service, mock_db):
+        """Test cancellation with different booking IDs."""
