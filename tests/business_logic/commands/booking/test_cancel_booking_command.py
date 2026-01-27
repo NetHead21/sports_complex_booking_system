@@ -96,3 +96,5 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_with_different_booking_ids(self, mock_input_service, mock_db):
         """Test cancellation with different booking IDs."""
+
+        booking_ids = ["1", "999", "12345", "99999"]
