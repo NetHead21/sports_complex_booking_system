@@ -170,3 +170,9 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_exception_in_input_service(self, mock_input_service, mock_db):
         """Test exception handling when input service raises error."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.side_effect = Exception(
+            "Input service error"
+        )
+        command = CancelBookRoomCommand()
