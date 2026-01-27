@@ -184,3 +184,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(error, "Input service error")
         mock_db.cancel_booking.assert_not_called()
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_exception_in_database(self, mock_input_service, mock_db):
+        """Test exception handling when database raises error."""
