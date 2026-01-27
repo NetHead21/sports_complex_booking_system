@@ -98,3 +98,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         """Test cancellation with different booking IDs."""
 
         booking_ids = ["1", "999", "12345", "99999"]
+
+        for booking_id in booking_ids:
+            with self.subTest(booking_id=booking_id):
+                # Arrange
