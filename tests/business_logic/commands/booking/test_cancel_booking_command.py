@@ -123,3 +123,5 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_with_different_member_ids(self, mock_input_service, mock_db):
         """Test cancellation with different member IDs."""
+
+        member_ids = ["user123", "member_test", "john_doe", "a" * 50]
