@@ -144,3 +144,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
                 # Assert
                 self.assertTrue(success)
                 self.assertIsNone(error)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_with_data_parameter_ignored(self, mock_input_service, mock_db):
+        """Test that data parameter is ignored (interface compatibility)."""
