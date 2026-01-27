@@ -102,3 +102,11 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         for booking_id in booking_ids:
             with self.subTest(booking_id=booking_id):
                 # Arrange
+
+                mock_input_service.collect_booking_cancellation_data.return_value = (
+                    booking_id,
+                    "testuser",
+                )
+                mock_db.cancel_booking.return_value = True
+
+                command = CancelBookRoomCommand()
