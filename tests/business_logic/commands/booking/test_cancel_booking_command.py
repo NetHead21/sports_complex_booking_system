@@ -176,3 +176,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
             "Input service error"
         )
         command = CancelBookRoomCommand()
+
+        # Act
+        success, error = command.execute()
