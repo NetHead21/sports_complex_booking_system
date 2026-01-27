@@ -198,3 +198,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         mock_db.cancel_booking.side_effect = Exception("Database connection error")
 
         command = CancelBookRoomCommand()
+
+        # Act
+        success, error = command.execute()
