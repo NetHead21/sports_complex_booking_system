@@ -158,3 +158,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         mock_db.cancel_booking.return_value = True
 
         command = CancelBookRoomCommand()
+
+        # Act - pass data parameter
+        success, error = command.execute(data={"some": "data"})
