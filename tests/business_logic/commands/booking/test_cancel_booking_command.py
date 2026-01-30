@@ -275,3 +275,9 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act
         result = command.execute()
+
+        # Assert
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 2)
+        self.assertIsInstance(result[0], bool)
+        # result[1] should be None or string
