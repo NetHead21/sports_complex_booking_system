@@ -205,3 +205,10 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertEqual(error, "Database connection error")
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_multiple_cancellations_sequential(
+        self, mock_input_service, mock_db
+    ):
+        """Test executing multiple cancellations sequentially."""
