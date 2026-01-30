@@ -325,3 +325,11 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertIsNotNone(error)
         self.assertIsInstance(error, str)
         self.assertEqual(error, "Cancellation operation failed")
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    @patch("builtins.print")
+    def test_execute_prints_success_message(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that success message is printed."""
