@@ -219,3 +219,5 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
             ("101", "user2"),
             ("102", "user3"),
         ]
+
+        command = CancelBookRoomCommand()
