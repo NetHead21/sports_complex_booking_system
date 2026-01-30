@@ -298,3 +298,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act
         success, error = command.execute()
+
+        # Assert
+        self.assertTrue(success)
+        self.assertIsNone(error)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_failure_return_values(self, mock_input_service, mock_db):
+        """Test return values for failed cancellation."""
