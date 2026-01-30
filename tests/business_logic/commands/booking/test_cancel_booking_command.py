@@ -258,3 +258,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Assert - verify exact parameters passed to database
         mock_db.cancel_booking.assert_called_once_with(int(booking_id_str))
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_return_value_structure(self, mock_input_service, mock_db):
+        """Test that return value structure is correct."""
