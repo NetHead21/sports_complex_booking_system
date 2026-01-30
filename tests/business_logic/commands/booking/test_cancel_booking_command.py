@@ -242,3 +242,13 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_booking_id_conversion_to_int(self, mock_input_service, mock_db):
         """Test that booking ID is correctly converted to int."""
+
+        # Arrange
+        booking_id_str = "99999"
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            booking_id_str,
+            "testuser",
+        )
+        mock_db.cancel_booking.return_value = True
+
+        command = CancelBookRoomCommand()
