@@ -307,3 +307,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_failure_return_values(self, mock_input_service, mock_db):
         """Test return values for failed cancellation."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "12345",
+            "testuser",
+        )
+        mock_db.cancel_booking.return_value = False
+
+        command = CancelBookRoomCommand()
