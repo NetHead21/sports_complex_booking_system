@@ -263,3 +263,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_return_value_structure(self, mock_input_service, mock_db):
         """Test that return value structure is correct."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "12345",
+            "testuser",
+        )
+        mock_db.cancel_booking.return_value = True
+
+        command = CancelBookRoomCommand()
