@@ -212,3 +212,10 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test executing multiple cancellations sequentially."""
+
+        # Arrange
+        cancellations = [
+            ("100", "user1"),
+            ("101", "user2"),
+            ("102", "user3"),
+        ]
