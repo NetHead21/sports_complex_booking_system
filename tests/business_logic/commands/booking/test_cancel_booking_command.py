@@ -281,3 +281,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertEqual(len(result), 2)
         self.assertIsInstance(result[0], bool)
         # result[1] should be None or string
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_success_return_values(self, mock_input_service, mock_db):
+        """Test return values for successful cancellation."""
