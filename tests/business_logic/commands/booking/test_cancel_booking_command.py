@@ -255,3 +255,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act
         command.execute()
+
+        # Assert - verify exact parameters passed to database
+        mock_db.cancel_booking.assert_called_once_with(int(booking_id_str))
