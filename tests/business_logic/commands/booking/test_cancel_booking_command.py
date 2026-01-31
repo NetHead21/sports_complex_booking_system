@@ -380,3 +380,11 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         mock_print.assert_called()
         call_args = str(mock_print.call_args)
         self.assertIn("Failed", call_args) or self.assertIn("❌", call_args)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    @patch("builtins.print")
+    def test_execute_prints_error_message_on_exception(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that error message is printed on exception."""
