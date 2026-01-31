@@ -404,3 +404,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         mock_print.assert_called()
         call_args = str(mock_print.call_args)
         self.assertIn(error_msg, call_args) or self.assertIn("❌", call_args)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_edge_case_minimum_booking_id(self, mock_input_service, mock_db):
+        """Test cancellation with minimum booking ID value."""
