@@ -355,3 +355,11 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertIn(member_id, call_args)
         self.assertIn("✅", call_args)
         self.assertIn("cancelled successfully", call_args.lower())
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    @patch("builtins.print")
+    def test_execute_prints_failure_message(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that failure message is printed."""
