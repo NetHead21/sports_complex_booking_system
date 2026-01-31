@@ -347,3 +347,11 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act
         command.execute()
+
+        # Assert - check that success message was printed
+        mock_print.assert_called()
+        call_args = str(mock_print.call_args)
+        self.assertIn(booking_id, call_args)
+        self.assertIn(member_id, call_args)
+        self.assertIn("✅", call_args)
+        self.assertIn("cancelled successfully", call_args.lower())
