@@ -452,3 +452,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_edge_case_minimum_member_id(self, mock_input_service, mock_db):
         """Test cancellation with minimum length member ID (3 characters)."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "12345",
+            "abc",
+        )
+        mock_db.cancel_booking.return_value = True
+
+        command = CancelBookRoomCommand()
