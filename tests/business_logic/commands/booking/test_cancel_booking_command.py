@@ -430,3 +430,13 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_edge_case_large_booking_id(self, mock_input_service, mock_db):
         """Test cancellation with large booking ID value."""
+
+        # Arrange
+        large_id = "999999"
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            large_id,
+            "testuser",
+        )
+        mock_db.cancel_booking.return_value = True
+
+        command = CancelBookRoomCommand()
