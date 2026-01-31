@@ -375,3 +375,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act
         command.execute()
+
+        # Assert - check that failure message was printed
+        mock_print.assert_called()
+        call_args = str(mock_print.call_args)
+        self.assertIn("Failed", call_args) or self.assertIn("❌", call_args)
