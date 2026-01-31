@@ -396,3 +396,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         )
 
         command = CancelBookRoomCommand()
+
+        # Act
+        command.execute()
