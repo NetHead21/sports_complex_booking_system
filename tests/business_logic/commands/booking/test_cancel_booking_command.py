@@ -363,3 +363,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test that failure message is printed."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "12345",
+            "testuser",
+        )
+        mock_db.cancel_booking.return_value = False
+
+        command = CancelBookRoomCommand()
