@@ -388,3 +388,11 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test that error message is printed on exception."""
+
+        # Arrange
+        error_msg = "Database connection timeout"
+        mock_input_service.collect_booking_cancellation_data.side_effect = Exception(
+            error_msg
+        )
+
+        command = CancelBookRoomCommand()
