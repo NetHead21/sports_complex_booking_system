@@ -487,3 +487,10 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Assert
         self.assertTrue(success)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_edge_case_special_characters_in_member_id(
+        self, mock_input_service, mock_db
+    ):
+        """Test cancellation with special characters in member ID."""
