@@ -534,3 +534,10 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertIn("timeout", error.lower())
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_value_error_on_invalid_booking_id_conversion(
+        self, mock_input_service, mock_db
+    ):
+        """Test handling of invalid booking ID that cannot be converted to int."""
