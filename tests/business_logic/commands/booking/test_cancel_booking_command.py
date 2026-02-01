@@ -527,3 +527,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         mock_db.cancel_booking.side_effect = TimeoutError("Database timeout")
 
         command = CancelBookRoomCommand()
+
+        # Act
+        success, error = command.execute()
