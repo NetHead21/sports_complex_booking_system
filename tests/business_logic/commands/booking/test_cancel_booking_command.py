@@ -467,3 +467,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Assert
         self.assertTrue(success)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_edge_case_maximum_member_id(self, mock_input_service, mock_db):
+        """Test cancellation with maximum length member ID (50 characters)."""
