@@ -518,3 +518,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_database_timeout_error(self, mock_input_service, mock_db):
         """Test handling of database timeout error."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "12345",
+            "testuser",
+        )
+        mock_db.cancel_booking.side_effect = TimeoutError("Database timeout")
+
+        command = CancelBookRoomCommand()
