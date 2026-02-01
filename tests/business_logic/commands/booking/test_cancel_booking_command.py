@@ -563,3 +563,9 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     def test_execute_keyboard_interrupt_handling(self, mock_input_service, mock_db):
         """Test that keyboard interrupt (Ctrl+C) propagates as expected."""
         # Arrange
+
+        mock_input_service.collect_booking_cancellation_data.side_effect = (
+            KeyboardInterrupt()
+        )
+
+        command = CancelBookRoomCommand()
