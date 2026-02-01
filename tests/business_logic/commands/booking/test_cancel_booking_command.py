@@ -569,3 +569,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         )
 
         command = CancelBookRoomCommand()
+
+        # Act & Assert - KeyboardInterrupt should propagate (not caught by except Exception)
+        with self.assertRaises(KeyboardInterrupt):
+            command.execute()
