@@ -541,3 +541,11 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test handling of invalid booking ID that cannot be converted to int."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "invalid",
+            "testuser",
+        )
+
+        command = CancelBookRoomCommand()
