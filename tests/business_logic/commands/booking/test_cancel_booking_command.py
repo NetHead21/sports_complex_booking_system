@@ -557,3 +557,9 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertFalse(success)
         self.assertIsNotNone(error)
         self.assertIsInstance(error, str)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_keyboard_interrupt_handling(self, mock_input_service, mock_db):
+        """Test that keyboard interrupt (Ctrl+C) propagates as expected."""
+        # Arrange
