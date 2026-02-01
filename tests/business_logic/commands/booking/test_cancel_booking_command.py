@@ -494,3 +494,16 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test cancellation with special characters in member ID."""
+
+        # Arrange
+        special_member_ids = ["user_123", "john.doe", "member-test"]
+
+        for member_id in special_member_ids:
+            with self.subTest(member_id=member_id):
+                mock_input_service.collect_booking_cancellation_data.return_value = (
+                    "12345",
+                    member_id,
+                )
+                mock_db.cancel_booking.return_value = True
+
+                command = CancelBookRoomCommand()
