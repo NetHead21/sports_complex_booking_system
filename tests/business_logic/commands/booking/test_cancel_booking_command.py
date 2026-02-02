@@ -587,3 +587,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         mock_db.cancel_booking.side_effect = ConnectionError("Connection lost")
 
         command = CancelBookRoomCommand()
+
+        # Act
+        success, error = command.execute()
