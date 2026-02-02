@@ -650,3 +650,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         mock_db.cancel_booking.side_effect = TypeError("Invalid type")
 
         command = CancelBookRoomCommand()
+
+        # Act
+        success, error = command.execute()
