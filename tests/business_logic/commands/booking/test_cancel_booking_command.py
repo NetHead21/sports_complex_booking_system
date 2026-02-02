@@ -641,3 +641,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_type_error_handling(self, mock_input_service, mock_db):
         """Test handling of type error in database operation."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "12345",
+            "testuser",
+        )
+        mock_db.cancel_booking.side_effect = TypeError("Invalid type")
+
+        command = CancelBookRoomCommand()
