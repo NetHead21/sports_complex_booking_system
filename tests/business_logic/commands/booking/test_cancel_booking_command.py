@@ -673,3 +673,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act
         success, error = command.execute()
+
+        # Assert
+        self.assertFalse(success)
+        self.assertIsNotNone(error)
