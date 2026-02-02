@@ -615,3 +615,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertIn("Access denied", error)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_runtime_error_handling(self, mock_input_service, mock_db):
+        """Test handling of runtime error."""
