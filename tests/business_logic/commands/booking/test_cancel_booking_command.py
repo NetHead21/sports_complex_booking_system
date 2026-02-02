@@ -608,3 +608,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         mock_db.cancel_booking.side_effect = PermissionError("Access denied")
 
         command = CancelBookRoomCommand()
+
+        # Act
+        success, error = command.execute()
