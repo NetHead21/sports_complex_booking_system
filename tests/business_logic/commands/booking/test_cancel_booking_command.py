@@ -636,3 +636,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertIn("Runtime failure", error)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_type_error_handling(self, mock_input_service, mock_db):
+        """Test handling of type error in database operation."""
