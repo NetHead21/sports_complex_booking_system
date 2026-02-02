@@ -632,3 +632,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act
         success, error = command.execute()
+
+        # Assert
+        self.assertFalse(success)
+        self.assertIn("Runtime failure", error)
