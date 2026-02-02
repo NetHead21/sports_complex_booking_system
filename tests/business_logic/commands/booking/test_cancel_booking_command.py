@@ -573,3 +573,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Act & Assert - KeyboardInterrupt should propagate (not caught by except Exception)
         with self.assertRaises(KeyboardInterrupt):
             command.execute()
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_connection_error_handling(self, mock_input_service, mock_db):
+        """Test handling of connection error."""
