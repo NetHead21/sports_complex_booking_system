@@ -657,3 +657,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertIn("Invalid type", error)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_with_none_booking_id_in_tuple(self, mock_input_service, mock_db):
+        """Test handling of None as booking ID in returned tuple."""
