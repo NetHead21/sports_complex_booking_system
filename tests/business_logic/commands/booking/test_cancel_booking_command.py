@@ -737,3 +737,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertIsNotNone(error)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_with_negative_booking_id(self, mock_input_service, mock_db):
+        """Test handling of negative booking ID."""
