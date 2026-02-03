@@ -677,3 +677,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertIsNotNone(error)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_with_none_member_id_in_tuple(self, mock_input_service, mock_db):
+        """Test handling of None as member ID in returned tuple."""
