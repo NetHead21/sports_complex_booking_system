@@ -694,3 +694,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Act
         success, error = command.execute()
+
+        # Assert - should still succeed as member_id is not used by db.cancel_booking
+        self.assertTrue(success)
