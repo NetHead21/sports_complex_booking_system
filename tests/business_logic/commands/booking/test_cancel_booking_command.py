@@ -759,3 +759,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         self.assertFalse(success)
         # Database should be called with negative number
         mock_db.cancel_booking.assert_called_once_with(-123)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_with_zero_booking_id(self, mock_input_service, mock_db):
+        """Test handling of zero as booking ID."""
