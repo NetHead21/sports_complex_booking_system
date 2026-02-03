@@ -780,3 +780,7 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         mock_db.cancel_booking.assert_called_once_with(0)
+
+
+class TestCancelBookRoomCommandIntegration(unittest.TestCase):
+    """Integration tests for CancelBookRoomCommand."""
