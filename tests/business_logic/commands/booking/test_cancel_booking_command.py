@@ -742,3 +742,12 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_execute_with_negative_booking_id(self, mock_input_service, mock_db):
         """Test handling of negative booking ID."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "-123",
+            "testuser",
+        )
+        mock_db.cancel_booking.return_value = False
+
+        command = CancelBookRoomCommand()
