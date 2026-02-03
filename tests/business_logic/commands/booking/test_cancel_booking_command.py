@@ -697,3 +697,8 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
         # Assert - should still succeed as member_id is not used by db.cancel_booking
         self.assertTrue(success)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_execute_with_empty_string_booking_id(self, mock_input_service, mock_db):
+        """Test handling of empty string as booking ID."""
