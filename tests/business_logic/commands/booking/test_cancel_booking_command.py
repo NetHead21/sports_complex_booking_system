@@ -784,3 +784,6 @@ class TestCancelBookRoomCommandExecute(unittest.TestCase):
 
 class TestCancelBookRoomCommandIntegration(unittest.TestCase):
     """Integration tests for CancelBookRoomCommand."""
+
+    def test_command_instantiation(self):
+        """Test that command can be instantiated."""
