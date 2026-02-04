@@ -793,3 +793,7 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
 
     def test_command_has_execute_method(self):
         """Test that command has execute method."""
+
+        command = CancelBookRoomCommand()
+        self.assertTrue(hasattr(command, "execute"))
+        self.assertTrue(callable(getattr(command, "execute")))
