@@ -824,3 +824,9 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
         command1 = CancelBookRoomCommand()
         command2 = CancelBookRoomCommand()
         command3 = CancelBookRoomCommand()
+
+        self.assertIsNotNone(command1)
+        self.assertIsNotNone(command2)
+        self.assertIsNotNone(command3)
+        self.assertIsNot(command1, command2)
+        self.assertIsNot(command2, command3)
