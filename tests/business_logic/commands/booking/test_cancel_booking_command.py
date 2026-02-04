@@ -877,3 +877,12 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
         result_without_data = command.execute()
         result_with_data = command.execute(data=None)
         result_with_some_data = command.execute(data={"test": "value"})
+
+        # Assert - all should work the same way
+        self.assertTrue(result_without_data[0])
+        self.assertTrue(result_with_data[0])
+        self.assertTrue(result_with_some_data[0])
+
+
+if __name__ == "__main__":
+    unittest.main()
