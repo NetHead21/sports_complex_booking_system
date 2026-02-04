@@ -21,3 +21,7 @@ from unittest.mock import patch, MagicMock, call
 from io import StringIO
 
 from business_logic.commands.booking.list_rooms_command import ListRoomCommand
+
+
+class TestListRoomCommandExecute(unittest.TestCase):
+    """Test cases for ListRoomCommand execute method."""
