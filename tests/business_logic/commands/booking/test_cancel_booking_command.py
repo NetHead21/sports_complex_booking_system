@@ -852,3 +852,7 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
             "testuser2",
         )
         result2 = command.execute()
+
+        # Assert - both should succeed independently
+        self.assertTrue(result1[0])
+        self.assertTrue(result2[0])
