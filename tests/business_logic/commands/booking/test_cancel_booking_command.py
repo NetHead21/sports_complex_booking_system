@@ -790,3 +790,6 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
 
         command = CancelBookRoomCommand()
         self.assertIsNotNone(command)
+
+    def test_command_has_execute_method(self):
+        """Test that command has execute method."""
