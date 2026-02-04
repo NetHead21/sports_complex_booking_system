@@ -787,3 +787,6 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
 
     def test_command_instantiation(self):
         """Test that command can be instantiated."""
+
+        command = CancelBookRoomCommand()
+        self.assertIsNotNone(command)
