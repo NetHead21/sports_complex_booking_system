@@ -818,3 +818,9 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
         # Assert - check it returns tuple with expected structure
         self.assertIsInstance(result, tuple)
         self.assertEqual(len(result), 2)
+
+    def test_multiple_command_instances(self):
+        """Test that multiple command instances can coexist."""
+        command1 = CancelBookRoomCommand()
+        command2 = CancelBookRoomCommand()
+        command3 = CancelBookRoomCommand()
