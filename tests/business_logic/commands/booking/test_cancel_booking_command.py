@@ -814,3 +814,7 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
 
         # Act
         result = command.execute()
+
+        # Assert - check it returns tuple with expected structure
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 2)
