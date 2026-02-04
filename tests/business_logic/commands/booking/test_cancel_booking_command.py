@@ -797,3 +797,8 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
         command = CancelBookRoomCommand()
         self.assertTrue(hasattr(command, "execute"))
         self.assertTrue(callable(getattr(command, "execute")))
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_command_interface_compliance(self, mock_input_service, mock_db):
+        """Test that command follows Command interface."""
