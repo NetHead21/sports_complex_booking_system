@@ -830,3 +830,8 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
         self.assertIsNotNone(command3)
         self.assertIsNot(command1, command2)
         self.assertIsNot(command2, command3)
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_command_stateless_execution(self, mock_input_service, mock_db):
+        """Test that command is stateless and can be executed multiple times."""
