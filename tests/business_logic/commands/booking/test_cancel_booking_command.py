@@ -872,3 +872,8 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
         mock_db.cancel_booking.return_value = True
 
         command = CancelBookRoomCommand()
+
+        # Act - test with and without data parameter
+        result_without_data = command.execute()
+        result_with_data = command.execute(data=None)
+        result_with_some_data = command.execute(data={"test": "value"})
