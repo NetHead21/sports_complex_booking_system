@@ -856,3 +856,10 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
         # Assert - both should succeed independently
         self.assertTrue(result1[0])
         self.assertTrue(result2[0])
+
+    @patch("business_logic.commands.booking.cancel_booking_command.db")
+    @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
+    def test_command_execute_with_optional_data_parameter(
+        self, mock_input_service, mock_db
+    ):
+        """Test that execute method accepts optional data parameter."""
