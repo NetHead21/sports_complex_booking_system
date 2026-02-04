@@ -25,3 +25,8 @@ from business_logic.commands.booking.list_rooms_command import ListRoomCommand
 
 class TestListRoomCommandExecute(unittest.TestCase):
     """Test cases for ListRoomCommand execute method."""
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_success_with_bookings(self, mock_db, mock_format_table):
+        """Test successful execution with booking data."""
