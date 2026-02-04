@@ -844,3 +844,11 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
         mock_db.cancel_booking.return_value = True
 
         command = CancelBookRoomCommand()
+
+        # Act - execute multiple times
+        result1 = command.execute()
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "67890",
+            "testuser2",
+        )
+        result2 = command.execute()
