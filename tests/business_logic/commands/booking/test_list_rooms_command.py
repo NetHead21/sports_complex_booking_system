@@ -15,3 +15,9 @@ covering all aspects of the room listing command execution including:
 The tests use mocking to isolate the command logic from external dependencies
 like the database and table formatter, ensuring fast and reliable unit testing.
 """
+
+import unittest
+from unittest.mock import patch, MagicMock, call
+from io import StringIO
+
+from business_logic.commands.booking.list_rooms_command import ListRoomCommand
