@@ -835,3 +835,12 @@ class TestCancelBookRoomCommandIntegration(unittest.TestCase):
     @patch("business_logic.commands.booking.cancel_booking_command.BookingInputService")
     def test_command_stateless_execution(self, mock_input_service, mock_db):
         """Test that command is stateless and can be executed multiple times."""
+
+        # Arrange
+        mock_input_service.collect_booking_cancellation_data.return_value = (
+            "12345",
+            "testuser",
+        )
+        mock_db.cancel_booking.return_value = True
+
+        command = CancelBookRoomCommand()
