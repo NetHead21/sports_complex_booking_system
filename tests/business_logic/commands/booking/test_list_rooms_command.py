@@ -139,3 +139,8 @@ class TestListRoomCommandExecute(unittest.TestCase):
         self.assertIsNone(result)
         mock_format_table.assert_called_once_with(mock_bookings)
         mock_print.assert_called_once_with("Single booking table")
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_with_large_booking_list(self, mock_db, mock_format_table):
+        """Test execution with a large number of bookings."""
