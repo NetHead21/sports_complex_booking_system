@@ -45,3 +45,10 @@ class TestListRoomCommandExecute(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             success, result = command.execute()
+
+        # Assert
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_db.show_bookings.assert_called_once()
+        mock_format_table.assert_called_once_with(mock_bookings)
+        mock_print.assert_called_once_with("Formatted Table Output")
