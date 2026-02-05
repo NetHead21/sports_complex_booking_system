@@ -75,3 +75,8 @@ class TestListRoomCommandExecute(unittest.TestCase):
         mock_db.show_bookings.assert_called_once()
         mock_format_table.assert_called_once_with(mock_bookings)
         mock_print.assert_called_once_with("No bookings found")
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_with_none_data_parameter(self, mock_db, mock_format_table):
+        """Test execution with None as data parameter (default)."""
