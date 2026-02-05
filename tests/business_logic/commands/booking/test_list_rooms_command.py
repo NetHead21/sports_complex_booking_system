@@ -112,3 +112,8 @@ class TestListRoomCommandExecute(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             success, result = command.execute(data={"arbitrary": "data"})
+
+        # Assert
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_db.show_bookings.assert_called_once()
