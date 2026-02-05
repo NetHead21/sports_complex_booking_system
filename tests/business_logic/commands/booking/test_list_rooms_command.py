@@ -153,3 +153,7 @@ class TestListRoomCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "Large table with 100 bookings"
 
         command = ListRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            success, result = command.execute()
