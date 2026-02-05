@@ -144,3 +144,12 @@ class TestListRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_large_booking_list(self, mock_db, mock_format_table):
         """Test execution with a large number of bookings."""
+
+        # Arrange
+        mock_bookings = [
+            (i, f"Room{i}", f"user{i}", "2026-02-10", "10:00:00") for i in range(1, 101)
+        ]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Large table with 100 bookings"
+
+        command = ListRoomCommand()
