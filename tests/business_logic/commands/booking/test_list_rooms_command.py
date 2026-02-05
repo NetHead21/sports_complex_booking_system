@@ -41,3 +41,7 @@ class TestListRoomCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "Formatted Table Output"
 
         command = ListRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            success, result = command.execute()
