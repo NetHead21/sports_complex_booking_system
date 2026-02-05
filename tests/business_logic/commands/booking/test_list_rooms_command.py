@@ -57,3 +57,10 @@ class TestListRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_success_with_empty_bookings(self, mock_db, mock_format_table):
         """Test successful execution with no bookings (empty list)."""
+
+        # Arrange
+        mock_bookings = []
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "No bookings found"
+
+        command = ListRoomCommand()
