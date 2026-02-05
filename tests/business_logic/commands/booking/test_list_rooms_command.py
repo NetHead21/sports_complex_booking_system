@@ -101,3 +101,10 @@ class TestListRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_arbitrary_data_parameter(self, mock_db, mock_format_table):
         """Test execution ignores arbitrary data parameter as it's unused."""
+
+        # Arrange
+        mock_bookings = [(1, "T1", "user1", "2026-02-10", "10:00:00")]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Table"
+
+        command = ListRoomCommand()
