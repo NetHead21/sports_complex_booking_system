@@ -300,3 +300,9 @@ class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_database_returns_none(self, mock_db, mock_format_table):
         """Test execution when database returns None instead of list."""
+
+        # Arrange
+        mock_db.show_bookings.return_value = None
+        mock_format_table.return_value = "Formatted None"
+
+        command = ListRoomCommand()
