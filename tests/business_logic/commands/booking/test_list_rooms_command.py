@@ -283,3 +283,7 @@ class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
         self, mock_db, mock_format_table
     ):
         """Test that database exceptions are raised (not caught by command)."""
+
+        # Arrange
+        mock_db.show_bookings.side_effect = Exception("Database connection error")
+        command = ListRoomCommand()
