@@ -276,3 +276,10 @@ class TestListRoomCommandExecute(unittest.TestCase):
 
 class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
     """Test cases for database exception handling."""
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_database_exception_handled_gracefully(
+        self, mock_db, mock_format_table
+    ):
+        """Test that database exceptions are raised (not caught by command)."""
