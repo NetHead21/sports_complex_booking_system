@@ -169,3 +169,18 @@ class TestListRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_various_room_types(self, mock_db, mock_format_table):
         """Test execution with different room types."""
+
+        # Arrange
+        mock_bookings = [
+            (1, "T1", "user1", "2026-02-10", "10:00:00"),
+            (2, "T2", "user2", "2026-02-10", "11:00:00"),
+            (3, "B1", "user3", "2026-02-10", "12:00:00"),
+            (4, "B2", "user4", "2026-02-10", "13:00:00"),
+            (5, "AR", "user5", "2026-02-10", "14:00:00"),
+            (6, "MPF1", "user6", "2026-02-10", "15:00:00"),
+            (7, "MPF2", "user7", "2026-02-10", "16:00:00"),
+        ]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Mixed room types table"
+
+        command = ListRoomCommand()
