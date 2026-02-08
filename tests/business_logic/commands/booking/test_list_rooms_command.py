@@ -226,3 +226,15 @@ class TestListRoomCommandExecute(unittest.TestCase):
         self, mock_db, mock_format_table
     ):
         """Test execution with multiple bookings for the same room."""
+
+        # Arrange
+        mock_bookings = [
+            (1, "T1", "user1", "2026-02-10", "10:00:00"),
+            (2, "T1", "user2", "2026-02-10", "11:00:00"),
+            (3, "T1", "user3", "2026-02-10", "12:00:00"),
+            (4, "T1", "user4", "2026-02-11", "10:00:00"),
+        ]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Same room multiple bookings"
+
+        command = ListRoomCommand()
