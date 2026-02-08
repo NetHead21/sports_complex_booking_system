@@ -272,3 +272,7 @@ class TestListRoomCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(result)
         mock_format_table.assert_called_once_with(mock_bookings)
+
+
+class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
+    """Test cases for database exception handling."""
