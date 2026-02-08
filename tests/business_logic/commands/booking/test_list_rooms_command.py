@@ -295,3 +295,8 @@ class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
         self.assertIn("Database connection error", str(context.exception))
         mock_db.show_bookings.assert_called_once()
         mock_format_table.assert_not_called()
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_database_returns_none(self, mock_db, mock_format_table):
+        """Test execution when database returns None instead of list."""
