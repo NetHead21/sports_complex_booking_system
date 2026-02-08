@@ -198,3 +198,15 @@ class TestListRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_various_time_formats(self, mock_db, mock_format_table):
         """Test execution with different time formats from database."""
+
+        # Arrange
+        mock_bookings = [
+            (1, "T1", "user1", "2026-02-10", "06:00:00"),  # Early morning
+            (2, "T1", "user2", "2026-02-10", "12:00:00"),  # Noon
+            (3, "T1", "user3", "2026-02-10", "18:30:00"),  # Evening
+            (4, "T1", "user4", "2026-02-10", "23:59:59"),  # Late night
+        ]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Various times table"
+
+        command = ListRoomCommand()
