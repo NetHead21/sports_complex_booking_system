@@ -210,3 +210,7 @@ class TestListRoomCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "Various times table"
 
         command = ListRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            success, result = command.execute()
