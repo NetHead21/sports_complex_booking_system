@@ -287,3 +287,11 @@ class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
         # Arrange
         mock_db.show_bookings.side_effect = Exception("Database connection error")
         command = ListRoomCommand()
+
+        # Act & Assert
+        with self.assertRaises(Exception) as context:
+            command.execute()
+
+        self.assertIn("Database connection error", str(context.exception))
+        mock_db.show_bookings.assert_called_once()
+        mock_format_table.assert_not_called()
