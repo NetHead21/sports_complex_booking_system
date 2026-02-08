@@ -252,3 +252,14 @@ class TestListRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_special_characters_in_data(self, mock_db, mock_format_table):
         """Test execution with special characters in booking data."""
+
+        # Arrange
+        mock_bookings = [
+            (1, "T1", "user@123", "2026-02-10", "10:00:00"),
+            (2, "B-1", "user.name", "2026-02-10", "11:00:00"),
+            (3, "AR_2", "user_123", "2026-02-10", "12:00:00"),
+        ]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Special characters table"
+
+        command = ListRoomCommand()
