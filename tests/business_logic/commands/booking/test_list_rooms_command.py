@@ -247,3 +247,8 @@ class TestListRoomCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(result)
         mock_format_table.assert_called_once_with(mock_bookings)
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_with_special_characters_in_data(self, mock_db, mock_format_table):
+        """Test execution with special characters in booking data."""
