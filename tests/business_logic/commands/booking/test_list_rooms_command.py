@@ -417,3 +417,8 @@ class TestListRoomCommandPrintExceptions(unittest.TestCase):
         mock_format_table.return_value = "Table"
 
         command = ListRoomCommand()
+
+        # Act & Assert
+        with patch("builtins.print", side_effect=IOError("Print error")):
+            with self.assertRaises(IOError):
+                command.execute()
