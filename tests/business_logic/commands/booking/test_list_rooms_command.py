@@ -405,3 +405,8 @@ class TestListRoomCommandFormatterExceptions(unittest.TestCase):
 
 class TestListRoomCommandPrintExceptions(unittest.TestCase):
     """Test cases for print operation exception handling."""
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_print_exception_raised(self, mock_db, mock_format_table):
+        """Test that print exceptions are propagated."""
