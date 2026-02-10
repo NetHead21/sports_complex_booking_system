@@ -351,3 +351,11 @@ class TestListRoomCommandFormatterExceptions(unittest.TestCase):
         mock_format_table.side_effect = ValueError("Formatting error")
 
         command = ListRoomCommand()
+
+        # Act & Assert
+        with self.assertRaises(ValueError) as context:
+            command.execute()
+
+        self.assertIn("Formatting error", str(context.exception))
+        mock_db.show_bookings.assert_called_once()
+        mock_format_table.assert_called_once_with(mock_bookings)
