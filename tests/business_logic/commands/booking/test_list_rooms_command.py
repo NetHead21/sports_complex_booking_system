@@ -359,3 +359,8 @@ class TestListRoomCommandFormatterExceptions(unittest.TestCase):
         self.assertIn("Formatting error", str(context.exception))
         mock_db.show_bookings.assert_called_once()
         mock_format_table.assert_called_once_with(mock_bookings)
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_formatter_returns_empty_string(self, mock_db, mock_format_table):
+        """Test execution when formatter returns empty string."""
