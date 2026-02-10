@@ -380,3 +380,8 @@ class TestListRoomCommandFormatterExceptions(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(result)
         mock_print.assert_called_once_with("")
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_formatter_returns_none(self, mock_db, mock_format_table):
+        """Test execution when formatter returns None."""
