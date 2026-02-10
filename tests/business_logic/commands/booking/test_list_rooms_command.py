@@ -375,3 +375,8 @@ class TestListRoomCommandFormatterExceptions(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             success, result = command.execute()
+
+        # Assert
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_print.assert_called_once_with("")
