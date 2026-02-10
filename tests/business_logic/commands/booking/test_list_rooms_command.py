@@ -321,3 +321,13 @@ class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_database_timeout_exception(self, mock_db, mock_format_table):
         """Test handling of database timeout exception."""
+
+        # Arrange
+        mock_db.show_bookings.side_effect = TimeoutError("Database query timeout")
+        command = ListRoomCommand()
+
+        # Act & Assert
+        with self.assertRaises(TimeoutError):
+            command.execute()
+
+        mock_db.show_bookings.assert_called_once()
