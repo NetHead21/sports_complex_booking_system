@@ -339,3 +339,8 @@ class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
 
 class TestListRoomCommandFormatterExceptions(unittest.TestCase):
     """Test cases for table formatter exception handling."""
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_formatter_exception_raised(self, mock_db, mock_format_table):
+        """Test that formatter exceptions are propagated."""
