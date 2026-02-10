@@ -326,8 +326,16 @@ class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
         mock_db.show_bookings.side_effect = TimeoutError("Database query timeout")
         command = ListRoomCommand()
 
+        # Arrange
+        mock_db.show_bookings.side_effect = TimeoutError("Database query timeout")
+        command = ListRoomCommand()
+
         # Act & Assert
         with self.assertRaises(TimeoutError):
             command.execute()
 
         mock_db.show_bookings.assert_called_once()
+
+
+class TestListRoomCommandFormatterExceptions(unittest.TestCase):
+    """Test cases for table formatter exception handling."""
