@@ -401,3 +401,7 @@ class TestListRoomCommandFormatterExceptions(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(result)
         mock_print.assert_called_once_with(None)
+
+
+class TestListRoomCommandPrintExceptions(unittest.TestCase):
+    """Test cases for print operation exception handling."""
