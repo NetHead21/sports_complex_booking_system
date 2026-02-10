@@ -316,3 +316,8 @@ class TestListRoomCommandDatabaseExceptions(unittest.TestCase):
         self.assertIsNone(result)
         mock_format_table.assert_called_once_with(None)
         mock_print.assert_called_once_with("Formatted None")
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_database_timeout_exception(self, mock_db, mock_format_table):
+        """Test handling of database timeout exception."""
