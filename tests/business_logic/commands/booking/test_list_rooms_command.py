@@ -466,3 +466,8 @@ class TestListRoomCommandReturnValues(unittest.TestCase):
         # Assert
         self.assertIsInstance(success, bool)
         self.assertTrue(success)
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_second_return_value_is_none(self, mock_db, mock_format_table):
+        """Test that second return value is always None."""
