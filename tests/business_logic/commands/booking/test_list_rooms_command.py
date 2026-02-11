@@ -422,3 +422,7 @@ class TestListRoomCommandPrintExceptions(unittest.TestCase):
         with patch("builtins.print", side_effect=IOError("Print error")):
             with self.assertRaises(IOError):
                 command.execute()
+
+
+class TestListRoomCommandReturnValues(unittest.TestCase):
+    """Test cases for verifying return value patterns."""
