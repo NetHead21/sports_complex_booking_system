@@ -522,3 +522,9 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
         mock_format_table.return_value = "Table"
 
         command = ListRoomCommand()
+
+        # Act & Assert
+        with patch("builtins.print"):
+            success1, result1 = command.execute()
+            success2, result2 = command.execute()
+            success3, result3 = command.execute()
