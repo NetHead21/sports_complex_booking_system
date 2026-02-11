@@ -505,3 +505,8 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
         # Act
         command1 = ListRoomCommand()
         command2 = ListRoomCommand()
+
+        # Assert
+        self.assertIsNot(command1, command2)
+        self.assertIsInstance(command1, ListRoomCommand)
+        self.assertIsInstance(command2, ListRoomCommand)
