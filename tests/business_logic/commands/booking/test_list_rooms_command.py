@@ -438,3 +438,7 @@ class TestListRoomCommandReturnValues(unittest.TestCase):
         mock_format_table.return_value = "Table"
 
         command = ListRoomCommand()
+
+        # Act
+        with patch("builtins.print"):
+            result = command.execute()
