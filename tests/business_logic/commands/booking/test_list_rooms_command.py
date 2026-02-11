@@ -489,3 +489,6 @@ class TestListRoomCommandReturnValues(unittest.TestCase):
 
 class TestListRoomCommandInstanceCreation(unittest.TestCase):
     """Test cases for command instance creation and initialization."""
+
+    def test_command_instantiation(self):
+        """Test that ListRoomCommand can be instantiated without errors."""
