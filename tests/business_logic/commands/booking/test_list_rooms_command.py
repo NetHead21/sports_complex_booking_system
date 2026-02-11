@@ -485,3 +485,7 @@ class TestListRoomCommandReturnValues(unittest.TestCase):
 
         # Assert
         self.assertIsNone(result)
+
+
+class TestListRoomCommandInstanceCreation(unittest.TestCase):
+    """Test cases for command instance creation and initialization."""
