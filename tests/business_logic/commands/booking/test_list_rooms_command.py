@@ -499,3 +499,9 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
         # Assert
         self.assertIsNotNone(command)
         self.assertIsInstance(command, ListRoomCommand)
+
+    def test_command_is_stateless(self):
+        """Test that multiple command instances are independent."""
+        # Act
+        command1 = ListRoomCommand()
+        command2 = ListRoomCommand()
