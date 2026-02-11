@@ -446,3 +446,8 @@ class TestListRoomCommandReturnValues(unittest.TestCase):
         # Assert
         self.assertIsInstance(result, tuple)
         self.assertEqual(len(result), 2)
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_first_return_value_is_boolean(self, mock_db, mock_format_table):
+        """Test that first return value is always boolean."""
