@@ -462,3 +462,7 @@ class TestListRoomCommandReturnValues(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             success, result = command.execute()
+
+        # Assert
+        self.assertIsInstance(success, bool)
+        self.assertTrue(success)
