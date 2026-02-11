@@ -528,3 +528,8 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
             success1, result1 = command.execute()
             success2, result2 = command.execute()
             success3, result3 = command.execute()
+
+        self.assertTrue(success1)
+        self.assertTrue(success2)
+        self.assertTrue(success3)
+        self.assertEqual(mock_db.show_bookings.call_count, 3)
