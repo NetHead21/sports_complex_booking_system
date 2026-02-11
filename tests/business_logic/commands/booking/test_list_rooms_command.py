@@ -515,3 +515,10 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_command_reusability(self, mock_db, mock_format_table):
         """Test that same command instance can be executed multiple times."""
+
+        # Arrange
+        mock_bookings = [(1, "T1", "user1", "2026-02-10", "10:00:00")]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Table"
+
+        command = ListRoomCommand()
