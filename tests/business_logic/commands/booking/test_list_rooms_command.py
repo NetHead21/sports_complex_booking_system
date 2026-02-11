@@ -426,3 +426,8 @@ class TestListRoomCommandPrintExceptions(unittest.TestCase):
 
 class TestListRoomCommandReturnValues(unittest.TestCase):
     """Test cases for verifying return value patterns."""
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_always_returns_tuple(self, mock_db, mock_format_table):
+        """Test that execute always returns a tuple."""
