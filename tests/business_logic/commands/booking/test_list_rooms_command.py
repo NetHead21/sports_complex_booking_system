@@ -510,3 +510,8 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
         self.assertIsNot(command1, command2)
         self.assertIsInstance(command1, ListRoomCommand)
         self.assertIsInstance(command2, ListRoomCommand)
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_command_reusability(self, mock_db, mock_format_table):
+        """Test that same command instance can be executed multiple times."""
