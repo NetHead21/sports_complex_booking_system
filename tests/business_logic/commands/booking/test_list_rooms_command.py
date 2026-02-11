@@ -492,3 +492,6 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
 
     def test_command_instantiation(self):
         """Test that ListRoomCommand can be instantiated without errors."""
+
+        # Act
+        command = ListRoomCommand()
