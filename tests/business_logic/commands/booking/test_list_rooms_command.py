@@ -572,3 +572,10 @@ class TestListRoomCommandIntegration(unittest.TestCase):
 
         # Assert
         self.assertEqual(call_order, ["db", "format"])
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_passes_database_result_to_formatter(
+        self, mock_db, mock_format_table
+    ):
+        """Test that database result is passed correctly to formatter."""
