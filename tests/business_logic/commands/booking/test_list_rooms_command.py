@@ -628,3 +628,12 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_very_long_strings(self, mock_db, mock_format_table):
         """Test execution with very long string values in data."""
+
+        # Arrange
+        long_user = "a" * 1000
+        long_room = "R" * 500
+        mock_bookings = [(1, long_room, long_user, "2026-02-10", "10:00:00")]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Long strings table"
+
+        command = ListRoomCommand()
