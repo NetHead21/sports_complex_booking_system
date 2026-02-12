@@ -569,3 +569,6 @@ class TestListRoomCommandIntegration(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             command.execute()
+
+        # Assert
+        self.assertEqual(call_order, ["db", "format"])
