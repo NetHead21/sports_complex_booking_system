@@ -533,3 +533,7 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
         self.assertTrue(success2)
         self.assertTrue(success3)
         self.assertEqual(mock_db.show_bookings.call_count, 3)
+
+
+class TestListRoomCommandIntegration(unittest.TestCase):
+    """Integration test cases verifying component interactions."""
