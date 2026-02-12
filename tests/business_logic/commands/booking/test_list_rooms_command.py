@@ -616,3 +616,6 @@ class TestListRoomCommandIntegration(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             command.execute()
+
+        # Assert
+        mock_print.assert_called_once_with(expected_output)
