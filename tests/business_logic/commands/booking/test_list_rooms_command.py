@@ -537,3 +537,10 @@ class TestListRoomCommandInstanceCreation(unittest.TestCase):
 
 class TestListRoomCommandIntegration(unittest.TestCase):
     """Integration test cases verifying component interactions."""
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_calls_components_in_correct_order(
+        self, mock_db, mock_format_table
+    ):
+        """Test that execute calls database and formatter in correct order."""
