@@ -619,3 +619,7 @@ class TestListRoomCommandIntegration(unittest.TestCase):
 
         # Assert
         mock_print.assert_called_once_with(expected_output)
+
+
+class TestListRoomCommandEdgeCases(unittest.TestCase):
+    """Test cases for edge cases and boundary conditions."""
