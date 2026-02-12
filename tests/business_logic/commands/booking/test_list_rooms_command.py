@@ -623,3 +623,8 @@ class TestListRoomCommandIntegration(unittest.TestCase):
 
 class TestListRoomCommandEdgeCases(unittest.TestCase):
     """Test cases for edge cases and boundary conditions."""
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_with_very_long_strings(self, mock_db, mock_format_table):
+        """Test execution with very long string values in data."""
