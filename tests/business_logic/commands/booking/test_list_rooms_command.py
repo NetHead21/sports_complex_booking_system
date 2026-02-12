@@ -599,3 +599,16 @@ class TestListRoomCommandIntegration(unittest.TestCase):
         args, kwargs = mock_format_table.call_args
         self.assertEqual(args[0], mock_bookings)
         self.assertEqual(len(args[0]), 2)
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_prints_formatter_output(self, mock_db, mock_format_table):
+        """Test that formatter output is printed to console."""
+
+        # Arrange
+        mock_bookings = [(1, "T1", "user1", "2026-02-10", "10:00:00")]
+        mock_db.show_bookings.return_value = mock_bookings
+        expected_output = "╔═══════════╗\n║ Bookings ║\n╚═══════════╝"
+        mock_format_table.return_value = expected_output
+
+        command = ListRoomCommand()
