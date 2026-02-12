@@ -650,3 +650,14 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_unicode_characters(self, mock_db, mock_format_table):
         """Test execution with unicode characters in booking data."""
+
+        # Arrange
+        mock_bookings = [
+            (1, "T1", "usér123", "2026-02-10", "10:00:00"),
+            (2, "B1", "用户", "2026-02-10", "11:00:00"),
+            (3, "AR", "usuário", "2026-02-10", "12:00:00"),
+        ]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Unicode table"
+
+        command = ListRoomCommand()
