@@ -637,3 +637,7 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
         mock_format_table.return_value = "Long strings table"
 
         command = ListRoomCommand()
+
+        # Act
+        with patch("builtins.print"):
+            success, result = command.execute()
