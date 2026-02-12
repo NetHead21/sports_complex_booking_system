@@ -565,3 +565,7 @@ class TestListRoomCommandIntegration(unittest.TestCase):
 
         mock_db.show_bookings.side_effect = track_db_call
         mock_format_table.side_effect = track_format_call
+
+        # Act
+        with patch("builtins.print"):
+            command.execute()
