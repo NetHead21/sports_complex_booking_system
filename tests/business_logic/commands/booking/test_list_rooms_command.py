@@ -551,3 +551,17 @@ class TestListRoomCommandIntegration(unittest.TestCase):
         mock_format_table.return_value = "Table"
 
         command = ListRoomCommand()
+
+        # Create a call tracker
+        call_order = []
+
+        def track_db_call():
+            call_order.append("db")
+            return mock_bookings
+
+        def track_format_call(data):
+            call_order.append("format")
+            return "Table"
+
+        mock_db.show_bookings.side_effect = track_db_call
+        mock_format_table.side_effect = track_format_call
