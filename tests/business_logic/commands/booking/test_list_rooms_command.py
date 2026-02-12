@@ -593,3 +593,9 @@ class TestListRoomCommandIntegration(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             command.execute()
+
+        # Assert
+        mock_format_table.assert_called_once()
+        args, kwargs = mock_format_table.call_args
+        self.assertEqual(args[0], mock_bookings)
+        self.assertEqual(len(args[0]), 2)
