@@ -612,3 +612,7 @@ class TestListRoomCommandIntegration(unittest.TestCase):
         mock_format_table.return_value = expected_output
 
         command = ListRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            command.execute()
