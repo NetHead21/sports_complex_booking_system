@@ -763,3 +763,9 @@ class TestListRoomCommandThreadSafety(unittest.TestCase):
         with patch("builtins.print"):
             success1, result1 = command1.execute()
             success2, result2 = command2.execute()
+
+        # Assert
+        self.assertTrue(success1)
+        self.assertTrue(success2)
+        self.assertEqual(mock_db.show_bookings.call_count, 2)
+        self.assertEqual(mock_format_table.call_count, 2)
