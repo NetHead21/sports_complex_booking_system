@@ -748,3 +748,7 @@ class TestListRoomCommandThreadSafety(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_multiple_commands_execute_independently(self, mock_db, mock_format_table):
         """Test that multiple command instances execute independently."""
+
+        # Arrange
+        mock_bookings1 = [(1, "T1", "user1", "2026-02-10", "10:00:00")]
+        mock_bookings2 = [(2, "B1", "user2", "2026-02-11", "14:00:00")]
