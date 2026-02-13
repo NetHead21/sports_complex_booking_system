@@ -674,3 +674,13 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_future_dates(self, mock_db, mock_format_table):
         """Test execution with far future dates."""
+
+        # Arrange
+        mock_bookings = [
+            (1, "T1", "user1", "2099-12-31", "23:59:59"),
+            (2, "B1", "user2", "3000-01-01", "00:00:00"),
+        ]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Future dates table"
+
+        command = ListRoomCommand()
