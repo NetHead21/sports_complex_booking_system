@@ -755,3 +755,6 @@ class TestListRoomCommandThreadSafety(unittest.TestCase):
 
         mock_db.show_bookings.side_effect = [mock_bookings1, mock_bookings2]
         mock_format_table.side_effect = ["Table1", "Table2"]
+
+        command1 = ListRoomCommand()
+        command2 = ListRoomCommand()
