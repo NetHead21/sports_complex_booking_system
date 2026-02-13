@@ -734,3 +734,8 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             success, result = command.execute()
+
+        # Assert
+        self.assertTrue(success)
+        # Formatter receives whatever database returns
+        mock_format_table.assert_called_once_with(mock_bookings)
