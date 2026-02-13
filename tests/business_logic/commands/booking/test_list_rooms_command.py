@@ -758,3 +758,8 @@ class TestListRoomCommandThreadSafety(unittest.TestCase):
 
         command1 = ListRoomCommand()
         command2 = ListRoomCommand()
+
+        # Act
+        with patch("builtins.print"):
+            success1, result1 = command1.execute()
+            success2, result2 = command2.execute()
