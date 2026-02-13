@@ -730,3 +730,7 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
         mock_format_table.return_value = "Malformed data table"
 
         command = ListRoomCommand()
+
+        # Act
+        with patch("builtins.print"):
+            success, result = command.execute()
