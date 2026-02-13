@@ -743,3 +743,8 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
 
 class TestListRoomCommandThreadSafety(unittest.TestCase):
     """Test cases for thread safety and concurrent execution."""
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_multiple_commands_execute_independently(self, mock_db, mock_format_table):
+        """Test that multiple command instances execute independently."""
