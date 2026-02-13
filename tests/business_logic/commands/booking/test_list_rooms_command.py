@@ -720,3 +720,13 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.list_rooms_command.db")
     def test_execute_with_malformed_data_structure(self, mock_db, mock_format_table):
         """Test execution with unexpected data structure from database."""
+
+        # Arrange
+        # Simulating database returning data with different structure
+        mock_bookings = [
+            {"id": 1, "room": "T1", "user": "user1"},  # Dict instead of tuple
+        ]
+        mock_db.show_bookings.return_value = mock_bookings
+        mock_format_table.return_value = "Malformed data table"
+
+        command = ListRoomCommand()
