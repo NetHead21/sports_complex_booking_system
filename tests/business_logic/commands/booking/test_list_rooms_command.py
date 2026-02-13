@@ -752,3 +752,6 @@ class TestListRoomCommandThreadSafety(unittest.TestCase):
         # Arrange
         mock_bookings1 = [(1, "T1", "user1", "2026-02-10", "10:00:00")]
         mock_bookings2 = [(2, "B1", "user2", "2026-02-11", "14:00:00")]
+
+        mock_db.show_bookings.side_effect = [mock_bookings1, mock_bookings2]
+        mock_format_table.side_effect = ["Table1", "Table2"]
