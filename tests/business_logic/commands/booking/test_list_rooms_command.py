@@ -769,3 +769,7 @@ class TestListRoomCommandThreadSafety(unittest.TestCase):
         self.assertTrue(success2)
         self.assertEqual(mock_db.show_bookings.call_count, 2)
         self.assertEqual(mock_format_table.call_count, 2)
+
+
+if __name__ == "__main__":
+    unittest.main()
