@@ -739,3 +739,7 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
         self.assertTrue(success)
         # Formatter receives whatever database returns
         mock_format_table.assert_called_once_with(mock_bookings)
+
+
+class TestListRoomCommandThreadSafety(unittest.TestCase):
+    """Test cases for thread safety and concurrent execution."""
