@@ -669,3 +669,8 @@ class TestListRoomCommandEdgeCases(unittest.TestCase):
         # Assert
         self.assertTrue(success)
         mock_format_table.assert_called_once_with(mock_bookings)
+
+    @patch("business_logic.commands.booking.list_rooms_command.format_booking_table")
+    @patch("business_logic.commands.booking.list_rooms_command.db")
+    def test_execute_with_future_dates(self, mock_db, mock_format_table):
+        """Test execution with far future dates."""
