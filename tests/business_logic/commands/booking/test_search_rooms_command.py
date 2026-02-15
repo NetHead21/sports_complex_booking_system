@@ -58,3 +58,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         mock_db.search_room.assert_called_once_with(
             "Tennis Court", date(2026, 3, 15), time(14, 30)
         )
+
+        # Verify success message was printed
+        mock_print.assert_called_with(
+            "✅ Search completed for Tennis Court on 2026-03-15 at 14:30:00"
+        )
