@@ -310,3 +310,16 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_data_parameter_value(self, mock_input_service, mock_db):
         """Test execution with data parameter (should be ignored)."""
+
+        # Arrange
+        mock_search_criteria = SearchRoom(
+            room_type="Tennis Court",
+            book_date=date(2026, 3, 15),
+            book_time=time(14, 30),
+        )
+        mock_input_service.collect_room_search_data.return_value = mock_search_criteria
+        mock_cursor = MagicMock()
+        mock_cursor.__bool__.return_value = True
+        mock_db.search_room.return_value = mock_cursor
+
+        command = SearchRoomCommand()
