@@ -88,3 +88,6 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(result, "No search results")
         mock_db.search_room.assert_called_once()
+
+        # Verify no results message was printed
+        mock_print.assert_called_with("❌ No rooms found matching your criteria.")
