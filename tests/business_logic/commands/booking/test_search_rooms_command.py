@@ -96,3 +96,7 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_input_collection_cancelled(self, mock_input_service, mock_db):
         """Test when user cancels search criteria collection."""
+
+        # Arrange
+        mock_input_service.collect_room_search_data.return_value = None
+        command = SearchRoomCommand()
