@@ -122,3 +122,20 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
             "Archery Range",
             "Multi-Purpose Field",
         ]
+
+        for room_type in room_types:
+            with self.subTest(room_type=room_type):
+                # Arrange
+                mock_search_criteria = SearchRoom(
+                    room_type=room_type,
+                    book_date=date(2026, 3, 15),
+                    book_time=time(14, 30),
+                )
+                mock_input_service.collect_room_search_data.return_value = (
+                    mock_search_criteria
+                )
+                mock_cursor = MagicMock()
+                mock_cursor.__bool__.return_value = True
+                mock_db.search_room.return_value = mock_cursor
+
+                command = SearchRoomCommand()
