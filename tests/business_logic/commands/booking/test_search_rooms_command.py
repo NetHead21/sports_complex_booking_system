@@ -256,3 +256,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         self.assertEqual(result, "Database connection error")
         # Verify error message was printed
         mock_print.assert_called_with("❌ Search Error: Database connection error")
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_input_service_exception(self, mock_input_service, mock_db):
+        """Test when input service raises an exception."""
