@@ -305,3 +305,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertEqual(result, mock_cursor)
         mock_input_service.collect_room_search_data.assert_called_once()
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_data_parameter_value(self, mock_input_service, mock_db):
+        """Test execution with data parameter (should be ignored)."""
