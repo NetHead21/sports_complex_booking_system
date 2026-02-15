@@ -27,3 +27,8 @@ from persistence.models import SearchRoom
 
 class TestSearchRoomCommandExecute(unittest.TestCase):
     """Test cases for SearchRoomCommand execute method."""
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_success_with_results(self, mock_input_service, mock_db):
+        """Test successful search execution with results found."""
