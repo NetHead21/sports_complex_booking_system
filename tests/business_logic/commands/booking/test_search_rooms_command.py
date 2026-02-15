@@ -250,3 +250,9 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             success, result = command.execute()
+
+        # Assert
+        self.assertFalse(success)
+        self.assertEqual(result, "Database connection error")
+        # Verify error message was printed
+        mock_print.assert_called_with("❌ Search Error: Database connection error")
