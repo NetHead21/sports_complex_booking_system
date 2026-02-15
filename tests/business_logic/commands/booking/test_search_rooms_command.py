@@ -261,3 +261,9 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_input_service_exception(self, mock_input_service, mock_db):
         """Test when input service raises an exception."""
+
+        # Arrange
+        mock_input_service.collect_room_search_data.side_effect = Exception(
+            "Input validation error"
+        )
+        command = SearchRoomCommand()
