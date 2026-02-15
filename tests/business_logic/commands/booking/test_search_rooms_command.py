@@ -203,3 +203,20 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
             time(18, 30),  # Evening
             time(22, 0),  # End of business hours
         ]
+
+        for book_time in times:
+            with self.subTest(book_time=book_time):
+                # Arrange
+                mock_search_criteria = SearchRoom(
+                    room_type="Tennis Court",
+                    book_date=date(2026, 3, 15),
+                    book_time=book_time,
+                )
+                mock_input_service.collect_room_search_data.return_value = (
+                    mock_search_criteria
+                )
+                mock_cursor = MagicMock()
+                mock_cursor.__bool__.return_value = True
+                mock_db.search_room.return_value = mock_cursor
+
+                command = SearchRoomCommand()
