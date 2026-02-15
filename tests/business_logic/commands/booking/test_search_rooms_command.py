@@ -100,3 +100,7 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         # Arrange
         mock_input_service.collect_room_search_data.return_value = None
         command = SearchRoomCommand()
+
+        # Act
+        with patch("builtins.print"):
+            success, result = command.execute()
