@@ -155,3 +155,10 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_different_dates(self, mock_input_service, mock_db):
         """Test search with various future dates."""
+
+        dates = [
+            date(2026, 2, 16),  # Tomorrow
+            date(2026, 2, 28),  # End of month
+            date(2026, 12, 31),  # End of year
+            date(2027, 1, 1),  # Next year
+        ]
