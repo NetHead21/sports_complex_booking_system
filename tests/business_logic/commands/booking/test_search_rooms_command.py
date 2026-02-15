@@ -300,3 +300,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             success, result = command.execute(data=None)
+
+        # Assert
+        self.assertTrue(success)
+        self.assertEqual(result, mock_cursor)
+        mock_input_service.collect_room_search_data.assert_called_once()
