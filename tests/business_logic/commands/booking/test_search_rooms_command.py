@@ -162,3 +162,20 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
             date(2026, 12, 31),  # End of year
             date(2027, 1, 1),  # Next year
         ]
+
+        for book_date in dates:
+            with self.subTest(book_date=book_date):
+                # Arrange
+                mock_search_criteria = SearchRoom(
+                    room_type="Tennis Court",
+                    book_date=book_date,
+                    book_time=time(14, 30),
+                )
+                mock_input_service.collect_room_search_data.return_value = (
+                    mock_search_criteria
+                )
+                mock_cursor = MagicMock()
+                mock_cursor.__bool__.return_value = True
+                mock_db.search_room.return_value = mock_cursor
+
+                command = SearchRoomCommand()
