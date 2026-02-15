@@ -32,3 +32,17 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_success_with_results(self, mock_input_service, mock_db):
         """Test successful search execution with results found."""
+
+        # Arrange
+        mock_search_criteria = SearchRoom(
+            room_type="Tennis Court",
+            book_date=date(2026, 3, 15),
+            book_time=time(14, 30),
+        )
+        mock_input_service.collect_room_search_data.return_value = mock_search_criteria
+
+        mock_cursor_result = MagicMock()
+        mock_cursor_result.__bool__.return_value = True  # Truthy cursor result
+        mock_db.search_room.return_value = mock_cursor_result
+
+        command = SearchRoomCommand()
