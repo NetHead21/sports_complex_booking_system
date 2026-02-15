@@ -278,3 +278,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         mock_db.search_room.assert_not_called()
         # Verify error message was printed
         mock_print.assert_called_with("❌ Search Error: Input validation error")
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_data_parameter_none(self, mock_input_service, mock_db):
+        """Test execution with None as data parameter (default)."""
