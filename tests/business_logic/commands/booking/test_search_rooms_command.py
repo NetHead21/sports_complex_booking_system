@@ -23,3 +23,7 @@ from datetime import date, time
 
 from business_logic.commands.booking.search_rooms_command import SearchRoomCommand
 from persistence.models import SearchRoom
+
+
+class TestSearchRoomCommandExecute(unittest.TestCase):
+    """Test cases for SearchRoomCommand execute method."""
