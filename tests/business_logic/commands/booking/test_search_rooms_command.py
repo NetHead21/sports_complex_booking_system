@@ -91,3 +91,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
 
         # Verify no results message was printed
         mock_print.assert_called_with("❌ No rooms found matching your criteria.")
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_input_collection_cancelled(self, mock_input_service, mock_db):
+        """Test when user cancels search criteria collection."""
