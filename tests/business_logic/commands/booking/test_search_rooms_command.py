@@ -271,3 +271,10 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             success, result = command.execute()
+
+        # Assert
+        self.assertFalse(success)
+        self.assertEqual(result, "Input validation error")
+        mock_db.search_room.assert_not_called()
+        # Verify error message was printed
+        mock_print.assert_called_with("❌ Search Error: Input validation error")
