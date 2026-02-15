@@ -194,3 +194,12 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_different_times(self, mock_input_service, mock_db):
         """Test search with different time slots."""
+
+        times = [
+            time(6, 0),  # Start of business hours
+            time(9, 30),  # Morning
+            time(12, 0),  # Midday
+            time(15, 45),  # Afternoon
+            time(18, 30),  # Evening
+            time(22, 0),  # End of business hours
+        ]
