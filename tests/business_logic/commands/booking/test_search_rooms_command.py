@@ -63,3 +63,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         mock_print.assert_called_with(
             "✅ Search completed for Tennis Court on 2026-03-15 at 14:30:00"
         )
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_success_with_no_results(self, mock_input_service, mock_db):
+        """Test successful search execution but no rooms found."""
