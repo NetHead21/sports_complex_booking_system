@@ -224,3 +224,9 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
                 # Act
                 with patch("builtins.print"):
                     success, result = command.execute()
+
+                # Assert
+                self.assertTrue(success)
+                mock_db.search_room.assert_called_with(
+                    "Tennis Court", date(2026, 3, 15), book_time
+                )
