@@ -104,3 +104,9 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             success, result = command.execute()
+
+        # Assert
+        self.assertFalse(success)
+        self.assertEqual(result, "Room search cancelled or failed")
+        mock_input_service.collect_room_search_data.assert_called_once()
+        mock_db.search_room.assert_not_called()
