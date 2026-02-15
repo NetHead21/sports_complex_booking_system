@@ -115,3 +115,10 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_different_room_types(self, mock_input_service, mock_db):
         """Test search with different room types."""
+
+        room_types = [
+            "Tennis Court",
+            "Badminton Court",
+            "Archery Range",
+            "Multi-Purpose Field",
+        ]
