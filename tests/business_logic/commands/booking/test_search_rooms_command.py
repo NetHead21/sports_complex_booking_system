@@ -361,3 +361,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(result, "No search results")
         mock_print.assert_called_with("❌ No rooms found matching your criteria.")
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_return_value_tuple_structure(self, mock_input_service, mock_db):
+        """Test that execute returns proper tuple structure."""
