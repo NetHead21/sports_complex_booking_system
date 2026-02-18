@@ -327,3 +327,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             success, result = command.execute(data={"ignored": "parameter"})
+
+        # Assert
+        self.assertTrue(success)
+        # Data parameter should be ignored, input service still called
+        mock_input_service.collect_room_search_data.assert_called_once()
