@@ -429,3 +429,10 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test search at earliest business hour (6:00 AM)."""
+
+        # Arrange
+        mock_search_criteria = SearchRoom(
+            room_type="Tennis Court",
+            book_date=date(2026, 3, 15),
+            book_time=time(6, 0),  # Earliest business hour
+        )
