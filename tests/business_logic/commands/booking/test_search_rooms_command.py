@@ -332,3 +332,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         # Data parameter should be ignored, input service still called
         mock_input_service.collect_room_search_data.assert_called_once()
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_empty_cursor_result(self, mock_input_service, mock_db):
+        """Test when database returns an empty cursor (falsy)."""
