@@ -393,3 +393,10 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_multiple_calls_independence(self, mock_input_service, mock_db):
         """Test that multiple execute calls are independent (thread safety)."""
+
+        # Arrange
+        mock_search_criteria = SearchRoom(
+            room_type="Tennis Court",
+            book_date=date(2026, 3, 15),
+            book_time=time(14, 30),
+        )
