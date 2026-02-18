@@ -407,3 +407,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         mock_db.search_room.return_value = mock_cursor
 
         command = SearchRoomCommand()
+
+        # Act - Execute multiple times
+        with patch("builtins.print"):
+            result1 = command.execute()
+            result2 = command.execute()
