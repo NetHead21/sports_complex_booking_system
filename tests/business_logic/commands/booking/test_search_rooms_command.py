@@ -418,3 +418,7 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         self.assertTrue(result2[0])
         self.assertEqual(mock_input_service.collect_room_search_data.call_count, 2)
         self.assertEqual(mock_db.search_room.call_count, 2)
+
+
+class TestSearchRoomCommandEdgeCases(unittest.TestCase):
+    """Test edge cases and boundary conditions for SearchRoomCommand."""
