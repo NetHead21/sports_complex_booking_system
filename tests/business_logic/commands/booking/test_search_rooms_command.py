@@ -422,3 +422,10 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
 
 class TestSearchRoomCommandEdgeCases(unittest.TestCase):
     """Test edge cases and boundary conditions for SearchRoomCommand."""
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_boundary_time_early_morning(
+        self, mock_input_service, mock_db
+    ):
+        """Test search at earliest business hour (6:00 AM)."""
