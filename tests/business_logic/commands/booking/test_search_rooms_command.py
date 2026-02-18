@@ -388,3 +388,8 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         self.assertIsInstance(result, tuple)
         self.assertEqual(len(result), 2)
         self.assertIsInstance(result[0], bool)
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_multiple_calls_independence(self, mock_input_service, mock_db):
+        """Test that multiple execute calls are independent (thread safety)."""
