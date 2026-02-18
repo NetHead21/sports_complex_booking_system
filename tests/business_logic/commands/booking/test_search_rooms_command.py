@@ -412,3 +412,9 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         with patch("builtins.print"):
             result1 = command.execute()
             result2 = command.execute()
+
+        # Assert - Both calls should succeed independently
+        self.assertTrue(result1[0])
+        self.assertTrue(result2[0])
+        self.assertEqual(mock_input_service.collect_room_search_data.call_count, 2)
+        self.assertEqual(mock_db.search_room.call_count, 2)
