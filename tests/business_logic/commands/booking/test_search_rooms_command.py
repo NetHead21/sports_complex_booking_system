@@ -352,3 +352,7 @@ class TestSearchRoomCommandExecute(unittest.TestCase):
         mock_db.search_room.return_value = mock_cursor
 
         command = SearchRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            success, result = command.execute()
