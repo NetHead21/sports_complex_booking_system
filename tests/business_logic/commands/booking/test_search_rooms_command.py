@@ -522,3 +522,8 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
                 mock_db.search_room.assert_called_with(
                     "Tennis Court", date(2026, 3, 15), book_time
                 )
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_leap_year_date(self, mock_input_service, mock_db):
+        """Test search on leap year date (Feb 29)."""
