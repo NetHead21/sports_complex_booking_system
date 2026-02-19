@@ -583,3 +583,16 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_year_start_date(self, mock_input_service, mock_db):
         """Test search on year start date (Jan 1)."""
+
+        # Arrange
+        mock_search_criteria = SearchRoom(
+            room_type="Multi-Purpose Field",
+            book_date=date(2027, 1, 1),  # First day of year
+            book_time=time(8, 0),
+        )
+        mock_input_service.collect_room_search_data.return_value = mock_search_criteria
+        mock_cursor = MagicMock()
+        mock_cursor.__bool__.return_value = True
+        mock_db.search_room.return_value = mock_cursor
+
+        command = SearchRoomCommand()
