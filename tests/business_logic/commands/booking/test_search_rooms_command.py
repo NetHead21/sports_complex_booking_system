@@ -487,3 +487,11 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_specific_minutes(self, mock_input_service, mock_db):
         """Test search with specific minute values (non-hour times)."""
+
+        times_with_minutes = [
+            time(6, 15),
+            time(10, 30),
+            time(14, 45),
+            time(18, 5),
+            time(21, 55),
+        ]
