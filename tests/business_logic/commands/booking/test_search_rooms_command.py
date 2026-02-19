@@ -600,3 +600,9 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
         # Act
         with patch("builtins.print"):
             success, result = command.execute()
+
+        # Assert
+        self.assertTrue(success)
+        mock_db.search_room.assert_called_with(
+            "Multi-Purpose Field", date(2027, 1, 1), time(8, 0)
+        )
