@@ -458,3 +458,10 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_boundary_time_late_evening(self, mock_input_service, mock_db):
         """Test search at latest business hour (10:00 PM)."""
+
+        # Arrange
+        mock_search_criteria = SearchRoom(
+            room_type="Tennis Court",
+            book_date=date(2026, 3, 15),
+            book_time=time(22, 0),  # Latest business hour
+        )
