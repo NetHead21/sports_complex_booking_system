@@ -482,3 +482,8 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
         mock_db.search_room.assert_called_with(
             "Tennis Court", date(2026, 3, 15), time(22, 0)
         )
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_specific_minutes(self, mock_input_service, mock_db):
+        """Test search with specific minute values (non-hour times)."""
