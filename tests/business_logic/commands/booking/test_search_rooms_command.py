@@ -681,3 +681,7 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
                 # Assert
                 self.assertFalse(success)
                 self.assertEqual(result, "No search results")
+
+
+class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
+    """Test exception handling scenarios for SearchRoomCommand."""
