@@ -737,3 +737,8 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(result, "Database query timeout")
         mock_print.assert_called_with("❌ Search Error: Database query timeout")
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_value_error(self, mock_input_service, mock_db):
+        """Test handling of value errors during search."""
