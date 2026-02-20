@@ -656,3 +656,20 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_database_returns_false_value(self, mock_input_service, mock_db):
         """Test when database returns False or 0 (falsy but not None)."""
+
+        falsy_values = [False, 0, [], ""]
+
+        for falsy_value in falsy_values:
+            with self.subTest(falsy_value=falsy_value):
+                # Arrange
+                mock_search_criteria = SearchRoom(
+                    room_type="Tennis Court",
+                    book_date=date(2026, 3, 15),
+                    book_time=time(14, 30),
+                )
+                mock_input_service.collect_room_search_data.return_value = (
+                    mock_search_criteria
+                )
+                mock_db.search_room.return_value = falsy_value
+
+                command = SearchRoomCommand()
