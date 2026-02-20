@@ -644,3 +644,7 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
                 mock_db.search_room.return_value = mock_cursor
 
                 command = SearchRoomCommand()
+
+                # Act
+                with patch("builtins.print"):
+                    success, result = command.execute()
