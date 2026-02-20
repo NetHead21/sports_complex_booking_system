@@ -627,3 +627,20 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
             date(2026, 3, 21),  # Saturday
             date(2026, 3, 22),  # Sunday
         ]
+
+        for book_date in weekend_dates:
+            with self.subTest(book_date=book_date):
+                # Arrange
+                mock_search_criteria = SearchRoom(
+                    room_type="Tennis Court",
+                    book_date=book_date,
+                    book_time=time(10, 0),
+                )
+                mock_input_service.collect_room_search_data.return_value = (
+                    mock_search_criteria
+                )
+                mock_cursor = MagicMock()
+                mock_cursor.__bool__.return_value = True
+                mock_db.search_room.return_value = mock_cursor
+
+                command = SearchRoomCommand()
