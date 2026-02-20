@@ -648,3 +648,6 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
                 # Act
                 with patch("builtins.print"):
                     success, result = command.execute()
+
+                # Assert
+                self.assertTrue(success)
