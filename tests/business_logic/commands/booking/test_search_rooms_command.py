@@ -685,3 +685,8 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
 
 class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
     """Test exception handling scenarios for SearchRoomCommand."""
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_database_connection_error(self, mock_input_service, mock_db):
+        """Test handling of database connection errors."""
