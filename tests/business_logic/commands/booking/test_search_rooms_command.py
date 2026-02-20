@@ -651,3 +651,8 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
 
                 # Assert
                 self.assertTrue(success)
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_database_returns_false_value(self, mock_input_service, mock_db):
+        """Test when database returns False or 0 (falsy but not None)."""
