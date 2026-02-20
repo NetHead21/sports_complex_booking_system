@@ -622,3 +622,8 @@ class TestSearchRoomCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_weekend_date(self, mock_input_service, mock_db):
         """Test search on weekend dates."""
+
+        weekend_dates = [
+            date(2026, 3, 21),  # Saturday
+            date(2026, 3, 22),  # Sunday
+        ]
