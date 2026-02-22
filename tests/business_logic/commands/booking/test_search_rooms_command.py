@@ -879,3 +879,7 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         mock_db.search_room.return_value = None
 
         command = SearchRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            command.execute()
