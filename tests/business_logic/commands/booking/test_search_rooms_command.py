@@ -857,3 +857,9 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             command.execute()
+
+        # Assert
+        expected_message = (
+            "✅ Search completed for Tennis Court on 2026-03-15 at 14:30:00"
+        )
+        mock_print.assert_called_once_with(expected_message)
