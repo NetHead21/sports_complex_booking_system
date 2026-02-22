@@ -911,3 +911,8 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         # Assert
         expected_message = f"❌ Search Error: {error_message}"
         mock_print.assert_called_once_with(expected_message)
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_no_print_when_cancelled(self, mock_input_service, mock_db):
+        """Test that no print is called when search is cancelled."""
