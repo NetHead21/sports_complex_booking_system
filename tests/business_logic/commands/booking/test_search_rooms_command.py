@@ -806,3 +806,8 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertEqual(result, "Unexpected runtime error")
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_generic_exception(self, mock_input_service, mock_db):
+        """Test handling of generic exceptions."""
