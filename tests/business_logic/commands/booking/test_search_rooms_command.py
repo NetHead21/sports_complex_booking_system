@@ -840,3 +840,14 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_success_message_format(self, mock_input_service, mock_db):
         """Test that success message is formatted correctly."""
+
+        # Arrange
+        mock_search_criteria = SearchRoom(
+            room_type="Tennis Court",
+            book_date=date(2026, 3, 15),
+            book_time=time(14, 30),
+        )
+        mock_input_service.collect_room_search_data.return_value = mock_search_criteria
+        mock_cursor = MagicMock()
+        mock_cursor.__bool__.return_value = True
+        mock_db.search_room.return_value = mock_cursor
