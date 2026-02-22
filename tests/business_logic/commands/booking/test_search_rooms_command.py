@@ -960,3 +960,12 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             success, result = command.execute()
+
+        # Assert
+        self.assertTrue(success)
+        self.assertEqual(result, mock_cursor)
+        mock_input_service.collect_room_search_data.assert_called_once()
+        mock_db.search_room.assert_called_once_with(
+            "Badminton Court", date(2026, 6, 10), time(17, 30)
+        )
+        mock_print.assert_called_once()
