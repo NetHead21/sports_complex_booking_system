@@ -851,3 +851,5 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         mock_cursor = MagicMock()
         mock_cursor.__bool__.return_value = True
         mock_db.search_room.return_value = mock_cursor
+
+        command = SearchRoomCommand()
