@@ -798,3 +798,7 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         mock_db.search_room.side_effect = RuntimeError("Unexpected runtime error")
 
         command = SearchRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            success, result = command.execute()
