@@ -796,3 +796,5 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         )
         mock_input_service.collect_room_search_data.return_value = mock_search_criteria
         mock_db.search_room.side_effect = RuntimeError("Unexpected runtime error")
+
+        command = SearchRoomCommand()
