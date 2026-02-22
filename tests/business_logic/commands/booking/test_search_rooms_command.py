@@ -886,3 +886,8 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
 
         # Assert
         mock_print.assert_called_once_with("❌ No rooms found matching your criteria.")
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_error_message_format(self, mock_input_service, mock_db):
+        """Test that error messages are formatted correctly."""
