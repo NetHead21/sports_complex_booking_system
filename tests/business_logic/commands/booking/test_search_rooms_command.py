@@ -922,4 +922,5 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         command = SearchRoomCommand()
 
         # Act
-        with patch("builtins.print") a
+        with patch("builtins.print") as mock_print:
+            command.execute()
