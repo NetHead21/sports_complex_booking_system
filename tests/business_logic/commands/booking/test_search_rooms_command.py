@@ -916,3 +916,7 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_no_print_when_cancelled(self, mock_input_service, mock_db):
         """Test that no print is called when search is cancelled."""
+
+        # Arrange
+        mock_input_service.collect_room_search_data.return_value = None
+        command = SearchRoomCommand()
