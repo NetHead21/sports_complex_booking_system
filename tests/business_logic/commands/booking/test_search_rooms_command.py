@@ -928,3 +928,7 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         # Assert
         # No print should be called when input collection returns None
         mock_print.assert_not_called()
+
+
+class TestSearchRoomCommandIntegration(unittest.TestCase):
+    """Integration-style tests for SearchRoomCommand workflow."""
