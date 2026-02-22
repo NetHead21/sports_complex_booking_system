@@ -831,3 +831,7 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(result, "Unknown error occurred")
         mock_print.assert_called_with("❌ Search Error: Unknown error occurred")
+
+
+class TestSearchRoomCommandPrintOutput(unittest.TestCase):
+    """Test print output verification for SearchRoomCommand."""
