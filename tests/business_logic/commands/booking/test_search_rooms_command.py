@@ -945,3 +945,12 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
             book_time=time(17, 30),
         )
         mock_input_service.collect_room_search_data.return_value = mock_search_criteria
+
+        # Mock cursor result with realistic data
+        mock_cursor = MagicMock()
+        mock_cursor.__bool__.return_value = True
+        mock_cursor.fetchall.return_value = [
+            ("B1", "Badminton Court", "Available", date(2026, 6, 10), time(17, 30)),
+            ("B2", "Badminton Court", "Available", date(2026, 6, 10), time(17, 30)),
+        ]
+        mock_db.search_room.return_value = mock_cursor
