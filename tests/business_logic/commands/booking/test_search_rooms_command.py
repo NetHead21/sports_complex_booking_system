@@ -782,3 +782,8 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         # Assert
         self.assertFalse(success)
         self.assertIn("object has no attribute", result)
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_runtime_error(self, mock_input_service, mock_db):
+        """Test handling of runtime errors."""
