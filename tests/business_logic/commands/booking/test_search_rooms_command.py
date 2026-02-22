@@ -907,3 +907,7 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             command.execute()
+
+        # Assert
+        expected_message = f"❌ Search Error: {error_message}"
+        mock_print.assert_called_once_with(expected_message)
