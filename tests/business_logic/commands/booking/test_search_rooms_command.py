@@ -835,3 +835,8 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
 
 class TestSearchRoomCommandPrintOutput(unittest.TestCase):
     """Test print output verification for SearchRoomCommand."""
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_success_message_format(self, mock_input_service, mock_db):
+        """Test that success message is formatted correctly."""
