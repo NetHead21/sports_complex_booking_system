@@ -863,3 +863,8 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
             "✅ Search completed for Tennis Court on 2026-03-15 at 14:30:00"
         )
         mock_print.assert_called_once_with(expected_message)
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_no_results_message_format(self, mock_input_service, mock_db):
+        """Test that no results message is formatted correctly."""
