@@ -932,3 +932,8 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
 
 class TestSearchRoomCommandIntegration(unittest.TestCase):
     """Integration-style tests for SearchRoomCommand workflow."""
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_complete_successful_search_workflow(self, mock_input_service, mock_db):
+        """Test complete workflow of successful room search."""
