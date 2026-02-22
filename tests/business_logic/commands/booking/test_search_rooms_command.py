@@ -772,3 +772,5 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         mock_input_service.collect_room_search_data.side_effect = AttributeError(
             "'NoneType' object has no attribute 'room_type'"
         )
+
+        command = SearchRoomCommand()
