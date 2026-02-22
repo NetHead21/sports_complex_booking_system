@@ -762,3 +762,8 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(result, "Invalid search parameters")
         mock_print.assert_called_with("❌ Search Error: Invalid search parameters")
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_execute_with_attribute_error(self, mock_input_service, mock_db):
+        """Test handling of attribute errors."""
