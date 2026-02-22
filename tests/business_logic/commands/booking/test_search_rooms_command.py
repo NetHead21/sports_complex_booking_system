@@ -903,3 +903,7 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         mock_db.search_room.side_effect = Exception(error_message)
 
         command = SearchRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            command.execute()
