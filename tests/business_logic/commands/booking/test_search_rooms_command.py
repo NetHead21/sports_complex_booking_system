@@ -767,3 +767,8 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_execute_with_attribute_error(self, mock_input_service, mock_db):
         """Test handling of attribute errors."""
+
+        # Arrange
+        mock_input_service.collect_room_search_data.side_effect = AttributeError(
+            "'NoneType' object has no attribute 'room_type'"
+        )
