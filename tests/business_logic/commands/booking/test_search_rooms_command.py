@@ -924,3 +924,7 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             command.execute()
+
+        # Assert
+        # No print should be called when input collection returns None
+        mock_print.assert_not_called()
