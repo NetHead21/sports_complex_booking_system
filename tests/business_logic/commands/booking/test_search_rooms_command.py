@@ -901,3 +901,5 @@ class TestSearchRoomCommandPrintOutput(unittest.TestCase):
         mock_input_service.collect_room_search_data.return_value = mock_search_criteria
         error_message = "Test error message"
         mock_db.search_room.side_effect = Exception(error_message)
+
+        command = SearchRoomCommand()
