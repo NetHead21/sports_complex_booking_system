@@ -774,3 +774,7 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         )
 
         command = SearchRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            success, result = command.execute()
