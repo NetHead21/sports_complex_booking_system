@@ -954,3 +954,5 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
             ("B2", "Badminton Court", "Available", date(2026, 6, 10), time(17, 30)),
         ]
         mock_db.search_room.return_value = mock_cursor
+
+        command = SearchRoomCommand()
