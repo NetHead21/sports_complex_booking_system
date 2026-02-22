@@ -802,3 +802,7 @@ class TestSearchRoomCommandExceptionHandling(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             success, result = command.execute()
+
+        # Assert
+        self.assertFalse(success)
+        self.assertEqual(result, "Unexpected runtime error")
