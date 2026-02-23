@@ -1001,3 +1001,8 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_complete_cancelled_search_workflow(self, mock_input_service, mock_db):
         """Test complete workflow when user cancels search."""
+
+        # Arrange
+        mock_input_service.collect_room_search_data.return_value = None
+
+        command = SearchRoomCommand()
