@@ -42,3 +42,16 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         command = AddMembersCommand()
 
         success, error = command.execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(error)
+        mock_input_service.collect_new_member_data.assert_called_once()
+        mock_db.create_new_member.assert_called_once_with(member)
+        mock_print.assert_called_once_with(
+            f"\u2705 Member '{member.id}' registered successfully!"
+        )
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    def test_execute_member_creation_cancelled(self, mock_input_service, mock_db):
+        """Test when user cancels member data collection."""
