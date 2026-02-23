@@ -989,3 +989,10 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
         # Act
         with patch("builtins.print") as mock_print:
             success, result = command.execute()
+
+        # Assert
+        self.assertFalse(success)
+        self.assertEqual(result, "No search results")
+        mock_input_service.collect_room_search_data.assert_called_once()
+        mock_db.search_room.assert_called_once()
+        mock_print.assert_called_once()
