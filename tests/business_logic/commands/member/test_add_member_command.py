@@ -82,3 +82,11 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self.assertIsNone(error)
         mock_input_service.collect_new_member_data.assert_called_once()
         mock_db.create_new_member.assert_called_once_with(member)
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_exception_in_input_service(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test exception handling when input service raises an error."""
