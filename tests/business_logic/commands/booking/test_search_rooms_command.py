@@ -996,3 +996,8 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
         mock_input_service.collect_room_search_data.assert_called_once()
         mock_db.search_room.assert_called_once()
         mock_print.assert_called_once()
+
+    @patch("business_logic.commands.booking.search_rooms_command.db")
+    @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
+    def test_complete_cancelled_search_workflow(self, mock_input_service, mock_db):
+        """Test complete workflow when user cancels search."""
