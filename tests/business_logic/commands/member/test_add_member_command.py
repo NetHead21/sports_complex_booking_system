@@ -65,3 +65,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self.assertEqual(error, "Member creation cancelled or failed")
         mock_input_service.collect_new_member_data.assert_called_once()
         mock_db.create_new_member.assert_not_called()
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    def test_execute_data_parameter_ignored(self, mock_input_service, mock_db):
+        """Test that data parameter is ignored."""
