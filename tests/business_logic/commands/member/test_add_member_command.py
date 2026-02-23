@@ -25,3 +25,7 @@ from unittest.mock import patch, call
 
 from business_logic.commands.member.add_member_command import AddMembersCommand
 from persistence.models import Member
+
+
+class TestAddMembersCommandExecute(unittest.TestCase):
+    """Test cases for AddMembersCommand.execute."""
