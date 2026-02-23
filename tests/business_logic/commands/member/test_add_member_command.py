@@ -90,3 +90,10 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test exception handling when input service raises an error."""
+
+        mock_input_service.collect_new_member_data.side_effect = Exception(
+            "Input service error"
+        )
+        command = AddMembersCommand()
+
+        success, error = command.execute()
