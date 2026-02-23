@@ -19,3 +19,9 @@ Coverage:
     - execute(data=None) explicit default
     - Edge-case member field values
 """
+
+import unittest
+from unittest.mock import patch, call
+
+from business_logic.commands.member.add_member_command import AddMembersCommand
+from persistence.models import Member
