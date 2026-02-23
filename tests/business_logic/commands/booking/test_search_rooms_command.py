@@ -974,3 +974,14 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
     @patch("business_logic.commands.booking.search_rooms_command.BookingInputService")
     def test_complete_failed_search_workflow(self, mock_input_service, mock_db):
         """Test complete workflow of failed room search."""
+
+        # Arrange
+        mock_search_criteria = SearchRoom(
+            room_type="Tennis Court",
+            book_date=date(2026, 6, 10),
+            book_time=time(10, 0),
+        )
+        mock_input_service.collect_room_search_data.return_value = mock_search_criteria
+        mock_db.search_room.return_value = None  # No rooms found
+
+        command = SearchRoomCommand()
