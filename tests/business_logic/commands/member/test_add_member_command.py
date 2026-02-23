@@ -77,3 +77,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         command = AddMembersCommand()
 
         success, error = command.execute(data={"ignored": "value"})
+
+        self.assertTrue(success)
+        self.assertIsNone(error)
+        mock_input_service.collect_new_member_data.assert_called_once()
+        mock_db.create_new_member.assert_called_once_with(member)
