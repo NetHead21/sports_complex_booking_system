@@ -60,3 +60,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         command = AddMembersCommand()
 
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Member creation cancelled or failed")
+        mock_input_service.collect_new_member_data.assert_called_once()
+        mock_db.create_new_member.assert_not_called()
