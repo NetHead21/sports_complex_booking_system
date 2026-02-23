@@ -29,3 +29,9 @@ from persistence.models import Member
 
 class TestAddMembersCommandExecute(unittest.TestCase):
     """Test cases for AddMembersCommand.execute."""
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_success(self, mock_print, mock_input_service, mock_db):
+        """Test successful member registration."""
