@@ -1006,3 +1006,7 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
         mock_input_service.collect_room_search_data.return_value = None
 
         command = SearchRoomCommand()
+
+        # Act
+        with patch("builtins.print") as mock_print:
+            success, result = command.execute()
