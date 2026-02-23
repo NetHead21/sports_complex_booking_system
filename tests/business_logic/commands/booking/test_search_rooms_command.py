@@ -1018,3 +1018,7 @@ class TestSearchRoomCommandIntegration(unittest.TestCase):
         mock_db.search_room.assert_not_called()
         # No print output for cancelled search
         mock_print.assert_not_called()
+
+
+if __name__ == "__main__":
+    unittest.main()
