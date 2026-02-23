@@ -35,3 +35,10 @@ class TestAddMembersCommandExecute(unittest.TestCase):
     @patch("builtins.print")
     def test_execute_success(self, mock_print, mock_input_service, mock_db):
         """Test successful member registration."""
+
+        member = Member(id="user123", password="Secret123", email="user@example.com")
+        mock_input_service.collect_new_member_data.return_value = member
+
+        command = AddMembersCommand()
+
+        success, error = command.execute()
