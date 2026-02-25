@@ -275,3 +275,6 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         """Test the exact cancellation error string."""
 
         mock_input_service.collect_new_member_data.return_value = None
+
+        command = AddMembersCommand()
+        success, error = command.execute()
