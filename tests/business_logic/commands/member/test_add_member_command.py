@@ -140,3 +140,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self.assertIsInstance(result, tuple)
         self.assertEqual(len(result), 2)
         self.assertIsInstance(result[0], bool)
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    def test_execute_with_varied_member_data(self, mock_input_service, mock_db):
+        """Test execution with edge-case member values."""
