@@ -303,3 +303,7 @@ class TestAddMembersCommandExecute(unittest.TestCase):
 
         member = Member(id="user123", password="Secret123", email="user@example.com")
         mock_input_service.collect_new_member_data.return_value = member
+
+        _, result = AddMembersCommand().execute()
+
+        self.assertIsNone(result)
