@@ -266,3 +266,10 @@ class TestAddMembersCommandExecute(unittest.TestCase):
 
         self.assertEqual(error, str(exc))
         self.assertEqual(error, "exact error message")
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    def test_execute_cancelled_second_element_exact_message(
+        self, mock_input_service, mock_db
+    ):
+        """Test the exact cancellation error string."""
