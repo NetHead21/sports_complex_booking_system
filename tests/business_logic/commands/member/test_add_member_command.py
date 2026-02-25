@@ -206,3 +206,7 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success_a)
         self.assertIsNone(error_a)
         mock_db.create_new_member.assert_called_with(member_a)
+
+        mock_db.reset_mock()
+        mock_input_service.reset_mock()
+        mock_print.reset_mock()
