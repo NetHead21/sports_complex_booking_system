@@ -110,3 +110,11 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test exception handling when database raises an error."""
+
+        member = Member(id="user123", password="Secret123", email="user@example.com")
+        mock_input_service.collect_new_member_data.return_value = member
+        mock_db.create_new_member.side_effect = Exception("Database connection error")
+
+        command = AddMembersCommand()
+
+        success, error = command.execute()
