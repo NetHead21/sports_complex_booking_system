@@ -217,3 +217,11 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success_b)
         self.assertIsNone(error_b)
         mock_db.create_new_member.assert_called_once_with(member_b)
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_various_exception_types_return_false_and_str_e(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that all exception types are caught, returning (False, str(e))."""
