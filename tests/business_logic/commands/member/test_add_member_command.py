@@ -199,3 +199,10 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         member_b = Member(id="bob", password="Pass2", email="bob@example.com")
 
         command = AddMembersCommand()
+
+        # First call
+        mock_input_service.collect_new_member_data.return_value = member_a
+        success_a, error_a = command.execute()
+        self.assertTrue(success_a)
+        self.assertIsNone(error_a)
+        mock_db.create_new_member.assert_called_with(member_a)
