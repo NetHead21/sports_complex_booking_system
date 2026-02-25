@@ -307,3 +307,7 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         _, result = AddMembersCommand().execute()
 
         self.assertIsNone(result)
+
+
+if __name__ == "__main__":
+    unittest.main()
