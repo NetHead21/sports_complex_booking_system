@@ -145,3 +145,15 @@ class TestAddMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.add_member_command.MemberInputService")
     def test_execute_with_varied_member_data(self, mock_input_service, mock_db):
         """Test execution with edge-case member values."""
+
+        members = [
+            Member(id="u", password="Secret123", email="a@b.co"),
+            Member(
+                id="user_with_long_id" * 5,
+                password="P@ssw0rd!",
+                email="long.email.address+alias@example.com",
+            ),
+            Member(id="user-123", password="123456", email="user-123@example.net"),
+        ]
+
+        command = AddMembersCommand()
