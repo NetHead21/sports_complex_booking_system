@@ -233,3 +233,5 @@ class TestAddMembersCommandExecute(unittest.TestCase):
             TypeError("Type mismatch"),
             PermissionError("Access denied"),
         ]
+
+        command = AddMembersCommand()
