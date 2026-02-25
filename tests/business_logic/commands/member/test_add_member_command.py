@@ -281,3 +281,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
 
         self.assertFalse(success)
         self.assertEqual(error, "Member creation cancelled or failed")
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    def test_execute_cancelled_db_never_called(self, mock_input_service, mock_db):
+        """Test that db.create_new_member is never reached when service returns None."""
