@@ -278,3 +278,6 @@ class TestAddMembersCommandExecute(unittest.TestCase):
 
         command = AddMembersCommand()
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Member creation cancelled or failed")
