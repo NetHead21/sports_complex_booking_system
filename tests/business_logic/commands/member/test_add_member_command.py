@@ -260,3 +260,6 @@ class TestAddMembersCommandExecute(unittest.TestCase):
 
         exc = Exception("exact error message")
         mock_input_service.collect_new_member_data.side_effect = exc
+
+        command = AddMembersCommand()
+        _, error = command.execute()
