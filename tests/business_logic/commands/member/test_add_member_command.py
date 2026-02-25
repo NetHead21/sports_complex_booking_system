@@ -175,3 +175,10 @@ class TestAddMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.add_member_command.MemberInputService")
     def test_execute_with_data_none_explicit(self, mock_input_service, mock_db):
         """Test that execute(data=None) behaves identically to execute()."""
+
+        member = Member(id="user123", password="Secret123", email="user@example.com")
+        mock_input_service.collect_new_member_data.return_value = member
+
+        command = AddMembersCommand()
+
+        success, error = command.execute(data=None)
