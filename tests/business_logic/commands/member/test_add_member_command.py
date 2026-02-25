@@ -170,3 +170,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
                 mock_db.create_new_member.assert_called_once_with(member)
                 mock_db.reset_mock()
                 mock_input_service.reset_mock()
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    def test_execute_with_data_none_explicit(self, mock_input_service, mock_db):
+        """Test that execute(data=None) behaves identically to execute()."""
