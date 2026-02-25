@@ -292,3 +292,11 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         AddMembersCommand().execute()
 
         mock_db.create_new_member.assert_not_called()
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_success_result_second_element_is_none(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that a successful execution always returns None as second element."""
