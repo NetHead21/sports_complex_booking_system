@@ -300,3 +300,6 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test that a successful execution always returns None as second element."""
+
+        member = Member(id="user123", password="Secret123", email="user@example.com")
+        mock_input_service.collect_new_member_data.return_value = member
