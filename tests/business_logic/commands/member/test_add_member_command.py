@@ -194,3 +194,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test stateless behavior: same instance can be reused for multiple calls."""
+
+        member_a = Member(id="alice", password="Pass1", email="alice@example.com")
+        member_b = Member(id="bob", password="Pass2", email="bob@example.com")
+
+        command = AddMembersCommand()
