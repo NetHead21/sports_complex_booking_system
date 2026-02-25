@@ -243,3 +243,9 @@ class TestAddMembersCommandExecute(unittest.TestCase):
                 mock_print.reset_mock()
 
                 success, error = command.execute()
+
+                self.assertFalse(success)
+                self.assertEqual(error, str(exc))
+                self.assertIsInstance(error, str)
+                mock_db.create_new_member.assert_not_called()
+                mock_print.assert_called_once_with(f"\u274c Database Error: {exc}")
