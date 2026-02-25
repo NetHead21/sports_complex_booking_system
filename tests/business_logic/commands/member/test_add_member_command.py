@@ -164,3 +164,9 @@ class TestAddMembersCommandExecute(unittest.TestCase):
                 mock_db.create_new_member.return_value = None
 
                 success, error = command.execute()
+
+                self.assertTrue(success)
+                self.assertIsNone(error)
+                mock_db.create_new_member.assert_called_once_with(member)
+                mock_db.reset_mock()
+                mock_input_service.reset_mock()
