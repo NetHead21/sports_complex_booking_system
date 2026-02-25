@@ -288,3 +288,5 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         """Test that db.create_new_member is never reached when service returns None."""
 
         mock_input_service.collect_new_member_data.return_value = None
+
+        AddMembersCommand().execute()
