@@ -290,3 +290,5 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         mock_input_service.collect_new_member_data.return_value = None
 
         AddMembersCommand().execute()
+
+        mock_db.create_new_member.assert_not_called()
