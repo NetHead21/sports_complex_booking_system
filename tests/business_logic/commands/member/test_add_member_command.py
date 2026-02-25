@@ -97,3 +97,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         command = AddMembersCommand()
 
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Input service error")
+        mock_db.create_new_member.assert_not_called()
+        mock_print.assert_called_once_with("\u274c Database Error: Input service error")
