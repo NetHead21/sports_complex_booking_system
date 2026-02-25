@@ -124,3 +124,8 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         mock_print.assert_called_once_with(
             "\u274c Database Error: Database connection error"
         )
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    def test_execute_return_value_structure(self, mock_input_service, mock_db):
+        """Test return tuple structure."""
