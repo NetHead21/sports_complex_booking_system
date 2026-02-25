@@ -157,3 +157,10 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         ]
 
         command = AddMembersCommand()
+
+        for member in members:
+            with self.subTest(member_id=member.id):
+                mock_input_service.collect_new_member_data.return_value = member
+                mock_db.create_new_member.return_value = None
+
+                success, error = command.execute()
