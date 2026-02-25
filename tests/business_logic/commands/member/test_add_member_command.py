@@ -186,3 +186,11 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(error)
         mock_db.create_new_member.assert_called_once_with(member)
+
+    @patch("business_logic.commands.member.add_member_command.db")
+    @patch("business_logic.commands.member.add_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_multiple_sequential_calls_same_instance(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test stateless behavior: same instance can be reused for multiple calls."""
