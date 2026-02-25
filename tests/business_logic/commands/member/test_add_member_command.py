@@ -241,3 +241,5 @@ class TestAddMembersCommandExecute(unittest.TestCase):
                 mock_input_service.collect_new_member_data.side_effect = exc
                 mock_db.reset_mock()
                 mock_print.reset_mock()
+
+                success, error = command.execute()
