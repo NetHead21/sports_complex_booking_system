@@ -210,3 +210,10 @@ class TestAddMembersCommandExecute(unittest.TestCase):
         mock_db.reset_mock()
         mock_input_service.reset_mock()
         mock_print.reset_mock()
+
+        # Second call — different member, same command instance
+        mock_input_service.collect_new_member_data.return_value = member_b
+        success_b, error_b = command.execute()
+        self.assertTrue(success_b)
+        self.assertIsNone(error_b)
+        mock_db.create_new_member.assert_called_once_with(member_b)
