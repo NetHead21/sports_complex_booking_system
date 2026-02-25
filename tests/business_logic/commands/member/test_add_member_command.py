@@ -129,3 +129,10 @@ class TestAddMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.add_member_command.MemberInputService")
     def test_execute_return_value_structure(self, mock_input_service, mock_db):
         """Test return tuple structure."""
+
+        member = Member(id="user123", password="Secret123", email="user@example.com")
+        mock_input_service.collect_new_member_data.return_value = member
+
+        command = AddMembersCommand()
+
+        result = command.execute()
