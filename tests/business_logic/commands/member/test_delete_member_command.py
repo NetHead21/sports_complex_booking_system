@@ -83,3 +83,12 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_input_service.display_operation_result.assert_called_once_with(
             "Member Deletion", "user123", True
         )
+
+    # ------------------------------------------------------------------
+    # Cancellation
+    # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_cancelled_returns_false(self, mock_input_service, mock_db):
+        """Test that cancellation returns False."""
