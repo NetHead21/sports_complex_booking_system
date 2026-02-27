@@ -29,3 +29,8 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
     # ------------------------------------------------------------------
     # Happy-path
     # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_success(self, mock_input_service, mock_db):
+        """Test successful member deletion returns (True, None)."""
