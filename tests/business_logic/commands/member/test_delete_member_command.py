@@ -74,3 +74,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test display_operation_result is called with correct args on success."""
+
+        mock_input_service.collect_member_id_for_deletion.return_value = "user123"
+        mock_db.delete_member.return_value = True
