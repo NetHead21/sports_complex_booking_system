@@ -21,3 +21,11 @@ import unittest
 from unittest.mock import patch, call
 
 from business_logic.commands.member.delete_member_command import DeleteMembersCommand
+
+
+class TestDeleteMembersCommandExecute(unittest.TestCase):
+    """Test cases for DeleteMembersCommand.execute."""
+
+    # ------------------------------------------------------------------
+    # Happy-path
+    # ------------------------------------------------------------------
