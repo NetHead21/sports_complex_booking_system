@@ -55,3 +55,8 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         DeleteMembersCommand().execute()
 
         mock_input_service.collect_member_id_for_deletion.assert_called_once()
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_success_passes_member_id_to_db(self, mock_input_service, mock_db):
+        """Test that the member ID from the service is forwarded to db.delete_member."""
