@@ -43,3 +43,8 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         self.assertTrue(success)
         self.assertIsNone(error)
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_success_calls_service_once(self, mock_input_service, mock_db):
+        """Test that collect_member_id_for_deletion is called exactly once on success."""
