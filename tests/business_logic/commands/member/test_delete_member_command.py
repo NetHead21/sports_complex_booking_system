@@ -40,3 +40,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         command = DeleteMembersCommand()
         success, error = command.execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(error)
