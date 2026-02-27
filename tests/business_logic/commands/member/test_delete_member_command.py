@@ -94,3 +94,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         """Test that cancellation returns False."""
 
         mock_input_service.collect_member_id_for_deletion.return_value = None
+
+        success, _ = DeleteMembersCommand().execute()
