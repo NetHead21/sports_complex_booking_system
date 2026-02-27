@@ -67,3 +67,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         DeleteMembersCommand().execute()
 
         mock_db.delete_member.assert_called_once_with("user123")
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_success_calls_display_with_correct_args(
+        self, mock_input_service, mock_db
+    ):
+        """Test display_operation_result is called with correct args on success."""
