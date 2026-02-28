@@ -153,3 +153,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test the exact 'does not exist' error message."""
+
+        mock_input_service.collect_member_id_for_deletion.return_value = "ghost_user"
+        mock_db.delete_member.return_value = False
+
+        _, error = DeleteMembersCommand().execute()
+
+        self.assertEqual(error, "Member 'ghost_user' does not exist")
