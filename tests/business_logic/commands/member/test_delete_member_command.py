@@ -146,3 +146,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         success, _ = DeleteMembersCommand().execute()
 
         self.assertFalse(success)
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_member_not_found_exact_error_message(
+        self, mock_input_service, mock_db
+    ):
+        """Test the exact 'does not exist' error message."""
