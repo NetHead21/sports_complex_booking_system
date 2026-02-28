@@ -105,3 +105,4 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         """Test the exact cancellation error string."""
 
         mock_input_service.collect_member_id_for_deletion.return_value = None
+        _, error = DeleteMembersCommand().execute()
