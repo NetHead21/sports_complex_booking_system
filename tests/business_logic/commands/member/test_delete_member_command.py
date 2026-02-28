@@ -139,3 +139,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.delete_member_command.MemberInputService")
     def test_execute_member_not_found_returns_false(self, mock_input_service, mock_db):
         """Test that a falsy db result returns (False, ...)."""
+
+        mock_input_service.collect_member_id_for_deletion.return_value = "ghost_user"
+        mock_db.delete_member.return_value = False
+
+        success, _ = DeleteMembersCommand().execute()
+
+        self.assertFalse(success)
