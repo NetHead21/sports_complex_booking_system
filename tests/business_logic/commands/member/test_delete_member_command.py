@@ -106,3 +106,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         mock_input_service.collect_member_id_for_deletion.return_value = None
         _, error = DeleteMembersCommand().execute()
+
+        self.assertEqual(error, "Member deletion cancelled or failed")
