@@ -160,3 +160,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         _, error = DeleteMembersCommand().execute()
 
         self.assertEqual(error, "Member 'ghost_user' does not exist")
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_member_not_found_calls_display_with_failure_args(
+        self, mock_input_service, mock_db
+    ):
+        """Test display_operation_result is called with failure args when member not found."""
