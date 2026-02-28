@@ -194,3 +194,7 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         )
 
         success, error = DeleteMembersCommand().execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Input service error")
+        mock_db.delete_member.assert_not_called()
