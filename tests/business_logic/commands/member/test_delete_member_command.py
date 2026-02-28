@@ -167,3 +167,12 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test display_operation_result is called with failure args when member not found."""
+
+        mock_input_service.collect_member_id_for_deletion.return_value = "ghost_user"
+        mock_db.delete_member.return_value = False
+
+        DeleteMembersCommand().execute()
+
+        mock_input_service.display_operation_result.assert_called_once_with(
+            "Member Deletion", "ghost_user", False, "Member not found"
+        )
