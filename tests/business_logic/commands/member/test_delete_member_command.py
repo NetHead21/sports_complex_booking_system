@@ -117,3 +117,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_input_service.collect_member_id_for_deletion.return_value = None
 
         DeleteMembersCommand().execute()
+
+        mock_db.delete_member.assert_not_called()
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_cancelled_display_never_called(self, mock_input_service, mock_db):
+        """Test that display_operation_result is never called when cancelled."""
