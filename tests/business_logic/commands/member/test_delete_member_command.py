@@ -206,3 +206,11 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test that the exact error print is emitted when input service raises."""
+
+        mock_input_service.collect_member_id_for_deletion.side_effect = Exception(
+            "Input service error"
+        )
+
+        DeleteMembersCommand().execute()
+
+        mock_print.assert_called_once_with("❌ Database Error: Input service error")
