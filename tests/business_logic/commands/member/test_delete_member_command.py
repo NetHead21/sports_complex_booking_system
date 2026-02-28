@@ -115,3 +115,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         """Test that db.delete_member is never reached when service returns None."""
 
         mock_input_service.collect_member_id_for_deletion.return_value = None
+
+        DeleteMembersCommand().execute()
