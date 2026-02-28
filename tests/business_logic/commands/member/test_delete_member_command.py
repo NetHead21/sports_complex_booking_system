@@ -176,3 +176,15 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_input_service.display_operation_result.assert_called_once_with(
             "Member Deletion", "ghost_user", False, "Member not found"
         )
+
+    # ------------------------------------------------------------------
+    # Exception handling
+    # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_exception_in_input_service(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test exception handling when input service raises an error."""
