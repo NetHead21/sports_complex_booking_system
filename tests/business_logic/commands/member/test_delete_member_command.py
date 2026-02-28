@@ -130,3 +130,7 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         DeleteMembersCommand().execute()
 
         mock_input_service.display_operation_result.assert_not_called()
+
+    # ------------------------------------------------------------------
+    # Member not found (db returns falsy)
+    # ------------------------------------------------------------------
