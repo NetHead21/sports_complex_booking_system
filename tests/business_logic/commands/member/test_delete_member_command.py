@@ -279,3 +279,11 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
                 self.assertIsInstance(error, str)
                 mock_db.delete_member.assert_not_called()
                 mock_print.assert_called_once_with(f"❌ Database Error: {exc}")
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_error_second_element_is_exact_str_of_exception(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that the returned error is exactly str(exception)."""
