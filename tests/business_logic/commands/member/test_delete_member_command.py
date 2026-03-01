@@ -290,3 +290,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         exc = Exception("exact error message")
         mock_input_service.collect_member_id_for_deletion.side_effect = exc
+
+        _, error = DeleteMembersCommand().execute()
