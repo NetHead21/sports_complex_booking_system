@@ -225,3 +225,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         mock_input_service.collect_member_id_for_deletion.return_value = "user123"
         mock_db.delete_member.side_effect = Exception("Database connection error")
+
+        success, error = DeleteMembersCommand().execute()
