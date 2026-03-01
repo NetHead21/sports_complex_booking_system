@@ -263,3 +263,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
             TypeError("Type mismatch"),
             PermissionError("Access denied"),
         ]
+
+        command = DeleteMembersCommand()
