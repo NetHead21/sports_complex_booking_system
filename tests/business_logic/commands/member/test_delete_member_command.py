@@ -273,3 +273,9 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
                 mock_print.reset_mock()
 
                 success, error = command.execute()
+
+                self.assertFalse(success)
+                self.assertEqual(error, str(exc))
+                self.assertIsInstance(error, str)
+                mock_db.delete_member.assert_not_called()
+                mock_print.assert_called_once_with(f"❌ Database Error: {exc}")
