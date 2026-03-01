@@ -214,3 +214,11 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         DeleteMembersCommand().execute()
 
         mock_print.assert_called_once_with("❌ Database Error: Input service error")
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_exception_in_database(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test exception handling when database raises an error."""
