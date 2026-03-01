@@ -287,3 +287,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test that the returned error is exactly str(exception)."""
+
+        exc = Exception("exact error message")
+        mock_input_service.collect_member_id_for_deletion.side_effect = exc
