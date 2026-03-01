@@ -295,3 +295,14 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         self.assertEqual(error, str(exc))
         self.assertEqual(error, "exact error message")
+
+    # ------------------------------------------------------------------
+    # data= parameter
+    # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_data_parameter_ignored_with_dict(
+        self, mock_input_service, mock_db
+    ):
+        """Test that passing a dict as data= is silently ignored."""
