@@ -292,3 +292,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_input_service.collect_member_id_for_deletion.side_effect = exc
 
         _, error = DeleteMembersCommand().execute()
+
+        self.assertEqual(error, str(exc))
+        self.assertEqual(error, "exact error message")
