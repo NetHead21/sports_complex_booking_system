@@ -247,3 +247,11 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_print.assert_called_once_with(
             "❌ Database Error: Database connection error"
         )
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_various_exception_types_return_false_and_str_e(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that all exception types are caught and return (False, str(e))."""
