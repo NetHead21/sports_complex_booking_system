@@ -255,3 +255,11 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test that all exception types are caught and return (False, str(e))."""
+
+        exceptions = [
+            ValueError("Invalid value"),
+            RuntimeError("Runtime failure"),
+            ConnectionError("Connection refused"),
+            TypeError("Type mismatch"),
+            PermissionError("Access denied"),
+        ]
