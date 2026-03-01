@@ -271,3 +271,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
                 mock_input_service.collect_member_id_for_deletion.side_effect = exc
                 mock_db.reset_mock()
                 mock_print.reset_mock()
+
+                success, error = command.execute()
