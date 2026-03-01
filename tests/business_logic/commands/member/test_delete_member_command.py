@@ -227,3 +227,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_db.delete_member.side_effect = Exception("Database connection error")
 
         success, error = DeleteMembersCommand().execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Database connection error")
