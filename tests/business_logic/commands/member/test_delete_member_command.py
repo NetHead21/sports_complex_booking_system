@@ -230,3 +230,11 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         self.assertFalse(success)
         self.assertEqual(error, "Database connection error")
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_exception_in_database_prints_error(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that the exact error print is emitted when database raises."""
