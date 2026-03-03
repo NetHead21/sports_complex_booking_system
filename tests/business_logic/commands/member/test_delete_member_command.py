@@ -360,3 +360,7 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
                     service_val
                 )
                 mock_db.delete_member.return_value = return_val
+
+                result = DeleteMembersCommand().execute()
+
+                self.assertIsInstance(result[0], bool)
