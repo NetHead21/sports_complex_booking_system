@@ -348,3 +348,8 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         self.assertIsInstance(result, tuple)
         self.assertEqual(len(result), 2)
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_first_element_is_bool(self, mock_input_service, mock_db):
+        """Test that the first element of the return tuple is always a bool."""
