@@ -387,3 +387,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test stateless behavior: same instance handles multiple calls correctly."""
+
+        command = DeleteMembersCommand()
