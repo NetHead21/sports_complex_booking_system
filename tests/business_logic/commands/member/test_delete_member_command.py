@@ -405,3 +405,7 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_input_service.collect_member_id_for_deletion.return_value = "bob"
         mock_db.delete_member.return_value = True
         success_b, error_b = command.execute()
+
+        self.assertTrue(success_b)
+        self.assertIsNone(error_b)
+        mock_db.delete_member.assert_called_once_with("bob")
