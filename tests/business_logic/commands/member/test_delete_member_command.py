@@ -325,3 +325,7 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_db.delete_member.return_value = True
 
         success, error = DeleteMembersCommand().execute(data=None)
+
+        self.assertTrue(success)
+        self.assertIsNone(error)
+        mock_db.delete_member.assert_called_once_with("user123")
