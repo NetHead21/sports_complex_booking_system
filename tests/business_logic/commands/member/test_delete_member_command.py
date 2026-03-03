@@ -397,3 +397,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         self.assertTrue(success_a)
         self.assertIsNone(error_a)
+
+        mock_db.reset_mock()
+        mock_input_service.reset_mock()
