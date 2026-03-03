@@ -389,3 +389,8 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         """Test stateless behavior: same instance handles multiple calls correctly."""
 
         command = DeleteMembersCommand()
+
+        # First call — success
+        mock_input_service.collect_member_id_for_deletion.return_value = "alice"
+        mock_db.delete_member.return_value = True
+        success_a, error_a = command.execute()
