@@ -364,3 +364,8 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
                 result = DeleteMembersCommand().execute()
 
                 self.assertIsInstance(result[0], bool)
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_success_second_element_is_none(self, mock_input_service, mock_db):
+        """Test that a successful delete always returns None as the second element."""
