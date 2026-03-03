@@ -353,3 +353,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.delete_member_command.MemberInputService")
     def test_execute_first_element_is_bool(self, mock_input_service, mock_db):
         """Test that the first element of the return tuple is always a bool."""
+
+        for return_val, service_val in [(True, "user123"), (False, None)]:
+            with self.subTest(return_val=return_val):
+                mock_input_service.collect_member_id_for_deletion.return_value = (
+                    service_val
+                )
+                mock_db.delete_member.return_value = return_val
