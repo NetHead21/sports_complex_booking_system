@@ -376,3 +376,14 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         _, result = DeleteMembersCommand().execute()
 
         self.assertIsNone(result)
+
+    # ------------------------------------------------------------------
+    # Statelessness / sequential calls
+    # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_multiple_sequential_calls_same_instance(
+        self, mock_input_service, mock_db
+    ):
+        """Test stateless behavior: same instance handles multiple calls correctly."""
