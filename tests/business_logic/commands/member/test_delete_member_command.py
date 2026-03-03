@@ -369,3 +369,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.delete_member_command.MemberInputService")
     def test_execute_success_second_element_is_none(self, mock_input_service, mock_db):
         """Test that a successful delete always returns None as the second element."""
+
+        mock_input_service.collect_member_id_for_deletion.return_value = "user123"
+        mock_db.delete_member.return_value = True
