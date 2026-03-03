@@ -315,3 +315,8 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(error)
         mock_input_service.collect_member_id_for_deletion.assert_called_once()
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_data_none_explicit(self, mock_input_service, mock_db):
+        """Test that execute(data=None) behaves identically to execute()."""
