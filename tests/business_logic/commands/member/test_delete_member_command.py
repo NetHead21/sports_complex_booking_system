@@ -345,3 +345,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_db.delete_member.return_value = True
 
         result = DeleteMembersCommand().execute()
+
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 2)
