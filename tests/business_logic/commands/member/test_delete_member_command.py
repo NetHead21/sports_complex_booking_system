@@ -333,3 +333,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
     # ------------------------------------------------------------------
     # Return structure
     # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_return_value_is_tuple_of_length_2(
+        self, mock_input_service, mock_db
+    ):
+        """Test return value is always a 2-tuple."""
