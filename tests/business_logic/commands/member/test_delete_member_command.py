@@ -419,3 +419,7 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self.assertFalse(success_c)
         self.assertEqual(error_c, "Member deletion cancelled or failed")
         mock_db.delete_member.assert_not_called()
+
+    # ------------------------------------------------------------------
+    # Edge-case member IDs
+    # ------------------------------------------------------------------
