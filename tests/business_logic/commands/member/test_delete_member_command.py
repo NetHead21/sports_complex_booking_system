@@ -446,3 +446,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
                     member_id
                 )
                 mock_db.delete_member.return_value = True
+
+                success, error = command.execute()
