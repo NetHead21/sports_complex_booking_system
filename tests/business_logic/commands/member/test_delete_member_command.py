@@ -409,3 +409,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success_b)
         self.assertIsNone(error_b)
         mock_db.delete_member.assert_called_once_with("bob")
+
+        mock_db.reset_mock()
+        mock_input_service.reset_mock()
