@@ -29,3 +29,7 @@ from business_logic.commands.member.list_members_command import ListMembersComma
 
 class TestListMembersCommandInit(unittest.TestCase):
     """Test cases for ListMembersCommand __init__."""
+
+    def test_default_order_by_is_member_since(self):
+        """Test that order_by defaults to 'member_since'."""
+        command = ListMembersCommand()
