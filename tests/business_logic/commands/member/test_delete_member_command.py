@@ -423,3 +423,8 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
     # ------------------------------------------------------------------
     # Edge-case member IDs
     # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_edge_case_member_ids(self, mock_input_service, mock_db):
+        """Test deletion succeeds with edge-case valid member ID strings."""
