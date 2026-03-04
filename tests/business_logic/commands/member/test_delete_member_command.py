@@ -437,3 +437,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
             "u" * 100,  # Very long ID
             "123456",  # Numeric-only
         ]
+
+        command = DeleteMembersCommand()
