@@ -455,3 +455,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
                 mock_db.reset_mock()
                 mock_input_service.reset_mock()
+
+    @patch("business_logic.commands.member.delete_member_command.db")
+    @patch("business_logic.commands.member.delete_member_command.MemberInputService")
+    def test_execute_member_not_found_error_contains_member_id(
+        self, mock_input_service, mock_db
+    ):
+        """Test that the 'does not exist' message always embeds the actual member ID."""
