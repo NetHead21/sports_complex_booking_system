@@ -471,3 +471,7 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         self.assertIn(member_id, error)
         self.assertIn("does not exist", error)
+
+
+if __name__ == "__main__":
+    unittest.main()
