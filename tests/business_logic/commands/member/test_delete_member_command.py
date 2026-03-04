@@ -439,3 +439,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         ]
 
         command = DeleteMembersCommand()
+
+        for member_id in edge_ids:
+            with self.subTest(member_id=member_id):
+                mock_input_service.collect_member_id_for_deletion.return_value = (
+                    member_id
+                )
+                mock_db.delete_member.return_value = True
