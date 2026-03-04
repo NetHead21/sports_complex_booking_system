@@ -462,3 +462,7 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test that the 'does not exist' message always embeds the actual member ID."""
+
+        member_id = "very_specific_user_id_99"
+        mock_input_service.collect_member_id_for_deletion.return_value = member_id
+        mock_db.delete_member.return_value = False
