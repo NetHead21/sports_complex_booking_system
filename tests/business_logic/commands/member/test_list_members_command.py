@@ -25,3 +25,7 @@ import unittest
 from unittest.mock import patch, MagicMock, call
 
 from business_logic.commands.member.list_members_command import ListMembersCommand
+
+
+class TestListMembersCommandInit(unittest.TestCase):
+    """Test cases for ListMembersCommand __init__."""
