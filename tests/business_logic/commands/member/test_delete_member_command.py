@@ -468,3 +468,6 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         mock_db.delete_member.return_value = False
 
         _, error = DeleteMembersCommand().execute()
+
+        self.assertIn(member_id, error)
+        self.assertIn("does not exist", error)
