@@ -33,3 +33,5 @@ class TestListMembersCommandInit(unittest.TestCase):
     def test_default_order_by_is_member_since(self):
         """Test that order_by defaults to 'member_since'."""
         command = ListMembersCommand()
+
+        self.assertEqual(command.order_by, "member_since")
