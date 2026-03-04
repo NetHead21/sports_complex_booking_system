@@ -39,3 +39,5 @@ class TestListMembersCommandInit(unittest.TestCase):
     def test_custom_order_by_stored(self):
         """Test that a custom order_by value is stored correctly."""
         command = ListMembersCommand(order_by="name")
+
+        self.assertEqual(command.order_by, "name")
