@@ -412,3 +412,10 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
 
         mock_db.reset_mock()
         mock_input_service.reset_mock()
+
+        # Third call — cancelled
+        mock_input_service.collect_member_id_for_deletion.return_value = None
+        success_c, error_c = command.execute()
+        self.assertFalse(success_c)
+        self.assertEqual(error_c, "Member deletion cancelled or failed")
+        mock_db.delete_member.assert_not_called()
