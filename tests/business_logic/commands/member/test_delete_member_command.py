@@ -466,3 +466,5 @@ class TestDeleteMembersCommandExecute(unittest.TestCase):
         member_id = "very_specific_user_id_99"
         mock_input_service.collect_member_id_for_deletion.return_value = member_id
         mock_db.delete_member.return_value = False
+
+        _, error = DeleteMembersCommand().execute()
