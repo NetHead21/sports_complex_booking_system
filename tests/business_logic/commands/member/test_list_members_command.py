@@ -59,3 +59,8 @@ class TestListMembersCommandExecute(unittest.TestCase):
     # ------------------------------------------------------------------
     # Happy path
     # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    def test_execute_success_returns_true_none(self, mock_db, mock_format_table):
+        """Test successful execution returns (True, None)."""
