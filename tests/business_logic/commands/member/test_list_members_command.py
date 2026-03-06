@@ -99,3 +99,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
         ]
         mock_db.show_members.return_value = members
         mock_format_table.return_value = "Table"
+
+        ListMembersCommand().execute()
+
+        mock_format_table.assert_called_once_with(members)
