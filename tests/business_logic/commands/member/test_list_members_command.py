@@ -137,3 +137,8 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "No members found"
 
         success, result = ListMembersCommand().execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_format_table.assert_called_once_with([])
+        mock_print.assert_called_once_with("No members found")
