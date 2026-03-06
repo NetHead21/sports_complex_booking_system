@@ -51,3 +51,11 @@ class TestListMembersCommandInit(unittest.TestCase):
             with self.subTest(order_by=value):
                 command = ListMembersCommand(order_by=value)
                 self.assertEqual(command.order_by, value)
+
+
+class TestListMembersCommandExecute(unittest.TestCase):
+    """Test cases for ListMembersCommand.execute."""
+
+    # ------------------------------------------------------------------
+    # Happy path
+    # ------------------------------------------------------------------
