@@ -103,3 +103,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
         ListMembersCommand().execute()
 
         mock_format_table.assert_called_once_with(members)
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_prints_formatted_table(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test that the formatted table string is printed."""
