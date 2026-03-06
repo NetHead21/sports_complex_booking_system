@@ -72,3 +72,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "Formatted Table"
 
         success, result = ListMembersCommand().execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(result)
