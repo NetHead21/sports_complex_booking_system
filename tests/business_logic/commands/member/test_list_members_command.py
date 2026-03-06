@@ -132,3 +132,8 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test that an empty list is passed to formatter and result is printed."""
+
+        mock_db.show_members.return_value = []
+        mock_format_table.return_value = "No members found"
+
+        success, result = ListMembersCommand().execute()
