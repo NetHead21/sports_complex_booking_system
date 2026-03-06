@@ -116,3 +116,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
             ("user1", "Alice", "a@b.com", "2025-01-01")
         ]
         mock_format_table.return_value = "Formatted Output"
+
+        ListMembersCommand().execute()
+
+        mock_print.assert_called_once_with("Formatted Output")
