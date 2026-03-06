@@ -41,3 +41,6 @@ class TestListMembersCommandInit(unittest.TestCase):
         command = ListMembersCommand(order_by="name")
 
         self.assertEqual(command.order_by, "name")
+
+    def test_various_order_by_values_stored(self):
+        """Test that various order_by values are stored as provided."""
