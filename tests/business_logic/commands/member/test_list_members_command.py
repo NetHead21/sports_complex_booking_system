@@ -70,3 +70,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
             ("user2", "Bob", "bob@example.com", "2025-02-01"),
         ]
         mock_format_table.return_value = "Formatted Table"
+
+        success, result = ListMembersCommand().execute()
