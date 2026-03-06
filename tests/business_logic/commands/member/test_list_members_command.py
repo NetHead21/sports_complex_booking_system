@@ -120,3 +120,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
         ListMembersCommand().execute()
 
         mock_print.assert_called_once_with("Formatted Output")
+
+    # ------------------------------------------------------------------
+    # Various data scenarios
+    # ------------------------------------------------------------------
