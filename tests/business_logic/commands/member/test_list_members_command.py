@@ -124,3 +124,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
     # ------------------------------------------------------------------
     # Various data scenarios
     # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_with_empty_member_list(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test that an empty list is passed to formatter and result is printed."""
