@@ -87,3 +87,8 @@ class TestListMembersCommandExecute(unittest.TestCase):
         ListMembersCommand().execute()
 
         mock_db.show_members.assert_called_once()
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    def test_execute_passes_members_to_formatter(self, mock_db, mock_format_table):
+        """Test that the return value of show_members is passed to format_member_table."""
