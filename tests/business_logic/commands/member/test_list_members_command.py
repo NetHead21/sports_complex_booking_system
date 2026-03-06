@@ -64,3 +64,9 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.list_members_command.db")
     def test_execute_success_returns_true_none(self, mock_db, mock_format_table):
         """Test successful execution returns (True, None)."""
+
+        mock_db.show_members.return_value = [
+            ("user1", "Alice", "alice@example.com", "2025-01-01"),
+            ("user2", "Bob", "bob@example.com", "2025-02-01"),
+        ]
+        mock_format_table.return_value = "Formatted Table"
