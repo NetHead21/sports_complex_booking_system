@@ -92,3 +92,10 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.list_members_command.db")
     def test_execute_passes_members_to_formatter(self, mock_db, mock_format_table):
         """Test that the return value of show_members is passed to format_member_table."""
+
+        members = [
+            ("user1", "Alice", "alice@example.com", "2025-01-01"),
+            ("user2", "Bob", "bob@example.com", "2025-02-01"),
+        ]
+        mock_db.show_members.return_value = members
+        mock_format_table.return_value = "Table"
