@@ -80,3 +80,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.list_members_command.db")
     def test_execute_calls_show_members_once(self, mock_db, mock_format_table):
         """Test that db.show_members is called exactly once per execute call."""
+
+        mock_db.show_members.return_value = []
+        mock_format_table.return_value = ""
