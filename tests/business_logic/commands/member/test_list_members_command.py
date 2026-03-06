@@ -44,3 +44,5 @@ class TestListMembersCommandInit(unittest.TestCase):
 
     def test_various_order_by_values_stored(self):
         """Test that various order_by values are stored as provided."""
+
+        values = ["name", "email", "member_id", "member_since", "custom_field"]
