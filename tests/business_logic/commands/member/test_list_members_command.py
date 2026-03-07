@@ -189,3 +189,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         mock_db.show_members.return_value = None
         mock_format_table.return_value = "None table"
+
+        success, result = ListMembersCommand().execute()
