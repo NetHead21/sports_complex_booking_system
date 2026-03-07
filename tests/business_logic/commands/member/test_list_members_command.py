@@ -148,3 +148,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("builtins.print")
     def test_execute_with_single_member(self, mock_print, mock_db, mock_format_table):
         """Test execution with exactly one member (boundary case)."""
+
+        members = [("only_user", "Solo Member", "solo@example.com", "2025-06-01")]
+        mock_db.show_members.return_value = members
+        mock_format_table.return_value = "Single member table"
