@@ -204,3 +204,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test execution with special characters in member data."""
+
+        members = [
+            ("user_1", "O'Brien, John", "o.brien+tag@example.co.uk", "2025-03-15"),
+            ("user-2", "李 伟", "liwei@example.cn", "2025-04-20"),
+            ("user.3", "Müller, Hans", "hans.mueller@example.de", "2025-05-10"),
+        ]
+        mock_db.show_members.return_value = members
+        mock_format_table.return_value = "Special chars table"
