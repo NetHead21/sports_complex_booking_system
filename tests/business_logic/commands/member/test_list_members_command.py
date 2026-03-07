@@ -167,3 +167,10 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test execution with a large member dataset."""
+
+        members = [
+            (f"user{i}", f"Member {i}", f"user{i}@example.com", "2025-01-01")
+            for i in range(1, 501)
+        ]
+        mock_db.show_members.return_value = members
+        mock_format_table.return_value = "Large table"
