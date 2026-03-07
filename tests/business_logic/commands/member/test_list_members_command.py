@@ -234,3 +234,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = ""
 
         success, result = ListMembersCommand().execute(data={"ignored": "value"})
+
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_db.show_members.assert_called_once()
