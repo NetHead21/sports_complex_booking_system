@@ -186,3 +186,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("builtins.print")
     def test_execute_with_none_from_db(self, mock_print, mock_db, mock_format_table):
         """Test execution when db.show_members returns None."""
+
+        mock_db.show_members.return_value = None
+        mock_format_table.return_value = "None table"
