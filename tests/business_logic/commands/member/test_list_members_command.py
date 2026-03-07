@@ -152,3 +152,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
         members = [("only_user", "Solo Member", "solo@example.com", "2025-06-01")]
         mock_db.show_members.return_value = members
         mock_format_table.return_value = "Single member table"
+
+        success, result = ListMembersCommand().execute()
