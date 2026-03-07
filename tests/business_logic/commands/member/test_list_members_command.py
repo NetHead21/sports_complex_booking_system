@@ -191,3 +191,8 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "None table"
 
         success, result = ListMembersCommand().execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_format_table.assert_called_once_with(None)
+        mock_print.assert_called_once_with("None table")
