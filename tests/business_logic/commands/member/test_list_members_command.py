@@ -229,3 +229,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test that passing a dict as data= is silently ignored."""
+
+        mock_db.show_members.return_value = []
+        mock_format_table.return_value = ""
