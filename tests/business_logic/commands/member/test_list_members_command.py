@@ -176,3 +176,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "Large table"
 
         success, result = ListMembersCommand().execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_format_table.assert_called_once_with(members)
