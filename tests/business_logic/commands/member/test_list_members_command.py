@@ -214,3 +214,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "Special chars table"
 
         success, result = ListMembersCommand().execute()
+
+        self.assertTrue(success)
+        mock_format_table.assert_called_once_with(members)
