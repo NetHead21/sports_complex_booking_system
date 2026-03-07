@@ -142,3 +142,9 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self.assertIsNone(result)
         mock_format_table.assert_called_once_with([])
         mock_print.assert_called_once_with("No members found")
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_with_single_member(self, mock_print, mock_db, mock_format_table):
+        """Test execution with exactly one member (boundary case)."""
