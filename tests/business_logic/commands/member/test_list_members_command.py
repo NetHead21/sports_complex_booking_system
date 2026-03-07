@@ -159,3 +159,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self.assertIsNone(result)
         mock_format_table.assert_called_once_with(members)
         mock_print.assert_called_once_with("Single member table")
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_with_large_member_list(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test execution with a large member dataset."""
