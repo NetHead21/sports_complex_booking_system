@@ -217,3 +217,15 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         self.assertTrue(success)
         mock_format_table.assert_called_once_with(members)
+
+    # ------------------------------------------------------------------
+    # data= parameter
+    # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_data_parameter_ignored_with_dict(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test that passing a dict as data= is silently ignored."""
