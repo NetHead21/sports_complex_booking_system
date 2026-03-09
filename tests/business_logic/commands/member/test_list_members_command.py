@@ -244,3 +244,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("builtins.print")
     def test_execute_data_none_explicit(self, mock_print, mock_db, mock_format_table):
         """Test that execute(data=None) behaves identically to execute()."""
+
+        mock_db.show_members.return_value = []
+        mock_format_table.return_value = ""
