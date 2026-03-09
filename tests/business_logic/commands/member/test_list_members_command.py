@@ -321,3 +321,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = ""
 
         success, result = ListMembersCommand().execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_print.assert_called_once_with("")
