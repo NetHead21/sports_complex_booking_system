@@ -297,3 +297,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test that the second element is always None."""
+
+        mock_db.show_members.return_value = [("u1", "Alice", "a@b.com", "2025-01-01")]
+        mock_format_table.return_value = "Table"
