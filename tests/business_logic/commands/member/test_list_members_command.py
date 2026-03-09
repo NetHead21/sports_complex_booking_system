@@ -286,3 +286,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = ""
 
         success, _ = ListMembersCommand().execute()
+
+        self.assertIsInstance(success, bool)
+        self.assertTrue(success)
