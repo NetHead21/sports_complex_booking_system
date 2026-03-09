@@ -270,3 +270,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = ""
 
         result = ListMembersCommand().execute()
+
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 2)
