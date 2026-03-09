@@ -300,3 +300,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         mock_db.show_members.return_value = [("u1", "Alice", "a@b.com", "2025-01-01")]
         mock_format_table.return_value = "Table"
+
+        _, result = ListMembersCommand().execute()
