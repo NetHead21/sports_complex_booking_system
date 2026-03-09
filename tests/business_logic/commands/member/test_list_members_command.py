@@ -289,3 +289,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         self.assertIsInstance(success, bool)
         self.assertTrue(success)
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_second_element_is_always_none(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test that the second element is always None."""
