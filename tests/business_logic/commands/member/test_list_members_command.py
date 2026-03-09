@@ -253,3 +253,15 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(result)
         mock_db.show_members.assert_called_once()
+
+    # ------------------------------------------------------------------
+    # Return structure
+    # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_return_value_is_tuple_of_length_2(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test return value is always a 2-tuple."""
