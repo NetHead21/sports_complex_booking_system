@@ -281,3 +281,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test that the first element is always bool True."""
+
+        mock_db.show_members.return_value = []
+        mock_format_table.return_value = ""
