@@ -284,3 +284,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         mock_db.show_members.return_value = []
         mock_format_table.return_value = ""
+
+        success, _ = ListMembersCommand().execute()
