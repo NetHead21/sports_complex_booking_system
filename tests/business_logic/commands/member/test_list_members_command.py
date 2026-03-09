@@ -238,3 +238,9 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(result)
         mock_db.show_members.assert_called_once()
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_data_none_explicit(self, mock_print, mock_db, mock_format_table):
+        """Test that execute(data=None) behaves identically to execute()."""
