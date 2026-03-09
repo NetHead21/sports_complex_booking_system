@@ -308,3 +308,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
     # ------------------------------------------------------------------
     # Formatter edge cases
     # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_formatter_returns_empty_string(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test execution when formatter returns an empty string."""
