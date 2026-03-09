@@ -302,3 +302,9 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = "Table"
 
         _, result = ListMembersCommand().execute()
+
+        self.assertIsNone(result)
+
+    # ------------------------------------------------------------------
+    # Formatter edge cases
+    # ------------------------------------------------------------------
