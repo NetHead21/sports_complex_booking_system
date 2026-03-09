@@ -265,3 +265,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test return value is always a 2-tuple."""
+
+        mock_db.show_members.return_value = []
+        mock_format_table.return_value = ""
