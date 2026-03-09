@@ -316,3 +316,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test execution when formatter returns an empty string."""
+
+        mock_db.show_members.return_value = []
+        mock_format_table.return_value = ""
