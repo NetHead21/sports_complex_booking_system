@@ -356,3 +356,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         with self.assertRaises(Exception) as ctx:
             ListMembersCommand().execute()
+
+        self.assertIn("Database connection error", str(ctx.exception))
+        mock_format_table.assert_not_called()
