@@ -369,3 +369,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         with self.assertRaises(TimeoutError):
             ListMembersCommand().execute()
+
+        mock_db.show_members.assert_called_once()
+        mock_format_table.assert_not_called()
