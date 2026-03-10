@@ -351,3 +351,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.list_members_command.db")
     def test_execute_database_exception_propagates(self, mock_db, mock_format_table):
         """Test that database exceptions propagate uncaught."""
+
+        mock_db.show_members.side_effect = Exception("Database connection error")
