@@ -405,3 +405,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
             ("user2", "Bob", "b@b.com", "2025-02-01"),
             ("user3", "Carol", "c@b.com", "2025-03-01"),
         ]
+
+        # First call
+        mock_db.show_members.return_value = batch_1
+        mock_format_table.return_value = "Table 1"
+        success_a, result_a = command.execute()
+        self.assertTrue(success_a)
+        self.assertIsNone(result_a)
+        mock_format_table.assert_called_with(batch_1)
