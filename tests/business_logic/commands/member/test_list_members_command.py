@@ -364,3 +364,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.list_members_command.db")
     def test_execute_database_timeout_propagates(self, mock_db, mock_format_table):
         """Test that TimeoutError from the database propagates."""
+
+        mock_db.show_members.side_effect = TimeoutError("Query timed out")
