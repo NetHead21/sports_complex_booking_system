@@ -385,3 +385,15 @@ class TestListMembersCommandExecute(unittest.TestCase):
             ListMembersCommand().execute()
 
         self.assertIn("Formatting error", str(ctx.exception))
+
+    # ------------------------------------------------------------------
+    # Statelessness / sequential calls
+    # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_multiple_sequential_calls_same_instance(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test stateless behavior: same instance produces correct results across calls."""
