@@ -431,3 +431,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
     # ------------------------------------------------------------------
     # order_by interaction with execute
     # ------------------------------------------------------------------
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_with_different_order_by_still_calls_show_members(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test execution with different order_by values all call show_members."""
