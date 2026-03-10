@@ -399,3 +399,9 @@ class TestListMembersCommandExecute(unittest.TestCase):
         """Test stateless behavior: same instance produces correct results across calls."""
 
         command = ListMembersCommand()
+
+        batch_1 = [("user1", "Alice", "a@b.com", "2025-01-01")]
+        batch_2 = [
+            ("user2", "Bob", "b@b.com", "2025-02-01"),
+            ("user3", "Carol", "c@b.com", "2025-03-01"),
+        ]
