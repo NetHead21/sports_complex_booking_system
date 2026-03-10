@@ -372,3 +372,8 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         mock_db.show_members.assert_called_once()
         mock_format_table.assert_not_called()
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    def test_execute_formatter_exception_propagates(self, mock_db, mock_format_table):
+        """Test that formatter exceptions propagate uncaught."""
