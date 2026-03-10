@@ -380,3 +380,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         mock_db.show_members.return_value = [("u1", "Alice", "a@b.com", "2025-01-01")]
         mock_format_table.side_effect = ValueError("Formatting error")
+
+        with self.assertRaises(ValueError) as ctx:
+            ListMembersCommand().execute()
