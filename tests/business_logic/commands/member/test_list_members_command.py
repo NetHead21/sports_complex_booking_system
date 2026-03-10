@@ -325,3 +325,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(result)
         mock_print.assert_called_once_with("")
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    @patch("builtins.print")
+    def test_execute_formatter_returns_none(
+        self, mock_print, mock_db, mock_format_table
+    ):
+        """Test execution when formatter returns None."""
