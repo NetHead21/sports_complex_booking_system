@@ -443,3 +443,12 @@ class TestListMembersCommandExecute(unittest.TestCase):
         order_options = ["name", "email", "member_id", "member_since"]
         mock_db.show_members.return_value = []
         mock_format_table.return_value = ""
+
+        for order in order_options:
+            with self.subTest(order_by=order):
+                mock_db.reset_mock()
+                command = ListMembersCommand(order_by=order)
+                success, result = command.execute()
+                self.assertTrue(success)
+                self.assertIsNone(result)
+                mock_db.show_members.assert_called_once()
