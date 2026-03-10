@@ -338,3 +338,11 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_format_table.return_value = None
 
         success, result = ListMembersCommand().execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(result)
+        mock_print.assert_called_once_with(None)
+
+    # ------------------------------------------------------------------
+    # Exception propagation (no try/except in execute)
+    # ------------------------------------------------------------------
