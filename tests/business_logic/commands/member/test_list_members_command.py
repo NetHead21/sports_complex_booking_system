@@ -359,3 +359,8 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         self.assertIn("Database connection error", str(ctx.exception))
         mock_format_table.assert_not_called()
+
+    @patch("business_logic.commands.member.list_members_command.format_member_table")
+    @patch("business_logic.commands.member.list_members_command.db")
+    def test_execute_database_timeout_propagates(self, mock_db, mock_format_table):
+        """Test that TimeoutError from the database propagates."""
