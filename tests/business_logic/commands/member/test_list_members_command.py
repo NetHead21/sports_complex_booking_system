@@ -383,3 +383,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
 
         with self.assertRaises(ValueError) as ctx:
             ListMembersCommand().execute()
+
+        self.assertIn("Formatting error", str(ctx.exception))
