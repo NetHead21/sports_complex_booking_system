@@ -452,3 +452,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
                 self.assertTrue(success)
                 self.assertIsNone(result)
                 mock_db.show_members.assert_called_once()
+
+
+if __name__ == "__main__":
+    unittest.main()
