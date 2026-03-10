@@ -353,3 +353,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         """Test that database exceptions propagate uncaught."""
 
         mock_db.show_members.side_effect = Exception("Database connection error")
+
+        with self.assertRaises(Exception) as ctx:
+            ListMembersCommand().execute()
