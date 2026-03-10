@@ -413,3 +413,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self.assertTrue(success_a)
         self.assertIsNone(result_a)
         mock_format_table.assert_called_with(batch_1)
+
+        mock_db.reset_mock()
+        mock_format_table.reset_mock()
+        mock_print.reset_mock()
