@@ -397,3 +397,5 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test stateless behavior: same instance produces correct results across calls."""
+
+        command = ListMembersCommand()
