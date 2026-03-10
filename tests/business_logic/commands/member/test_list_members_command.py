@@ -377,3 +377,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.list_members_command.db")
     def test_execute_formatter_exception_propagates(self, mock_db, mock_format_table):
         """Test that formatter exceptions propagate uncaught."""
+
+        mock_db.show_members.return_value = [("u1", "Alice", "a@b.com", "2025-01-01")]
+        mock_format_table.side_effect = ValueError("Formatting error")
