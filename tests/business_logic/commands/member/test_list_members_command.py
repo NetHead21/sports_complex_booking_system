@@ -417,3 +417,17 @@ class TestListMembersCommandExecute(unittest.TestCase):
         mock_db.reset_mock()
         mock_format_table.reset_mock()
         mock_print.reset_mock()
+
+        # Second call — different data
+        mock_db.show_members.return_value = batch_2
+        mock_format_table.return_value = "Table 2"
+        success_b, result_b = command.execute()
+        self.assertTrue(success_b)
+        self.assertIsNone(result_b)
+        mock_db.show_members.assert_called_once()
+        mock_format_table.assert_called_once_with(batch_2)
+        mock_print.assert_called_once_with("Table 2")
+
+    # ------------------------------------------------------------------
+    # order_by interaction with execute
+    # ------------------------------------------------------------------
