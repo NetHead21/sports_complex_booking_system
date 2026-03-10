@@ -366,3 +366,6 @@ class TestListMembersCommandExecute(unittest.TestCase):
         """Test that TimeoutError from the database propagates."""
 
         mock_db.show_members.side_effect = TimeoutError("Query timed out")
+
+        with self.assertRaises(TimeoutError):
+            ListMembersCommand().execute()
