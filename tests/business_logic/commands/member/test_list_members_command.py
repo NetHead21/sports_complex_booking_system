@@ -439,3 +439,7 @@ class TestListMembersCommandExecute(unittest.TestCase):
         self, mock_print, mock_db, mock_format_table
     ):
         """Test execution with different order_by values all call show_members."""
+
+        order_options = ["name", "email", "member_id", "member_since"]
+        mock_db.show_members.return_value = []
+        mock_format_table.return_value = ""
