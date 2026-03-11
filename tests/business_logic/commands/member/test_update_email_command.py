@@ -71,3 +71,9 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         command = UpdateMembersEmailCommand()
 
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Email update cancelled or failed")
+        mock_input_service.collect_member_email_update_data.assert_called_once()
+        mock_db.update_member_email.assert_not_called()
+        mock_input_service.display_operation_result.assert_not_called()
