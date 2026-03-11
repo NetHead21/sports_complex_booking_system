@@ -31,3 +31,13 @@ from unittest.mock import patch, MagicMock, call
 from business_logic.commands.member.update_email_command import (
     UpdateMembersEmailCommand,
 )
+
+
+class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
+    """Test cases for UpdateMembersEmailCommand.execute."""
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_success(self, mock_print, mock_input_service, mock_db):
+        """Test successful member email update."""
