@@ -129,3 +129,9 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test exception handling when database raises an error."""
+
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "user123",
+            "newemail@example.com",
+        )
+        mock_db.update_member_email.side_effect = Exception("Database connection error")
