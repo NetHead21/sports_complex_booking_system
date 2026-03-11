@@ -114,3 +114,5 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
             "Input service error"
         )
         command = UpdateMembersEmailCommand()
+
+        success, error = command.execute()
