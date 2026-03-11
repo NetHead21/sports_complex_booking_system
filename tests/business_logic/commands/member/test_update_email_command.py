@@ -137,3 +137,5 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         mock_db.update_member_email.side_effect = Exception("Database connection error")
 
         command = UpdateMembersEmailCommand()
+
+        success, error = command.execute()
