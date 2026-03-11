@@ -41,3 +41,13 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
     @patch("builtins.print")
     def test_execute_success(self, mock_print, mock_input_service, mock_db):
         """Test successful member email update."""
+
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "user123",
+            "newemail@example.com",
+        )
+        mock_db.update_member_email.return_value = True
+
+        command = UpdateMembersEmailCommand()
+
+        success, error = command.execute()
