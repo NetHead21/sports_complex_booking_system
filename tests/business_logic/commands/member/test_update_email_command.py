@@ -24,3 +24,10 @@ Coverage Areas:
     - Database error with member not found
     - Multiple exception types handling
 """
+
+import unittest
+from unittest.mock import patch, MagicMock, call
+
+from business_logic.commands.member.update_email_command import (
+    UpdateMembersEmailCommand,
+)
