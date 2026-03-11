@@ -51,3 +51,13 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         command = UpdateMembersEmailCommand()
 
         success, error = command.execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(error)
+        mock_input_service.collect_member_email_update_data.assert_called_once()
+        mock_db.update_member_email.assert_called_once_with(
+            "user123", "newemail@example.com"
+        )
+        mock_input_service.display_operation_result.assert_called_once_with(
+            "Email Update", "user123", True
+        )
