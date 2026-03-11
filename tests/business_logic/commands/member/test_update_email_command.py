@@ -109,3 +109,8 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test exception handling when input service raises an error."""
+
+        mock_input_service.collect_member_email_update_data.side_effect = Exception(
+            "Input service error"
+        )
+        command = UpdateMembersEmailCommand()
