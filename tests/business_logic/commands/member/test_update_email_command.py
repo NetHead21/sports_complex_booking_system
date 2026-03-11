@@ -121,3 +121,11 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         self.assertEqual(error, "Input service error")
         mock_db.update_member_email.assert_not_called()
         mock_print.assert_called_once_with("❌ Database Error: Input service error")
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_exception_in_database(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test exception handling when database raises an error."""
