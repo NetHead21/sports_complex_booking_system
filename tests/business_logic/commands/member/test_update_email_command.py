@@ -92,3 +92,12 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         command = UpdateMembersEmailCommand()
 
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Member 'nonexistent_user' does not exist")
+        mock_db.update_member_email.assert_called_once_with(
+            "nonexistent_user", "newemail@example.com"
+        )
+        mock_input_service.display_operation_result.assert_called_once_with(
+            "Email Update", "nonexistent_user", False, "Member not found"
+        )
