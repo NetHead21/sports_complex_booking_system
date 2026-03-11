@@ -82,3 +82,9 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.update_email_command.MemberInputService")
     def test_execute_member_not_found(self, mock_input_service, mock_db):
         """Test when member does not exist in database."""
+
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "nonexistent_user",
+            "newemail@example.com",
+        )
+        mock_db.update_member_email.return_value = False
