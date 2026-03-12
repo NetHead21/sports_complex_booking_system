@@ -232,3 +232,7 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         mock_db.update_member_email.assert_called_with(
             "alice", "alice.newemail@example.com"
         )
+
+        mock_db.reset_mock()
+        mock_input_service.reset_mock()
+        mock_print.reset_mock()
