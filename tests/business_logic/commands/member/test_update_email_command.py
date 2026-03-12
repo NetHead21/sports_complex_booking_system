@@ -236,3 +236,10 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         mock_db.reset_mock()
         mock_input_service.reset_mock()
         mock_print.reset_mock()
+
+        # Second call — different member, same command instance
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "bob",
+            "bob.newemail@example.com",
+        )
+        mock_db.update_member_email.return_value = True
