@@ -294,3 +294,6 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
 
         exc = Exception("exact error message")
         mock_input_service.collect_member_email_update_data.side_effect = exc
+
+        command = UpdateMembersEmailCommand()
+        _, error = command.execute()
