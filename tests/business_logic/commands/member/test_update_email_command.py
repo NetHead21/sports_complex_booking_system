@@ -145,3 +145,8 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         mock_print.assert_called_once_with(
             "❌ Database Error: Database connection error"
         )
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_data_parameter_ignored(self, mock_input_service, mock_db):
+        """Test that data parameter is ignored."""
