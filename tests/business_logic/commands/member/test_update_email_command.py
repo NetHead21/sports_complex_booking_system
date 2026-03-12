@@ -215,3 +215,12 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test stateless behavior: same instance can be reused for multiple calls."""
+
+        command = UpdateMembersEmailCommand()
+
+        # First call
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "alice",
+            "alice.newemail@example.com",
+        )
+        mock_db.update_member_email.return_value = True
