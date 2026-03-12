@@ -186,3 +186,8 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         self.assertIsInstance(result, tuple)
         self.assertEqual(len(result), 2)
         self.assertIsInstance(result[0], bool)
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_with_data_none_explicit(self, mock_input_service, mock_db):
+        """Test that execute(data=None) behaves identically to execute()."""
