@@ -251,3 +251,11 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         mock_db.update_member_email.assert_called_once_with(
             "bob", "bob.newemail@example.com"
         )
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_various_exception_types_return_false_and_str_e(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that all exception types are caught, returning (False, str(e))."""
