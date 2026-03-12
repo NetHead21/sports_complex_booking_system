@@ -167,3 +167,8 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         mock_db.update_member_email.assert_called_once_with(
             "user123", "newemail@example.com"
         )
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_return_value_structure(self, mock_input_service, mock_db):
+        """Test return tuple structure."""
