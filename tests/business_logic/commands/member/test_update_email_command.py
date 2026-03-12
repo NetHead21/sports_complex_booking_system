@@ -182,3 +182,7 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         command = UpdateMembersEmailCommand()
 
         result = command.execute()
+
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 2)
+        self.assertIsInstance(result[0], bool)
