@@ -224,3 +224,11 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
             "alice.newemail@example.com",
         )
         mock_db.update_member_email.return_value = True
+
+        success_a, error_a = command.execute()
+
+        self.assertTrue(success_a)
+        self.assertIsNone(error_a)
+        mock_db.update_member_email.assert_called_with(
+            "alice", "alice.newemail@example.com"
+        )
