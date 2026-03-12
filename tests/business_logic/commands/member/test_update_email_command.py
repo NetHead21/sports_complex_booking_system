@@ -259,3 +259,11 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test that all exception types are caught, returning (False, str(e))."""
+
+        exceptions = [
+            ValueError("Invalid email value"),
+            RuntimeError("Runtime failure"),
+            ConnectionError("Connection refused"),
+            TypeError("Type mismatch"),
+            PermissionError("Access denied"),
+        ]
