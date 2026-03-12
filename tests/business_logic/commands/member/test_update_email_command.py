@@ -297,3 +297,6 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
 
         command = UpdateMembersEmailCommand()
         _, error = command.execute()
+
+        self.assertEqual(error, str(exc))
+        self.assertEqual(error, "exact error message")
