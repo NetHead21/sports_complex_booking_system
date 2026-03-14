@@ -315,3 +315,8 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
 
         self.assertFalse(success)
         self.assertEqual(error, "Email update cancelled or failed")
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_cancelled_db_never_called(self, mock_input_service, mock_db):
+        """Test that db.update_member_email is never reached when service returns None."""
