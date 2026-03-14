@@ -326,3 +326,7 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         UpdateMembersEmailCommand().execute()
 
         mock_db.update_member_email.assert_not_called()
+
+
+class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
+    """Edge case tests for UpdateMembersEmailCommand."""
