@@ -320,3 +320,5 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.update_email_command.MemberInputService")
     def test_execute_cancelled_db_never_called(self, mock_input_service, mock_db):
         """Test that db.update_member_email is never reached when service returns None."""
+
+        mock_input_service.collect_member_email_update_data.return_value = None
