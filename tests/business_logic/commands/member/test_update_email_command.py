@@ -309,3 +309,6 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         """Test the exact cancellation error string."""
 
         mock_input_service.collect_member_email_update_data.return_value = None
+
+        command = UpdateMembersEmailCommand()
+        success, error = command.execute()
