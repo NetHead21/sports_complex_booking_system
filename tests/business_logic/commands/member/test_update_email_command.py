@@ -330,3 +330,8 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
 
 class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
     """Edge case tests for UpdateMembersEmailCommand."""
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_with_single_character_member_id(self, mock_input_service, mock_db):
+        """Test update with single character member ID."""
