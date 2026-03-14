@@ -378,3 +378,13 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test update with member ID containing special characters."""
+
+        special_ids = [
+            "user-123",
+            "user_123",
+            "user.123",
+            "user@domain",
+            "user+tag",
+            "123user",
+            "user123!",
+        ]
