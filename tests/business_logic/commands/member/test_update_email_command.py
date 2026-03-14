@@ -390,3 +390,11 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         ]
 
         command = UpdateMembersEmailCommand()
+
+        for member_id in special_ids:
+            with self.subTest(member_id=member_id):
+                mock_input_service.collect_member_email_update_data.return_value = (
+                    member_id,
+                    "email@example.com",
+                )
+                mock_db.update_member_email.return_value = True
