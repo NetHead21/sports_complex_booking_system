@@ -322,3 +322,7 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
         """Test that db.update_member_email is never reached when service returns None."""
 
         mock_input_service.collect_member_email_update_data.return_value = None
+
+        UpdateMembersEmailCommand().execute()
+
+        mock_db.update_member_email.assert_not_called()
