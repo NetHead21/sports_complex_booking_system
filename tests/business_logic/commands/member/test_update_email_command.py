@@ -312,3 +312,6 @@ class TestUpdateMembersEmailCommandExecute(unittest.TestCase):
 
         command = UpdateMembersEmailCommand()
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Email update cancelled or failed")
