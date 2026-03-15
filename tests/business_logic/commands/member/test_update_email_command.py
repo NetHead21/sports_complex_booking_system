@@ -412,3 +412,12 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.member.update_email_command.MemberInputService")
     def test_execute_with_simple_valid_email(self, mock_input_service, mock_db):
         """Test update with simple valid email addresses."""
+
+        simple_emails = [
+            "a@b.c",
+            "test@test.com",
+            "user.name@example.co.uk",
+            "user+tag@example.com",
+            "123@example.com",
+            "user123@test.org",
+        ]
