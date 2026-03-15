@@ -463,3 +463,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.member.update_email_command.MemberInputService")
     def test_execute_with_email_containing_many_dots(self, mock_input_service, mock_db):
         """Test update with email containing many dots."""
+
+        email = "user.name.with.dots@sub.domain.example.co.uk"
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "user123",
+            email,
+        )
+        mock_db.update_member_email.return_value = True
