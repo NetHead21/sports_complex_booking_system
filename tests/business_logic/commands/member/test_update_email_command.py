@@ -438,3 +438,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                 self.assertIsNone(error)
                 mock_db.update_member_email.assert_called_once_with("user123", email)
                 mock_db.reset_mock()
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_with_very_long_email(self, mock_input_service, mock_db):
+        """Test update with very long email address."""
