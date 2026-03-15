@@ -485,3 +485,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test update with email containing multiple @ symbols (invalid but passed)."""
+
+        email = "user@domain@example.com"
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "user123",
+            email,
+        )
+        mock_db.update_member_email.return_value = True
