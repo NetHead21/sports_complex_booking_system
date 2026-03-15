@@ -526,3 +526,9 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.member.update_email_command.MemberInputService")
     def test_execute_update_to_same_email(self, mock_input_service, mock_db):
         """Test update where new email is the same (no actual change)."""
+
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "user123",
+            "user123@example.com",
+        )
+        mock_db.update_member_email.return_value = True
