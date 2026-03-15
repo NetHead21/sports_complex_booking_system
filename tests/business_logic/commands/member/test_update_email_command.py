@@ -500,3 +500,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(error)
         mock_db.update_member_email.assert_called_once_with("user123", email)
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_with_whitespace_in_data(self, mock_input_service, mock_db):
+        """Test update with whitespace in member ID and email (edge case)."""
