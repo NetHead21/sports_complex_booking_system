@@ -443,3 +443,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.member.update_email_command.MemberInputService")
     def test_execute_with_very_long_email(self, mock_input_service, mock_db):
         """Test update with very long email address."""
+
+        long_email = "a" * 100 + "@" + "b" * 100 + ".com"
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "user123",
+            long_email,
+        )
+        mock_db.update_member_email.return_value = True
