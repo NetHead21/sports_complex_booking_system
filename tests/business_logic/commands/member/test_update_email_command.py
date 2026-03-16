@@ -580,3 +580,17 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         self.assertFalse(success)
         mock_db.update_member_email.assert_called_once_with("", "")
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_unicode_characters_in_member_id(self, mock_input_service, mock_db):
+        """Test update with unicode characters in member ID."""
+
+        unicode_ids = [
+            "user_äöü",
+            "user_日本語",
+            "user_العربية",
+            "user_😀",
+        ]
+
+        command = UpdateMembersEmailCommand()
