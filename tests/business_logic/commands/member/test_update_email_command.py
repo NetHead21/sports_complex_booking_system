@@ -562,3 +562,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         self.assertFalse(success)
         self.assertEqual(error, "Member 'user-123-notfound' does not exist")
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_empty_string_values(self, mock_input_service, mock_db):
+        """Test update with empty string values (edge case)."""
