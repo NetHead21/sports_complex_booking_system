@@ -611,3 +611,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                     member_id, "email@example.com"
                 )
                 mock_db.reset_mock()
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_unicode_characters_in_email(self, mock_input_service, mock_db):
+        """Test update with unicode characters in email address."""
