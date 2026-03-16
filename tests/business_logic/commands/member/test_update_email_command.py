@@ -542,3 +542,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         mock_db.update_member_email.assert_called_once_with(
             "user123", "user123@example.com"
         )
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_member_not_found_with_special_char_id(
+        self, mock_input_service, mock_db
+    ):
+        """Test member not found error with special character ID."""
