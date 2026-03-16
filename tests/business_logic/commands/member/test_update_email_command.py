@@ -577,3 +577,6 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         command = UpdateMembersEmailCommand()
 
         success, error = command.execute()
+
+        self.assertFalse(success)
+        mock_db.update_member_email.assert_called_once_with("", "")
