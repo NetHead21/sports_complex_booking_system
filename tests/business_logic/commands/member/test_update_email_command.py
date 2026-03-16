@@ -559,3 +559,6 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         command = UpdateMembersEmailCommand()
 
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Member 'user-123-notfound' does not exist")
