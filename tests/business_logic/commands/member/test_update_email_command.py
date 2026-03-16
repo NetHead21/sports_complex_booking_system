@@ -567,3 +567,9 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.member.update_email_command.MemberInputService")
     def test_execute_empty_string_values(self, mock_input_service, mock_db):
         """Test update with empty string values (edge case)."""
+
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "",
+            "",
+        )
+        mock_db.update_member_email.return_value = False
