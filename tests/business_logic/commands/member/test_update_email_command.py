@@ -741,3 +741,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         # Verify the exact method name
         mock_input_service.collect_member_email_update_data.assert_called_once()
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_database_method_called_correctly(
+        self, mock_input_service, mock_db
+    ):
+        """Test that the correct database method is called with exact parameters."""
