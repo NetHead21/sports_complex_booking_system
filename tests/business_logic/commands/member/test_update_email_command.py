@@ -724,3 +724,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         mock_input_service.display_operation_result.assert_called_once_with(
             "Email Update", "user123", False, "Member not found"
         )
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_service_method_called_correctly(self, mock_input_service, mock_db):
+        """Test that the correct service method is called."""
