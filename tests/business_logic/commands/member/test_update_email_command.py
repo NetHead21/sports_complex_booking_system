@@ -659,3 +659,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                     "newemail@example.com",
                 )
                 mock_db.update_member_email.return_value = False
+
+                success, error = command.execute()
+
+                self.assertFalse(success)
+                self.assertEqual(error, f"Member '{member_id}' does not exist")
+                mock_db.reset_mock()
+                mock_input_service.reset_mock()
