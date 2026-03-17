@@ -640,3 +640,11 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                 self.assertIsNone(error)
                 mock_db.update_member_email.assert_called_once_with("user123", email)
                 mock_db.reset_mock()
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_multiple_members_not_found_sequentially(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test multiple not-found scenarios in sequence."""
