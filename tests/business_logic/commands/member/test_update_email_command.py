@@ -671,3 +671,9 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
     @patch("business_logic.commands.member.update_email_command.MemberInputService")
     def test_execute_success_second_element_is_none(self, mock_input_service, mock_db):
         """Test that success returns exactly None as second element, not empty string."""
+
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "user123",
+            "newemail@example.com",
+        )
+        mock_db.update_member_email.return_value = True
