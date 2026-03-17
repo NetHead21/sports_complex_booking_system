@@ -691,3 +691,9 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test that display_operation_result is called with correct parameters."""
+
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "john_doe",
+            "john@newemail.com",
+        )
+        mock_db.update_member_email.return_value = True
