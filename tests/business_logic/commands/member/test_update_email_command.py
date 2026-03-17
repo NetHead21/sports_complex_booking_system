@@ -704,3 +704,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         mock_input_service.display_operation_result.assert_called_once_with(
             "Email Update", "john_doe", True
         )
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_display_operation_result_on_failure(
+        self, mock_input_service, mock_db
+    ):
+        """Test that display_operation_result is called on failure with error message."""
