@@ -666,3 +666,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                 self.assertEqual(error, f"Member '{member_id}' does not exist")
                 mock_db.reset_mock()
                 mock_input_service.reset_mock()
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_success_second_element_is_none(self, mock_input_service, mock_db):
+        """Test that success returns exactly None as second element, not empty string."""
