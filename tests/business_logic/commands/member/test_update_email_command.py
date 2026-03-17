@@ -711,3 +711,9 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test that display_operation_result is called on failure with error message."""
+
+        mock_input_service.collect_member_email_update_data.return_value = (
+            "user123",
+            "newemail@example.com",
+        )
+        mock_db.update_member_email.return_value = False
