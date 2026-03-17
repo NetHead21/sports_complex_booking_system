@@ -738,3 +738,6 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         command = UpdateMembersEmailCommand()
         command.execute()
+
+        # Verify the exact method name
+        mock_input_service.collect_member_email_update_data.assert_called_once()
