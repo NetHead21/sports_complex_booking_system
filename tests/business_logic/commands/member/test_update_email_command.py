@@ -648,3 +648,6 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test multiple not-found scenarios in sequence."""
+
+        command = UpdateMembersEmailCommand()
+        not_found_members = ["member1", "member2", "member3"]
