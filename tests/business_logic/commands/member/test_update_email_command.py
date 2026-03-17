@@ -759,3 +759,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         command = UpdateMembersEmailCommand()
         command.execute()
+
+        # Verify exact method and parameter order
+        mock_db.update_member_email.assert_called_once()
+        call_args = mock_db.update_member_email.call_args
+        self.assertEqual(call_args[0], (member_id, new_email))
