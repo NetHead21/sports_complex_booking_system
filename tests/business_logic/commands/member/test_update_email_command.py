@@ -680,3 +680,7 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         command = UpdateMembersEmailCommand()
         _, error = command.execute()
+
+        self.assertIsNone(error)
+        self.assertNotEqual(error, "")
+        self.assertNotEqual(error, False)
