@@ -697,3 +697,6 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
             "john@newemail.com",
         )
         mock_db.update_member_email.return_value = True
+
+        command = UpdateMembersEmailCommand()
+        command.execute()
