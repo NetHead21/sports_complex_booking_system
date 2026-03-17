@@ -651,3 +651,11 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         command = UpdateMembersEmailCommand()
         not_found_members = ["member1", "member2", "member3"]
+
+        for member_id in not_found_members:
+            with self.subTest(member_id=member_id):
+                mock_input_service.collect_member_email_update_data.return_value = (
+                    member_id,
+                    "newemail@example.com",
+                )
+                mock_db.update_member_email.return_value = False
