@@ -684,3 +684,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self.assertIsNone(error)
         self.assertNotEqual(error, "")
         self.assertNotEqual(error, False)
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_display_operation_result_called_with_correct_params(
+        self, mock_input_service, mock_db
+    ):
+        """Test that display_operation_result is called with correct parameters."""
