@@ -720,3 +720,7 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         command = UpdateMembersEmailCommand()
         command.execute()
+
+        mock_input_service.display_operation_result.assert_called_once_with(
+            "Email Update", "user123", False, "Member not found"
+        )
