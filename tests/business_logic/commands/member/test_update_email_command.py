@@ -772,3 +772,11 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test handling of various database exception types."""
+
+        db_exceptions = [
+            Exception("Generic database error"),
+            RuntimeError("Database runtime error"),
+            ConnectionError("Cannot connect to database"),
+            ValueError("Invalid email value in database"),
+            OSError("Database file access error"),
+        ]
