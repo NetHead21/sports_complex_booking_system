@@ -32,3 +32,7 @@ from unittest.mock import patch, MagicMock, call
 from business_logic.commands.member.update_password_command import (
     UpdateMembersPasswordCommand,
 )
+
+
+class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
+    """Test cases for UpdateMembersPasswordCommand.execute."""
