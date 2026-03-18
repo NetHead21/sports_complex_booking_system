@@ -782,3 +782,11 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         ]
 
         command = UpdateMembersEmailCommand()
+
+        for exc in db_exceptions:
+            with self.subTest(exception=type(exc).__name__):
+                mock_input_service.collect_member_email_update_data.return_value = (
+                    "user123",
+                    "newemail@example.com",
+                )
+                mock_db.update_member_email.side_effect = exc
