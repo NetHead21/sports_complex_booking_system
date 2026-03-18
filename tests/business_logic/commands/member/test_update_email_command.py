@@ -840,3 +840,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                 mock_db.update_member_email.return_value = True
 
                 success, error = command.execute()
+
+                self.assertTrue(success)
+                self.assertIsNone(error)
+                mock_db.update_member_email.assert_called_once_with(member_id, email)
+                mock_db.reset_mock()
