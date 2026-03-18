@@ -25,3 +25,10 @@ Coverage Areas:
     - Multiple exception types handling
     - Security considerations
 """
+
+import unittest
+from unittest.mock import patch, MagicMock, call
+
+from business_logic.commands.member.update_password_command import (
+    UpdateMembersPasswordCommand,
+)
