@@ -780,3 +780,5 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
             ValueError("Invalid email value in database"),
             OSError("Database file access error"),
         ]
+
+        command = UpdateMembersEmailCommand()
