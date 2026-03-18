@@ -828,3 +828,5 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
             ("member_123", "member123@test.org"),
             ("admin", "admin@system.com"),
         ]
+
+        command = UpdateMembersEmailCommand()
