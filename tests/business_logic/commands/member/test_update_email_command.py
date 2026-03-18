@@ -808,3 +808,6 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
             "newemail@example.com",
         )
         mock_db.update_member_email.return_value = True
+
+        command = UpdateMembersEmailCommand()
+        success, error = command.execute()
