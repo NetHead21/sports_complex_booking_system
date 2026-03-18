@@ -815,3 +815,10 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         # Ensure both values are accessible and have correct types
         self.assertIsInstance(success, bool)
         self.assertIsNone(error)
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_service_returns_tuple_with_two_strings(
+        self, mock_input_service, mock_db
+    ):
+        """Test handling when service returns tuple with two string values."""
