@@ -764,3 +764,11 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         mock_db.update_member_email.assert_called_once()
         call_args = mock_db.update_member_email.call_args
         self.assertEqual(call_args[0], (member_id, new_email))
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_database_exceptions_various_types(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test handling of various database exception types."""
