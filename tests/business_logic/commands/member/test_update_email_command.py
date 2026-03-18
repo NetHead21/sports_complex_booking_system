@@ -790,3 +790,5 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                     "newemail@example.com",
                 )
                 mock_db.update_member_email.side_effect = exc
+
+                success, error = command.execute()
