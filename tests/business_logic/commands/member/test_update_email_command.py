@@ -792,3 +792,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                 mock_db.update_member_email.side_effect = exc
 
                 success, error = command.execute()
+
+                self.assertFalse(success)
+                self.assertEqual(error, str(exc))
+                mock_db.reset_mock()
+                mock_print.reset_mock()
