@@ -797,3 +797,8 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                 self.assertEqual(error, str(exc))
                 mock_db.reset_mock()
                 mock_print.reset_mock()
+
+    @patch("business_logic.commands.member.update_email_command.db")
+    @patch("business_logic.commands.member.update_email_command.MemberInputService")
+    def test_execute_tuple_unpacking(self, mock_input_service, mock_db):
+        """Test that returned tuple can be properly unpacked."""
