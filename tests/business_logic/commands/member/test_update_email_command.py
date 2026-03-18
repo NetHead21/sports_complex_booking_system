@@ -845,3 +845,7 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
                 self.assertIsNone(error)
                 mock_db.update_member_email.assert_called_once_with(member_id, email)
                 mock_db.reset_mock()
+
+
+if __name__ == "__main__":
+    unittest.main()
