@@ -42,3 +42,9 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
     @patch("builtins.print")
     def test_execute_success(self, mock_print, mock_input_service, mock_db):
         """Test successful member password update."""
+
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "user123",
+            "SecurePass123!",
+        )
+        mock_db.update_member_password.return_value = True
