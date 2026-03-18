@@ -811,3 +811,7 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
 
         command = UpdateMembersEmailCommand()
         success, error = command.execute()
+
+        # Ensure both values are accessible and have correct types
+        self.assertIsInstance(success, bool)
+        self.assertIsNone(error)
