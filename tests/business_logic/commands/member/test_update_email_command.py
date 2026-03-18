@@ -822,3 +822,9 @@ class TestUpdateMembersEmailCommandEdgeCases(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test handling when service returns tuple with two string values."""
+
+        test_data = [
+            ("user1", "user1@example.com"),
+            ("member_123", "member123@test.org"),
+            ("admin", "admin@system.com"),
+        ]
