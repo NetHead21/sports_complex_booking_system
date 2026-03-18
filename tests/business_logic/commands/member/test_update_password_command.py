@@ -36,3 +36,9 @@ from business_logic.commands.member.update_password_command import (
 
 class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
     """Test cases for UpdateMembersPasswordCommand.execute."""
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_success(self, mock_print, mock_input_service, mock_db):
+        """Test successful member password update."""
