@@ -116,3 +116,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         )
         command = UpdateMembersPasswordCommand()
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Input service error")
+        mock_db.update_member_password.assert_not_called()
+        mock_print.assert_called_once_with("❌ Database Error: Input service error")
