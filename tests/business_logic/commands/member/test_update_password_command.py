@@ -137,3 +137,7 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.side_effect = Exception(
             "Database connection error"
         )
+
+        command = UpdateMembersPasswordCommand()
+
+        success, error = command.execute()
