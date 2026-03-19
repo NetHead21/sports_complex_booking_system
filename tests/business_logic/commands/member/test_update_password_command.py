@@ -141,3 +141,9 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         command = UpdateMembersPasswordCommand()
 
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Database connection error")
+        mock_print.assert_called_once_with(
+            "❌ Database Error: Database connection error"
+        )
