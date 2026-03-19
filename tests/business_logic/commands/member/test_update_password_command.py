@@ -78,3 +78,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_input_service.collect_member_password_update_data.assert_called_once()
         mock_db.update_member_password.assert_not_called()
         mock_input_service.display_operation_result.assert_not_called()
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_member_not_found(self, mock_input_service, mock_db):
+        """Test when member does not exist in database."""
