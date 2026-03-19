@@ -62,3 +62,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_input_service.display_operation_result.assert_called_once_with(
             "Password Update", "user123", True
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_password_update_cancelled(self, mock_input_service, mock_db):
+        """Test when user cancels password data collection."""
