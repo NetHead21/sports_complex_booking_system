@@ -115,3 +115,4 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
             "Input service error"
         )
         command = UpdateMembersPasswordCommand()
+        success, error = command.execute()
