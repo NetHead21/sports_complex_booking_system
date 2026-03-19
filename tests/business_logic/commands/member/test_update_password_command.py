@@ -102,3 +102,11 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_input_service.display_operation_result.assert_called_once_with(
             "Password Update", "nonexistent_user", False, "Member not found"
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_exception_in_input_service(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test exception handling when input service raises an error."""
