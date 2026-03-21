@@ -227,3 +227,9 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
             "AliceNewPass123!",
         )
         mock_db.update_member_password.return_value = True
+
+        success_a, error_a = command.execute()
+
+        self.assertTrue(success_a)
+        self.assertIsNone(error_a)
+        mock_db.update_member_password.assert_called_with("alice", "AliceNewPass123!")
