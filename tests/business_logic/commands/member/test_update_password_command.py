@@ -210,3 +210,11 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.assert_called_once_with(
             "user123", "NewPassword123!"
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_multiple_sequential_calls_same_instance(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test stateless behavior: same instance can be reused for multiple calls."""
