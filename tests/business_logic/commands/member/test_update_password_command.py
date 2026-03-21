@@ -218,3 +218,5 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test stateless behavior: same instance can be reused for multiple calls."""
+
+        command = UpdateMembersPasswordCommand()
