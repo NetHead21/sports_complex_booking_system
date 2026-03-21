@@ -250,3 +250,11 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self.assertTrue(success_b)
         self.assertIsNone(error_b)
         mock_db.update_member_password.assert_called_once_with("bob", "BobNewPass456!")
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_various_exception_types_return_false_and_str_e(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test that all exception types are caught, returning (False, str(e))."""
