@@ -220,3 +220,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         """Test stateless behavior: same instance can be reused for multiple calls."""
 
         command = UpdateMembersPasswordCommand()
+
+        # First call
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "alice",
+            "AliceNewPass123!",
+        )
+        mock_db.update_member_password.return_value = True
