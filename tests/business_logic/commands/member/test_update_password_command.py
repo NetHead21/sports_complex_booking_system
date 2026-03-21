@@ -237,3 +237,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.reset_mock()
         mock_input_service.reset_mock()
         mock_print.reset_mock()
+
+        # Second call — different member, same command instance
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "bob",
+            "BobNewPass456!",
+        )
+        mock_db.update_member_password.return_value = True
