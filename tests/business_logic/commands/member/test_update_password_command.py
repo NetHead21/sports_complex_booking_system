@@ -268,3 +268,9 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         ]
 
         command = UpdateMembersPasswordCommand()
+
+        for exc in exceptions:
+            with self.subTest(exception_type=type(exc).__name__):
+                mock_input_service.collect_member_password_update_data.side_effect = exc
+                mock_db.reset_mock()
+                mock_print.reset_mock()
