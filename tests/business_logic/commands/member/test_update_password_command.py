@@ -169,3 +169,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.assert_called_once_with(
             "user123", "NewPassword123!"
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_return_value_structure(self, mock_input_service, mock_db):
+        """Test return tuple structure."""
