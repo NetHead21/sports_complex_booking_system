@@ -233,3 +233,7 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self.assertTrue(success_a)
         self.assertIsNone(error_a)
         mock_db.update_member_password.assert_called_with("alice", "AliceNewPass123!")
+
+        mock_db.reset_mock()
+        mock_input_service.reset_mock()
+        mock_print.reset_mock()
