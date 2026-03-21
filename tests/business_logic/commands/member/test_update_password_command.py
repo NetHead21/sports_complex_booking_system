@@ -266,3 +266,5 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
             TypeError("Type mismatch"),
             PermissionError("Access denied"),
         ]
+
+        command = UpdateMembersPasswordCommand()
