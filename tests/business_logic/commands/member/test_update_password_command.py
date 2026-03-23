@@ -319,3 +319,7 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
 
         command = UpdateMembersPasswordCommand()
         success, error = command.execute()
+
+        self.assertFalse(success)
+        self.assertEqual(error, "Member '' does not exist")
+        mock_db.update_member_password.assert_called_once_with("", "ValidPassword123!")
