@@ -323,3 +323,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(error, "Member '' does not exist")
         mock_db.update_member_password.assert_called_once_with("", "ValidPassword123!")
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_edge_case_empty_string_password(self, mock_input_service, mock_db):
+        """Test with empty string password."""
