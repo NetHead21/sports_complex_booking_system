@@ -470,3 +470,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.assert_called_once_with(
             "12345", "ValidPassword123!"
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_edge_case_member_id_with_special_characters(
+        self, mock_input_service, mock_db
+    ):
+        """Test with member ID containing special characters."""
