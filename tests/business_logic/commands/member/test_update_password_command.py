@@ -429,3 +429,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.assert_called_once_with(
             "user123", whitespace_password
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_edge_case_very_long_member_id(self, mock_input_service, mock_db):
+        """Test with very long member ID."""
