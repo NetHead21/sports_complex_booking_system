@@ -455,3 +455,9 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.update_password_command.MemberInputService")
     def test_execute_edge_case_numeric_member_id(self, mock_input_service, mock_db):
         """Test with purely numeric member ID."""
+
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "12345",
+            "ValidPassword123!",
+        )
+        mock_db.update_member_password.return_value = True
