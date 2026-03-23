@@ -290,3 +290,6 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test that the error tuple element is exactly str(exception)."""
+
+        exc = Exception("exact error message")
+        mock_input_service.collect_member_password_update_data.side_effect = exc
