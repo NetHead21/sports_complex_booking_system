@@ -360,3 +360,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(error)
         mock_db.update_member_password.assert_called_once_with("user123", long_password)
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_edge_case_password_with_special_characters(
+        self, mock_input_service, mock_db
+    ):
+        """Test password with special characters and unicode."""
