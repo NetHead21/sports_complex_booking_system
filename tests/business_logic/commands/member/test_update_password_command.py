@@ -293,3 +293,6 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
 
         exc = Exception("exact error message")
         mock_input_service.collect_member_password_update_data.side_effect = exc
+
+        command = UpdateMembersPasswordCommand()
+        _, error = command.execute()
