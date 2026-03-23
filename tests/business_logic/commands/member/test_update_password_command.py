@@ -296,3 +296,6 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
 
         command = UpdateMembersPasswordCommand()
         _, error = command.execute()
+
+        self.assertEqual(error, str(exc))
+        self.assertEqual(error, "exact error message")
