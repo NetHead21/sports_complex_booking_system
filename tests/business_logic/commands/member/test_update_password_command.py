@@ -356,3 +356,7 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
 
         command = UpdateMembersPasswordCommand()
         success, error = command.execute()
+
+        self.assertTrue(success)
+        self.assertIsNone(error)
+        mock_db.update_member_password.assert_called_once_with("user123", long_password)
