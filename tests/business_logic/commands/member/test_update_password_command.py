@@ -413,3 +413,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test password containing spaces and tabs."""
+
+        whitespace_password = "Pass word\twith\tspaces123!"
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "user123",
+            whitespace_password,
+        )
+        mock_db.update_member_password.return_value = True
