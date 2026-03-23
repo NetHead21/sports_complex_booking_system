@@ -477,3 +477,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test with member ID containing special characters."""
+
+        special_member_id = "user-123_test@domain"
+        mock_input_service.collect_member_password_update_data.return_value = (
+            special_member_id,
+            "ValidPassword123!",
+        )
+        mock_db.update_member_password.return_value = True
