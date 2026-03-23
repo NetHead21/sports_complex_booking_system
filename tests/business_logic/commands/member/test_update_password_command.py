@@ -390,3 +390,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test password with unicode characters."""
+
+        unicode_password = "Pässwörd123!™€"
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "user123",
+            unicode_password,
+        )
+        mock_db.update_member_password.return_value = True
