@@ -537,3 +537,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.assert_called_once_with(
             "user123", number_password
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_edge_case_password_only_letters(self, mock_input_service, mock_db):
+        """Test password containing only letters."""
