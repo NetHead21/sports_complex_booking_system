@@ -579,3 +579,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self.assertFalse(success)
         self.assertEqual(error, "Database locked")
         mock_print.assert_called_once_with("❌ Database Error: Database locked")
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_success_displays_correct_operation_result_format(
+        self, mock_input_service, mock_db
+    ):
+        """Test that success response displays operation result with correct format."""
