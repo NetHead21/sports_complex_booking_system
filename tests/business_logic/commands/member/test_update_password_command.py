@@ -595,3 +595,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
 
         command = UpdateMembersPasswordCommand()
         success, error = command.execute()
+
+        # Verify exact call signature for success
+        mock_input_service.display_operation_result.assert_called_once_with(
+            "Password Update", "testuser", True
+        )
