@@ -600,3 +600,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_input_service.display_operation_result.assert_called_once_with(
             "Password Update", "testuser", True
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_failure_displays_correct_operation_result_format(
+        self, mock_input_service, mock_db
+    ):
+        """Test that failure response displays operation result with correct format."""
