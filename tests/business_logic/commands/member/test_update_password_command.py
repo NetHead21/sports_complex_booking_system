@@ -521,3 +521,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.update_password_command.MemberInputService")
     def test_execute_edge_case_password_only_numbers(self, mock_input_service, mock_db):
         """Test password containing only numbers."""
+
+        number_password = "123456789012"
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "user123",
+            number_password,
+        )
+        mock_db.update_member_password.return_value = True
