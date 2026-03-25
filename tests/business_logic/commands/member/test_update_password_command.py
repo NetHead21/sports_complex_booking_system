@@ -572,3 +572,6 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
             "ValidPassword123!",
         )
         mock_db.update_member_password.side_effect = RuntimeError("Database locked")
+
+        command = UpdateMembersPasswordCommand()
+        success, error = command.execute()
