@@ -558,3 +558,11 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.assert_called_once_with(
             "user123", letter_password
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_database_error_after_service_success(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test database error even though service successfully collected data."""
