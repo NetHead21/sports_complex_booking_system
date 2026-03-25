@@ -586,3 +586,9 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test that success response displays operation result with correct format."""
+
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "testuser",
+            "NewPass123!",
+        )
+        mock_db.update_member_password.return_value = True
