@@ -566,3 +566,9 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test database error even though service successfully collected data."""
+
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "user123",
+            "ValidPassword123!",
+        )
+        mock_db.update_member_password.side_effect = RuntimeError("Database locked")
