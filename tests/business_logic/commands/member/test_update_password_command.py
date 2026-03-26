@@ -621,3 +621,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_input_service.display_operation_result.assert_called_once_with(
             "Password Update", "testuser", False, "Member not found"
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_newlines_in_password(self, mock_input_service, mock_db):
+        """Test password containing newline characters."""
