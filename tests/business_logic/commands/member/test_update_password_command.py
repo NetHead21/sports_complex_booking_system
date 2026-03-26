@@ -649,3 +649,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_input_service, mock_db
     ):
         """Test when member ID and password are identical."""
+
+        same_value = "samevalue123"
+        mock_input_service.collect_member_password_update_data.return_value = (
+            same_value,
+            same_value,
+        )
+        mock_db.update_member_password.return_value = True
