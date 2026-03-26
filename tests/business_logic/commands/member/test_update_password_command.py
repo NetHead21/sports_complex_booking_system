@@ -705,3 +705,11 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.assert_called_once_with(
             space_member_id, "ValidPassword123!"
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    @patch("builtins.print")
+    def test_execute_multiple_exceptions_in_sequence(
+        self, mock_print, mock_input_service, mock_db
+    ):
+        """Test handling of multiple different exception types in sequence."""
