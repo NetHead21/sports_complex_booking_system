@@ -656,3 +656,6 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
             same_value,
         )
         mock_db.update_member_password.return_value = True
+
+        command = UpdateMembersPasswordCommand()
+        success, error = command.execute()
