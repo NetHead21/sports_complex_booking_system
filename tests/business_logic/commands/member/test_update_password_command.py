@@ -642,3 +642,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_db.update_member_password.assert_called_once_with(
             "user123", password_with_newlines
         )
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_identical_member_id_and_password(
+        self, mock_input_service, mock_db
+    ):
+        """Test when member ID and password are identical."""
