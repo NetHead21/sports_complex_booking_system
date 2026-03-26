@@ -663,3 +663,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self.assertTrue(success)
         self.assertIsNone(error)
         mock_db.update_member_password.assert_called_once_with(same_value, same_value)
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_password_starting_with_space(self, mock_input_service, mock_db):
+        """Test password starting with space character."""
