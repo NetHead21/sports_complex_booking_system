@@ -689,3 +689,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.update_password_command.MemberInputService")
     def test_execute_member_id_starting_with_space(self, mock_input_service, mock_db):
         """Test member ID starting with space character."""
+
+        space_member_id = " user123"
+        mock_input_service.collect_member_password_update_data.return_value = (
+            space_member_id,
+            "ValidPassword123!",
+        )
+        mock_db.update_member_password.return_value = True
