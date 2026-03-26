@@ -626,3 +626,10 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.update_password_command.MemberInputService")
     def test_execute_newlines_in_password(self, mock_input_service, mock_db):
         """Test password containing newline characters."""
+
+        password_with_newlines = "Password\nWith\nNewlines123!"
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "user123",
+            password_with_newlines,
+        )
+        mock_db.update_member_password.return_value = True
