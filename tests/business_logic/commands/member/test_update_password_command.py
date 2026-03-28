@@ -738,3 +738,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         success2, error2 = command.execute()
         self.assertFalse(success2)
         self.assertEqual(error2, "Type error")
+
+    @patch("business_logic.commands.member.update_password_command.db")
+    @patch("business_logic.commands.member.update_password_command.MemberInputService")
+    def test_execute_null_tuple_unpacking(self, mock_input_service, mock_db):
+        """Test that returned tuple elements are unpacked correctly."""
