@@ -758,3 +758,7 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self.assertIsNotNone(success)
         self.assertIsNone(error)
         self.assertTrue(success)
+
+
+class TestUpdateMembersPasswordCommandIntegration(unittest.TestCase):
+    """Integration tests for UpdateMembersPasswordCommand."""
