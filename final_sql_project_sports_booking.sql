@@ -858,8 +858,8 @@ create procedure cancel_booking(
 		declare v_member_id varchar(255);
 		declare v_payment_status varchar(10);
 		declare v_booked_date date;
-		declare v_price double(8,2);
-		declare v_payment_due double;
+		declare v_price DECIMAL(8,2);
+		declare v_payment_due DECIMAL(10,2);
 
 		set v_cancellation = 0;
 
