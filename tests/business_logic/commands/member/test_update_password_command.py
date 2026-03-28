@@ -753,3 +753,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
 
         command = UpdateMembersPasswordCommand()
         success, error = command.execute()
+
+        # Verify both elements are unpacked correctly
+        self.assertIsNotNone(success)
+        self.assertIsNone(error)
+        self.assertTrue(success)
