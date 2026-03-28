@@ -789,3 +789,7 @@ class TestUpdateMembersPasswordCommandIntegration(unittest.TestCase):
                 mock_db.reset_mock()
 
                 success, error = command.execute()
+
+                if should_succeed:
+                    self.assertTrue(success)
+                    self.assertIsNone(error)
