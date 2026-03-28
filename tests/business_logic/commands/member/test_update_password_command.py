@@ -769,3 +769,10 @@ class TestUpdateMembersPasswordCommandIntegration(unittest.TestCase):
         """Test updating passwords for multiple different members in sequence."""
 
         command = UpdateMembersPasswordCommand()
+
+        test_cases = [
+            ("alice", "AlicePass123!", True),
+            ("bob", "BobPass456!", True),
+            ("charlie", "CharliePass789!", False),
+            ("david", "DavidPass000!", True),
+        ]
