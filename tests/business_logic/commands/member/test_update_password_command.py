@@ -724,3 +724,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         success1, error1 = command.execute()
         self.assertFalse(success1)
         self.assertEqual(error1, "Invalid value")
+
+        # Reset mocks
+        mock_input_service.reset_mock()
+        mock_db.reset_mock()
+        mock_print.reset_mock()
