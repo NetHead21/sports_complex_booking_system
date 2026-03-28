@@ -767,3 +767,5 @@ class TestUpdateMembersPasswordCommandIntegration(unittest.TestCase):
     @patch("business_logic.commands.member.update_password_command.MemberInputService")
     def test_multiple_updates_different_members(self, mock_input_service, mock_db):
         """Test updating passwords for multiple different members in sequence."""
+
+        command = UpdateMembersPasswordCommand()
