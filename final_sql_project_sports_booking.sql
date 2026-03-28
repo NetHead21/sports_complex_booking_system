@@ -268,7 +268,10 @@ BEGIN
         user_agent
     ) VALUES (
         NEW.id,
-        'UPDATE',
+		CASE WHEN OLD.payment_status != 'CANCELLED' AND NEW.payment_status = 'CANCELLED'
+			THEN 'CANCEL'
+			ELSE 'UPDATE'
+		END,
         JSON_OBJECT(
             'id', OLD.id,
             'room_id', OLD.room_id,
