@@ -385,7 +385,13 @@ call insert_new_member('nethead21', 'B&t9fvejU!Q^4xrq', 'junivensaavedra@gmail.c
 delimiter $$
 create procedure delete_member(in p_id varchar(255))
 	begin
-		delete from members where id = p_id;
+		declare v_count int default 0;
+		select count(*) into v_count from members where id = p_id;
+		if v_count = 0 then
+			signal sqlstate '45000' set message_text = 'Member not found';
+		else
+			delete from members where id = p_id;
+		end if;
 	end $$
 delimiter ;
 
