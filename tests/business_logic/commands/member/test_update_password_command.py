@@ -793,3 +793,7 @@ class TestUpdateMembersPasswordCommandIntegration(unittest.TestCase):
                 if should_succeed:
                     self.assertTrue(success)
                     self.assertIsNone(error)
+
+                else:
+                    self.assertFalse(success)
+                    self.assertIn(member_id, error)
