@@ -385,6 +385,8 @@ delimiter ;
 
 call delete_member('nethead21');
 
+call insert_new_member('nethead21', 'B&t9fvejU!Q^4xrq', 'junivensaavedra@gmail.com');
+
 -- Update Member Password Procedure
 delimiter $$
 create procedure update_member_password(in p_id varchar(255), in p_passwords varchar(255))
@@ -396,7 +398,6 @@ delimiter ;
 call update_member_password('nethead21', 'hello_world');
 
 
-call insert_new_member('nethead21', 'B&t9fvejU!Q^4xrq', 'junivensaavedra@gmail.com');
 -- Update Member Email Procedure
 delimiter $$
 create procedure update_member_email(in p_id varchar(255), in p_email varchar(255))
