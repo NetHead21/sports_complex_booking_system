@@ -713,3 +713,5 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         self, mock_print, mock_input_service, mock_db
     ):
         """Test handling of multiple different exception types in sequence."""
+
+        command = UpdateMembersPasswordCommand()
