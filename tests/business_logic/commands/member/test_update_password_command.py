@@ -783,3 +783,7 @@ class TestUpdateMembersPasswordCommandIntegration(unittest.TestCase):
                     member_id,
                     password,
                 )
+
+                mock_db.update_member_password.return_value = should_succeed
+                mock_input_service.reset_mock()
+                mock_db.reset_mock()
