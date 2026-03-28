@@ -440,8 +440,7 @@ create procedure make_booking(
 		-- Validate room exists and get price
 		select count(*), price into v_room_count, v_price
 		from rooms 
-		where id = p_room_id and status = 'AVAILABLE'
-		group by price;
+		where id = p_room_id and status = 'AVAILABLE';
 		
 		if v_room_count = 0 then
 			set p_booking_id = null;
@@ -555,8 +554,7 @@ create procedure update_payment(
 		select count(*), payment_status, total_amount, member_id 
 		into v_booking_count, v_current_status, v_price, v_member_id
 		from bookings 
-		where id = p_id
-		group by payment_status, total_amount, member_id;
+		where id = p_id;
 
 		if v_booking_count = 0 then
 			set p_status = 'NOT_FOUND';
