@@ -879,15 +879,15 @@ create procedure cancel_booking(
 		from members where id = v_member_id;
 
 		if curdate() >= v_booked_date then
-			select 'Cacellation cannot be done on/after the booked date' into p_message;
-		elseif v_payment_status = 'Cancelled' or v_payment_status = 'Paid' then
+			select 'Cancellation cannot be done on/after the booked date' into p_message;
+		elseif v_payment_status = 'CANCELLED' or v_payment_status = 'PAID' then
 			select 'Booking has already been cancelled or paid' into p_message;
 		else
-			update bookings set payment_status = 'Cancelled' where id = p_booking_id;
+			update bookings set payment_status = 'CANCELLED' where id = p_booking_id;
 			set v_payment_due = v_payment_due - v_price;
 			set v_cancellation = check_cancellation(p_booking_id);
 
-			if v_cancellation >=2 then
+			if v_cancellation >=3 then
 				set v_payment_due = v_payment_due + 10;
 			end if;
 
