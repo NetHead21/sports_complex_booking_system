@@ -729,3 +729,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_input_service.reset_mock()
         mock_db.reset_mock()
         mock_print.reset_mock()
+
+        # Second exception (different type)
+        mock_input_service.collect_member_password_update_data.side_effect = TypeError(
+            "Type error"
+        )
