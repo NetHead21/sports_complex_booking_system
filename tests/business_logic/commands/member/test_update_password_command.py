@@ -797,3 +797,7 @@ class TestUpdateMembersPasswordCommandIntegration(unittest.TestCase):
                 else:
                     self.assertFalse(success)
                     self.assertIn(member_id, error)
+
+
+if __name__ == "__main__":
+    unittest.main()
