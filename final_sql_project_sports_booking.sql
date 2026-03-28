@@ -421,8 +421,15 @@ call update_member_password('nethead21', 'hello_world');
 delimiter $$
 create procedure update_member_email(in p_id varchar(255), in p_email varchar(255))
 	begin
-		update members set email = p_email where id = p_id;
+		declare v_count int default 0;
+		select count(*) into v_count from members where id = p_id;
+		if v_count = 0 then
+			signal sqlstate '45000' set message_text = 'Member not found';
+		else
+			update members set email = p_email where id = p_id;
+		end if;
 	end $$
+
 delimiter ;
 
 call update_member_email('nethead21', 'helloworld@gmail.com');
