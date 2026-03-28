@@ -895,7 +895,8 @@ delimiter ;
 delimiter $$
 create function check_cancellation(p_booking_id int)
     returns int
-    deterministic
+    not deterministic
+	reads sql data
     begin
         declare v_done int;
         declare v_cancellation int;
