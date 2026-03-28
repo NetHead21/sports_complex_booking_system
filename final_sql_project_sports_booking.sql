@@ -368,8 +368,14 @@ CREATE VIEW member_bookings AS
 delimiter $$
 create procedure insert_new_member(in p_id varchar(255), in p_passwords varchar(255), in p_email varchar(255))
 	begin
-		insert into members (id, password, email)
-		values (p_id, p_passwords, p_email);
+		declare v_count int default 0;
+		select count(*) into v_count from members where id = p_id;
+		if v_count > 0 then
+			signal sqlstate '45000' set message_text = 'Member ID already exists';
+		else
+			insert into members (id, password, email)
+			values (p_id, p_passwords, p_email);
+		end if;
 	end $$
 delimiter ;
 
