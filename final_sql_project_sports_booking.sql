@@ -337,39 +337,6 @@ BEGIN
     );
 END$$
 
--- Special trigger for CANCEL action (when payment_status changes to CANCELLED)
-CREATE TRIGGER trg_booking_audit_cancel
-    AFTER UPDATE ON bookings
-    FOR EACH ROW
-BEGIN
-    -- Only trigger when payment status changes to CANCELLED
-    IF OLD.payment_status != 'CANCELLED' AND NEW.payment_status = 'CANCELLED' THEN
-        INSERT INTO booking_audit (
-            booking_id,
-            action,
-            old_values,
-            new_values,
-            changed_by,
-            ip_address,
-            user_agent
-        ) VALUES (
-            NEW.id,
-            'CANCEL',
-            JSON_OBJECT(
-                'payment_status', OLD.payment_status,
-                'cancelled_at', NULL
-            ),
-            JSON_OBJECT(
-                'payment_status', NEW.payment_status,
-                'cancelled_at', NOW()
-            ),
-            COALESCE(USER(), 'SYSTEM'),
-            COALESCE(@audit_ip_address, 'N/A'),
-            COALESCE(@audit_user_agent, 'N/A')
-        );
-    END IF;
-END$$
-DELIMITER ;
 
 -- Example of how to set audit context in your application:
 -- SET @audit_ip_address = '192.168.1.100';
