@@ -650,7 +650,6 @@ create procedure view_bookings(
 			select 
 				b.id as booking_id,
 				b.room_id,
-				b.room_id,
 				r.room_type,
 				b.booked_date,
 				b.booked_time,
