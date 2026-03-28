@@ -24,3 +24,19 @@ CREATE TABLE test_results (
     message    VARCHAR(500),
     ran_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+-- Logs a test result
+DROP PROCEDURE IF EXISTS log_test;
+DELIMITER $$
+CREATE PROCEDURE log_test(
+    IN p_group  VARCHAR(100),
+    IN p_name   VARCHAR(255),
+    IN p_status ENUM('PASS', 'FAIL'),
+    IN p_msg    VARCHAR(500)
+)
+BEGIN
+    INSERT INTO test_results (test_group, test_name, status, message)
+    VALUES (p_group, p_name, p_status, p_msg);
+END$$
+DELIMITER ;
