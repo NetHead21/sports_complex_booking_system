@@ -776,3 +776,10 @@ class TestUpdateMembersPasswordCommandIntegration(unittest.TestCase):
             ("charlie", "CharliePass789!", False),
             ("david", "DavidPass000!", True),
         ]
+
+        for member_id, password, should_succeed in test_cases:
+            with self.subTest(member_id=member_id):
+                mock_input_service.collect_member_password_update_data.return_value = (
+                    member_id,
+                    password,
+                )
