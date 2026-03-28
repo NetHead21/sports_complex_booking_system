@@ -624,7 +624,7 @@ create procedure view_bookings(
 			select 
 				b.id as booking_id,
 				b.room_id,
-				r.id,
+				b.room_id,
 				r.room_type,
 				b.booked_date,
 				b.booked_time,
@@ -876,7 +876,6 @@ delimiter $$
 create trigger payment_check
 	before delete on members for each row
 	begin
-
 		if old.payment_due > 0 then
 			insert into pending_terminations (id, email, payment_due)
 			values (old.id, old.email, old.payment_due);
