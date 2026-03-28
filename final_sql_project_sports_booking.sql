@@ -876,14 +876,10 @@ delimiter $$
 create trigger payment_check
 	before delete on members for each row
 	begin
-		declare v_payment_due double;
 
-		select payment_due into v_payment_due 
-		from members where id = old.id;
-
-		if v_payment_due > 0 then
+		if old.payment_due > 0 then
 			insert into pending_terminations (id, email, payment_due)
-			values (old.id, old.email, v_payment_due);
+			values (old.id, old.email, old.payment_due);
 		end if;
 	end $$
 delimiter ;
