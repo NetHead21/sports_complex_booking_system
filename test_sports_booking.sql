@@ -1,0 +1,8 @@
+-- ============================================================
+-- Sports Booking - Comprehensive SQL Test Suite
+-- ============================================================
+-- How to use:
+--   1. Run final_sql_project_sports_booking.sql first
+--   2. Then run this file
+--   3. Results are shown automatically at the end
+-- ============================================================
