@@ -734,3 +734,7 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_input_service.collect_member_password_update_data.side_effect = TypeError(
             "Type error"
         )
+
+        success2, error2 = command.execute()
+        self.assertFalse(success2)
+        self.assertEqual(error2, "Type error")
