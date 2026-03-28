@@ -715,3 +715,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         """Test handling of multiple different exception types in sequence."""
 
         command = UpdateMembersPasswordCommand()
+
+        # First exception
+        mock_input_service.collect_member_password_update_data.side_effect = ValueError(
+            "Invalid value"
+        )
