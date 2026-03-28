@@ -700,41 +700,7 @@ create procedure search_room(
 			set p_status = 'INVALID_DATE';
 			set p_message = 'Cannot search for rooms on past dates';
 		else
-			-- Search for available rooms with detailed information
-			select 
-				r.id,
-				r.room_type,
-				r.price,
-				r.capacity,
-				r.status as room_status,
-				case 
-					when r.status = 'AVAILABLE' then 'Available for booking'
-					when r.status = 'MAINTENANCE' then 'Under maintenance'
-					when r.status = 'RESERVED' then 'Reserved for special events'
-					else 'Status unknown'
-				end as availability_message,
-				coalesce(
-					(select count(*) 
-					 from bookings b2 
-					 where b2.room_id = r.id
-					   and b2.booked_date between curdate() and date_add(curdate(), interval 30 day)
-					   and b2.payment_status != 'CANCELLED'
-					), 0
-				) as bookings_next_30_days
-			from rooms r 
-			where r.id not in (
-				select b.room_id 
-				from bookings b
-				where 
-					b.booked_date = p_booked_date and 
-					b.booked_time = p_booked_time and 
-					b.payment_status != 'CANCELLED'
-			) 
-			and r.room_type = p_room_type
-			and r.status = 'AVAILABLE'
-			order by r.price, r.room_type;
-			
-			-- Count the results for status message
+			-- Count first to avoid running the query twice
 			select count(*) into v_search_count
 			from rooms r 
 			where r.id not in (
@@ -747,11 +713,45 @@ create procedure search_room(
 			) 
 			and r.room_type = p_room_type
 			and r.status = 'AVAILABLE';
-			
+
 			if v_search_count = 0 then
 				set p_status = 'NO_ROOMS';
 				set p_message = concat('No available rooms found for ', p_room_type, ' on ', p_booked_date, ' at ', p_booked_time);
 			else
+				-- Only fetch full results when rooms exist
+				select 
+					r.id,
+					r.room_type,
+					r.price,
+					r.capacity,
+					r.status as room_status,
+					case 
+						when r.status = 'AVAILABLE' then 'Available for booking'
+						when r.status = 'MAINTENANCE' then 'Under maintenance'
+						when r.status = 'RESERVED' then 'Reserved for special events'
+						else 'Status unknown'
+					end as availability_message,
+					coalesce(
+						(select count(*) 
+						 from bookings b2 
+						 where b2.room_id = r.id
+						   and b2.booked_date between curdate() and date_add(curdate(), interval 30 day)
+						   and b2.payment_status != 'CANCELLED'
+						), 0
+					) as bookings_next_30_days
+				from rooms r 
+				where r.id not in (
+					select b.room_id 
+					from bookings b
+					where 
+						b.booked_date = p_booked_date and 
+						b.booked_time = p_booked_time and 
+						b.payment_status != 'CANCELLED'
+				) 
+				and r.room_type = p_room_type
+				and r.status = 'AVAILABLE'
+				order by r.price, r.room_type;
+
 				set p_status = 'SUCCESS';
 				set p_message = concat(v_search_count, ' room(s) found for ', p_room_type);
 			end if;
