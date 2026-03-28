@@ -62,3 +62,25 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+
+-- Assert two INT values are equal
+DROP PROCEDURE IF EXISTS assert_int_eq;
+DELIMITER $$
+CREATE PROCEDURE assert_int_eq(
+    IN p_group    VARCHAR(100),
+    IN p_name     VARCHAR(255),
+    IN p_expected INT,
+    IN p_actual   INT
+)
+BEGIN
+    IF p_expected <=> p_actual THEN
+        CALL log_test(p_group, p_name, 'PASS',
+            CONCAT('Value = ', COALESCE(p_actual, 'NULL')));
+    ELSE
+        CALL log_test(p_group, p_name, 'FAIL',
+            CONCAT('Expected [', COALESCE(p_expected, 'NULL'),
+                   '] but got [', COALESCE(p_actual, 'NULL'), ']'));
+    END IF;
+END$$
+DELIMITER ;
