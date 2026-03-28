@@ -743,3 +743,8 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
     @patch("business_logic.commands.member.update_password_command.MemberInputService")
     def test_execute_null_tuple_unpacking(self, mock_input_service, mock_db):
         """Test that returned tuple elements are unpacked correctly."""
+
+        mock_input_service.collect_member_password_update_data.return_value = (
+            "user123",
+            "ValidPassword123!",
+        )
