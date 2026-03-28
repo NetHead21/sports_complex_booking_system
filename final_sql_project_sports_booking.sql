@@ -921,7 +921,7 @@ create function check_cancellation(p_booking_id int)
         		
         		fetch cur into v_current_payment_status;
 
-        		if v_current_payment_status != 'Cancelled' or v_done = 1 then
+        		if v_current_payment_status != 'CANCELLED' or v_done = 1 then
         			leave get_payment_status;
         		else
         			set v_cancellation = v_cancellation + 1;
