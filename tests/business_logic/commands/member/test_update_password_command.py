@@ -720,3 +720,7 @@ class TestUpdateMembersPasswordCommandExecute(unittest.TestCase):
         mock_input_service.collect_member_password_update_data.side_effect = ValueError(
             "Invalid value"
         )
+
+        success1, error1 = command.execute()
+        self.assertFalse(success1)
+        self.assertEqual(error1, "Invalid value")
