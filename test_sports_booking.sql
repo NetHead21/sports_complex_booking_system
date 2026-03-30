@@ -197,3 +197,9 @@ DROP PROCEDURE IF EXISTS _t;
 
 -- Setup
 CALL insert_new_member('test_del1', 'Pass123!', 'test_del1@example.com');
+
+
+-- 4.1 Delete existing member removes the row
+CALL delete_member('test_del1');
+CALL assert_int_eq('delete_member', '4.1 Delete existing member - row removed',
+    0, (SELECT COUNT(*) FROM members WHERE id = 'test_del1'));
