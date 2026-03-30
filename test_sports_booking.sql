@@ -247,3 +247,11 @@ END$$
 DELIMITER ;
 CALL _t();
 DROP PROCEDURE IF EXISTS _t;
+
+
+-- ============================================================
+-- SECTION 6: update_member_email
+-- ============================================================
+
+-- Setup
+CALL insert_new_member('test_eml1', 'Pass123!', 'test_eml1@example.com');
