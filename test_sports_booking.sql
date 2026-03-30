@@ -159,3 +159,18 @@ END$$
 DELIMITER ;
 CALL _t();
 DROP PROCEDURE IF EXISTS _t;
+
+
+-- 3.3 Member ID shorter than 3 characters raises a constraint error
+DROP PROCEDURE IF EXISTS _t;
+DELIMITER $$
+CREATE PROCEDURE _t()
+BEGIN
+    DECLARE v_err INT DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET v_err = 1;
+    CALL insert_new_member('ab', 'ValidPass1!', 'shortid@example.com');
+    CALL assert_int_eq('insert_new_member', '3.3 ID shorter than 3 chars raises error', 1, v_err);
+END$$
+DELIMITER ;
+CALL _t();
+DROP PROCEDURE IF EXISTS _t;
