@@ -261,3 +261,30 @@ CALL insert_new_member('test_eml1', 'Pass123!', 'test_eml1@example.com');
 CALL update_member_email('test_eml1', 'updated_eml1@example.com');
 CALL assert_eq('update_member_email', '6.1 Email updated successfully',
     'updated_eml1@example.com', (SELECT email FROM members WHERE id = 'test_eml1'));
+
+
+-- 6.2 Update email of a non-existent member raises an error
+DROP PROCEDURE IF EXISTS _t;
+DELIMITER $$
+CREATE PROCEDURE _t()
+BEGIN
+    DECLARE v_err INT DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET v_err = 1;
+    CALL update_member_email('test_nobody', 'new@example.com');
+    CALL assert_int_eq('update_member_email', '6.2 Non-existent member raises error', 1, v_err);
+END$$
+DELIMITER ;
+CALL _t();
+DROP PROCEDURE IF EXISTS _t;
+
+
+-- 6.3 Update to an invalid email format raises a constraint error
+DROP PROCEDURE IF EXISTS _t;
+DELIMITER $$
+CREATE PROCEDURE _t()
+BEGIN
+    DECLARE v_err INT DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET v_err = 1;
+    CALL update_member_email('test_eml1', 'not-a-valid-email');
+    CALL assert_int_eq('update_member_email', '6.3 Invalid email format raises error', 1, v_err);
+END$$
