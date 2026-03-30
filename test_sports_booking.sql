@@ -218,3 +218,11 @@ END$$
 DELIMITER ;
 CALL _t();
 DROP PROCEDURE IF EXISTS _t;
+
+
+-- ============================================================
+-- SECTION 5: update_member_password
+-- ============================================================
+
+-- Setup
+CALL insert_new_member('test_pwd1', 'OldPass1!', 'test_pwd1@example.com');
