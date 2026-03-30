@@ -300,3 +300,8 @@ DROP PROCEDURE IF EXISTS _t;
 
 -- Setup
 CALL insert_new_member('test_bk1', 'Pass123!', 'test_bk1@example.com');
+
+
+-- 7.1 Valid booking returns SUCCESS
+CALL make_booking('B2', '2030-06-01', '09:00:00', 'test_bk1', @bk_id, @bk_status, @bk_msg);
+CALL assert_eq('make_booking', '7.1 Valid booking returns SUCCESS', 'SUCCESS', @bk_status);
