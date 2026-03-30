@@ -106,3 +106,27 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+
+-- ============================================================
+-- SECTION 2: CLEANUP HELPER
+-- ============================================================
+-- Note: seed data bookings (IDs 1-10) were inserted BEFORE triggers
+-- were created, so booking_audit only contains records from test runs.
+
+DROP PROCEDURE IF EXISTS cleanup_test_data;
+DELIMITER $$
+CREATE PROCEDURE cleanup_test_data()
+BEGIN
+    -- Remove audit records for test bookings that still exist
+    DELETE FROM booking_audit
+    WHERE booking_id IN (SELECT id FROM bookings WHERE member_id LIKE 'test%');
+    -- Remove any orphaned audit records from test bookings that were deleted
+    DELETE FROM booking_audit
+    WHERE booking_id NOT IN (SELECT id FROM bookings);
+    -- Remove test bookings (FK: must go before members)
+    DELETE FROM bookings      WHERE member_id LIKE 'test%';
+    DELETE FROM pending_terminations WHERE id LIKE 'test%';
+    DELETE FROM members       WHERE id LIKE 'test%';
+END$$
+DELIMITER ;
