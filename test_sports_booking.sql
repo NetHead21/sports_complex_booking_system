@@ -130,3 +130,7 @@ BEGIN
     DELETE FROM members       WHERE id LIKE 'test%';
 END$$
 DELIMITER ;
+
+
+-- Run cleanup before tests to ensure a clean slate
+CALL cleanup_test_data();
