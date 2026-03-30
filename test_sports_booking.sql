@@ -288,3 +288,7 @@ BEGIN
     CALL update_member_email('test_eml1', 'not-a-valid-email');
     CALL assert_int_eq('update_member_email', '6.3 Invalid email format raises error', 1, v_err);
 END$$
+
+DELIMITER ;
+CALL _t();
+DROP PROCEDURE IF EXISTS _t;
