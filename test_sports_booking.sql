@@ -255,3 +255,9 @@ DROP PROCEDURE IF EXISTS _t;
 
 -- Setup
 CALL insert_new_member('test_eml1', 'Pass123!', 'test_eml1@example.com');
+
+
+-- 6.1 Update email of an existing member
+CALL update_member_email('test_eml1', 'updated_eml1@example.com');
+CALL assert_eq('update_member_email', '6.1 Email updated successfully',
+    'updated_eml1@example.com', (SELECT email FROM members WHERE id = 'test_eml1'));
