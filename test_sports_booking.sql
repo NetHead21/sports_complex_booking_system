@@ -146,7 +146,6 @@ CALL assert_int_eq('insert_new_member', '3.1 Valid insert - member row created',
     1, (SELECT COUNT(*) FROM members WHERE id = 'test_ins1'));
 
 
-
 -- 3.2 Duplicate member ID raises an error
 DROP PROCEDURE IF EXISTS _t;
 DELIMITER $$
