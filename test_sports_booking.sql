@@ -232,3 +232,18 @@ CALL insert_new_member('test_pwd1', 'OldPass1!', 'test_pwd1@example.com');
 CALL update_member_password('test_pwd1', 'NewPass2!');
 CALL assert_eq('update_member_password', '5.1 Password updated successfully',
     'NewPass2!', (SELECT password FROM members WHERE id = 'test_pwd1'));
+
+
+-- 5.2 Update password of a non-existent member raises an error
+DROP PROCEDURE IF EXISTS _t;
+DELIMITER $$
+CREATE PROCEDURE _t()
+BEGIN
+    DECLARE v_err INT DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET v_err = 1;
+    CALL update_member_password('test_nobody', 'SomePass1!');
+    CALL assert_int_eq('update_member_password', '5.2 Non-existent member raises error', 1, v_err);
+END$$
+DELIMITER ;
+CALL _t();
+DROP PROCEDURE IF EXISTS _t;
