@@ -134,3 +134,13 @@ DELIMITER ;
 
 -- Run cleanup before tests to ensure a clean slate
 CALL cleanup_test_data();
+
+
+-- ============================================================
+-- SECTION 3: insert_new_member
+-- ============================================================
+
+-- 3.1 Insert a valid new member creates the row
+CALL insert_new_member('test_ins1', 'ValidPass1!', 'test_ins1@example.com');
+CALL assert_int_eq('insert_new_member', '3.1 Valid insert - member row created',
+    1, (SELECT COUNT(*) FROM members WHERE id = 'test_ins1'));
