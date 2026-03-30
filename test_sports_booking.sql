@@ -226,3 +226,9 @@ DROP PROCEDURE IF EXISTS _t;
 
 -- Setup
 CALL insert_new_member('test_pwd1', 'OldPass1!', 'test_pwd1@example.com');
+
+
+-- 5.1 Update password of an existing member
+CALL update_member_password('test_pwd1', 'NewPass2!');
+CALL assert_eq('update_member_password', '5.1 Password updated successfully',
+    'NewPass2!', (SELECT password FROM members WHERE id = 'test_pwd1'));
