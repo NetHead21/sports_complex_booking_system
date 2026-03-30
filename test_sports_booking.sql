@@ -292,3 +292,11 @@ END$$
 DELIMITER ;
 CALL _t();
 DROP PROCEDURE IF EXISTS _t;
+
+
+-- ============================================================
+-- SECTION 7: make_booking
+-- ============================================================
+
+-- Setup
+CALL insert_new_member('test_bk1', 'Pass123!', 'test_bk1@example.com');
