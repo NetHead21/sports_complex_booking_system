@@ -189,3 +189,11 @@ END$$
 DELIMITER ;
 CALL _t();
 DROP PROCEDURE IF EXISTS _t;
+
+
+-- ============================================================
+-- SECTION 4: delete_member
+-- ============================================================
+
+-- Setup
+CALL insert_new_member('test_del1', 'Pass123!', 'test_del1@example.com');
