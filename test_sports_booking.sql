@@ -174,3 +174,18 @@ END$$
 DELIMITER ;
 CALL _t();
 DROP PROCEDURE IF EXISTS _t;
+
+
+-- 3.4 Invalid email format raises a constraint error
+DROP PROCEDURE IF EXISTS _t;
+DELIMITER $$
+CREATE PROCEDURE _t()
+BEGIN
+    DECLARE v_err INT DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET v_err = 1;
+    CALL insert_new_member('test_ins2', 'ValidPass1!', 'not-a-valid-email');
+    CALL assert_int_eq('insert_new_member', '3.4 Invalid email format raises error', 1, v_err);
+END$$
+DELIMITER ;
+CALL _t();
+DROP PROCEDURE IF EXISTS _t;
