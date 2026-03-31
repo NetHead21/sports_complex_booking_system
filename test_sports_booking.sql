@@ -415,3 +415,12 @@ CALL make_booking('T1', '2030-08-11', '14:00:00', 'test_sr1', @sr_id3, @s, @m);
 CALL search_room('Tennis Court', '2030-08-11', '14:00:00', @sr_status, @sr_msg);
 CALL assert_eq('search_room', '10.4 Partial availability still returns SUCCESS', 'SUCCESS', @sr_status);
 
+
+-- ============================================================
+-- SECTION 11: cancel_booking
+-- ============================================================
+
+
+-- Setup: member with a future booking
+CALL insert_new_member('test_can1', 'Pass123!', 'test_can1@example.com');
+CALL make_booking('AR', '2030-09-01', '10:00:00', 'test_can1', @can_bk_id1, @s, @m);
