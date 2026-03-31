@@ -330,3 +330,12 @@ CALL assert_eq('make_booking', '7.5 Non-existent member returns MEMBER_NOT_FOUND
 -- 7.6 Booking a past date returns INVALID_DATE
 CALL make_booking('B2', '2000-01-01', '10:00:00', 'test_bk1', @bk_id, @bk_status, @bk_msg);
 CALL assert_eq('make_booking', '7.6 Past date returns INVALID_DATE', 'INVALID_DATE', @bk_status);
+
+
+-- ============================================================
+-- SECTION 8: update_payment
+-- ============================================================
+
+-- Setup: member with one booking
+CALL insert_new_member('test_pay1', 'Pass123!', 'test_pay1@example.com');
+CALL make_booking('T1', '2030-07-01', '09:00:00', 'test_pay1', @pay_bk_id, @s, @m);
