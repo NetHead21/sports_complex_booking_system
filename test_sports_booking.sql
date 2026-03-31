@@ -310,3 +310,9 @@ CALL assert_eq('make_booking', '7.1 Valid booking returns SUCCESS', 'SUCCESS', @
 -- 7.2 Valid booking increases member payment_due by the room price
 CALL assert_decimal_eq('make_booking', '7.2 payment_due increases by room price (8.00)',
     8.00, (SELECT payment_due FROM members WHERE id = 'test_bk1'));
+
+
+
+-- 7.3 Booking the same room/date/time again returns CONFLICT
+CALL make_booking('B2', '2030-06-01', '09:00:00', 'test_bk1', @bk_id, @bk_status, @bk_msg);
+CALL assert_eq('make_booking', '7.3 Duplicate room/date/time returns CONFLICT', 'CONFLICT', @bk_status);
