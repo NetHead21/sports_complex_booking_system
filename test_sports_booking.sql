@@ -344,3 +344,8 @@ CALL make_booking('T1', '2030-07-01', '09:00:00', 'test_pay1', @pay_bk_id, @s, @
 -- 8.1 Valid payment returns SUCCESS
 CALL update_payment(@pay_bk_id, @pay_status, @pay_msg);
 CALL assert_eq('update_payment', '8.1 Valid payment returns SUCCESS', 'SUCCESS', @pay_status);
+
+
+-- 8.2 Paying a booking reduces member payment_due to 0
+CALL assert_decimal_eq('update_payment', '8.2 Payment reduces member payment_due to 0',
+    0.00, (SELECT payment_due FROM members WHERE id = 'test_pay1'));
