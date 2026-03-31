@@ -430,3 +430,8 @@ CALL make_booking('AR', '2030-09-01', '10:00:00', 'test_can1', @can_bk_id1, @s, 
 CALL cancel_booking(@can_bk_id1, @can_msg);
 CALL assert_eq('cancel_booking', '11.1 Valid cancellation returns success message',
     'Booking Cancelled', @can_msg);
+
+
+-- 11.2 Cancelled booking status is set to CANCELLED
+CALL assert_eq('cancel_booking', '11.2 Booking status set to CANCELLED',
+    'CANCELLED', (SELECT payment_status FROM bookings WHERE id = @can_bk_id1));
