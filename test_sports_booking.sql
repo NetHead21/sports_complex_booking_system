@@ -359,3 +359,10 @@ CALL assert_eq('update_payment', '8.3 Already paid booking returns ALREADY_PAID'
 -- 8.4 Non-existent booking ID returns NOT_FOUND
 CALL update_payment(999999, @pay_status, @pay_msg);
 CALL assert_eq('update_payment', '8.4 Non-existent booking returns NOT_FOUND', 'NOT_FOUND', @pay_status);
+
+
+-- 8.5 Paying a cancelled booking returns CANCELLED
+CALL make_booking('T2', '2030-07-02', '10:00:00', 'test_pay1', @pay_bk_id2, @s, @m);
+CALL cancel_booking(@pay_bk_id2, @cm);
+CALL update_payment(@pay_bk_id2, @pay_status, @pay_msg);
+CALL assert_eq('update_payment', '8.5 Cancelled booking returns CANCELLED status', 'CANCELLED', @pay_status);
