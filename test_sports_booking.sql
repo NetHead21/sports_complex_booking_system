@@ -374,3 +374,8 @@ CALL assert_eq('update_payment', '8.5 Cancelled booking returns CANCELLED status
 -- ============================================================
 
 -- test_pay1 already has bookings from section 8
+
+
+-- 9.1 Existing active member returns SUCCESS
+CALL view_bookings('test_pay1', @vb_status, @vb_msg);
+CALL assert_eq('view_bookings', '9.1 Existing member returns SUCCESS', 'SUCCESS', @vb_status);
