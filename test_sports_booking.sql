@@ -320,3 +320,8 @@ CALL assert_eq('make_booking', '7.3 Duplicate room/date/time returns CONFLICT', 
 -- 7.4 Non-existent room ID returns ROOM_NOT_FOUND
 CALL make_booking('ZZZ', '2030-06-02', '10:00:00', 'test_bk1', @bk_id, @bk_status, @bk_msg);
 CALL assert_eq('make_booking', '7.4 Invalid room ID returns ROOM_NOT_FOUND', 'ROOM_NOT_FOUND', @bk_status);
+
+
+-- 7.5 Non-existent member returns MEMBER_NOT_FOUND
+CALL make_booking('B2', '2030-06-03', '10:00:00', 'test_nobody', @bk_id, @bk_status, @bk_msg);
+CALL assert_eq('make_booking', '7.5 Non-existent member returns MEMBER_NOT_FOUND', 'MEMBER_NOT_FOUND', @bk_status);
