@@ -339,3 +339,8 @@ CALL assert_eq('make_booking', '7.6 Past date returns INVALID_DATE', 'INVALID_DA
 -- Setup: member with one booking
 CALL insert_new_member('test_pay1', 'Pass123!', 'test_pay1@example.com');
 CALL make_booking('T1', '2030-07-01', '09:00:00', 'test_pay1', @pay_bk_id, @s, @m);
+
+
+-- 8.1 Valid payment returns SUCCESS
+CALL update_payment(@pay_bk_id, @pay_status, @pay_msg);
+CALL assert_eq('update_payment', '8.1 Valid payment returns SUCCESS', 'SUCCESS', @pay_status);
