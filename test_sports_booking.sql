@@ -366,3 +366,11 @@ CALL make_booking('T2', '2030-07-02', '10:00:00', 'test_pay1', @pay_bk_id2, @s, 
 CALL cancel_booking(@pay_bk_id2, @cm);
 CALL update_payment(@pay_bk_id2, @pay_status, @pay_msg);
 CALL assert_eq('update_payment', '8.5 Cancelled booking returns CANCELLED status', 'CANCELLED', @pay_status);
+
+
+
+-- ============================================================
+-- SECTION 9: view_bookings
+-- ============================================================
+
+-- test_pay1 already has bookings from section 8
