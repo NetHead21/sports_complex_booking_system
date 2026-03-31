@@ -379,3 +379,8 @@ CALL assert_eq('update_payment', '8.5 Cancelled booking returns CANCELLED status
 -- 9.1 Existing active member returns SUCCESS
 CALL view_bookings('test_pay1', @vb_status, @vb_msg);
 CALL assert_eq('view_bookings', '9.1 Existing member returns SUCCESS', 'SUCCESS', @vb_status);
+
+
+-- 9.2 Non-existent member returns MEMBER_NOT_FOUND
+CALL view_bookings('test_nobody', @vb_status, @vb_msg);
+CALL assert_eq('view_bookings', '9.2 Non-existent member returns MEMBER_NOT_FOUND', 'MEMBER_NOT_FOUND', @vb_status);
