@@ -424,3 +424,9 @@ CALL assert_eq('search_room', '10.4 Partial availability still returns SUCCESS',
 -- Setup: member with a future booking
 CALL insert_new_member('test_can1', 'Pass123!', 'test_can1@example.com');
 CALL make_booking('AR', '2030-09-01', '10:00:00', 'test_can1', @can_bk_id1, @s, @m);
+
+
+-- 11.1 Valid cancellation returns success message
+CALL cancel_booking(@can_bk_id1, @can_msg);
+CALL assert_eq('cancel_booking', '11.1 Valid cancellation returns success message',
+    'Booking Cancelled', @can_msg);
