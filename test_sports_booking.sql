@@ -399,3 +399,12 @@ CALL assert_eq('search_room', '10.1 Available rooms found returns SUCCESS', 'SUC
 -- 10.2 Past date returns INVALID_DATE
 CALL search_room('Tennis Court', '2000-01-01', '09:00:00', @sr_status, @sr_msg);
 CALL assert_eq('search_room', '10.2 Past date returns INVALID_DATE', 'INVALID_DATE', @sr_status);
+
+
+-- 10.3 When all rooms of a type are booked returns NO_ROOMS
+-- Setup: book both Tennis Courts at the same slot
+CALL insert_new_member('test_sr1', 'Pass123!', 'test_sr1@example.com');
+CALL make_booking('T1', '2030-08-10', '14:00:00', 'test_sr1', @sr_id1, @s, @m);
+CALL make_booking('T2', '2030-08-10', '14:00:00', 'test_sr1', @sr_id2, @s, @m);
+CALL search_room('Tennis Court', '2030-08-10', '14:00:00', @sr_status, @sr_msg);
+CALL assert_eq('search_room', '10.3 All rooms of type booked returns NO_ROOMS', 'NO_ROOMS', @sr_status);
