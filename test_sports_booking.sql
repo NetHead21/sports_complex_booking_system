@@ -384,3 +384,13 @@ CALL assert_eq('view_bookings', '9.1 Existing member returns SUCCESS', 'SUCCESS'
 -- 9.2 Non-existent member returns MEMBER_NOT_FOUND
 CALL view_bookings('test_nobody', @vb_status, @vb_msg);
 CALL assert_eq('view_bookings', '9.2 Non-existent member returns MEMBER_NOT_FOUND', 'MEMBER_NOT_FOUND', @vb_status);
+
+
+-- ============================================================
+-- SECTION 10: search_room
+-- ============================================================
+
+
+-- 10.1 Valid search with available rooms returns SUCCESS
+CALL search_room('Tennis Court', '2030-08-01', '09:00:00', @sr_status, @sr_msg);
+CALL assert_eq('search_room', '10.1 Available rooms found returns SUCCESS', 'SUCCESS', @sr_status);
