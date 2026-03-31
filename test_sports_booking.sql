@@ -349,3 +349,8 @@ CALL assert_eq('update_payment', '8.1 Valid payment returns SUCCESS', 'SUCCESS',
 -- 8.2 Paying a booking reduces member payment_due to 0
 CALL assert_decimal_eq('update_payment', '8.2 Payment reduces member payment_due to 0',
     0.00, (SELECT payment_due FROM members WHERE id = 'test_pay1'));
+
+
+-- 8.3 Paying an already-paid booking returns ALREADY_PAID
+CALL update_payment(@pay_bk_id, @pay_status, @pay_msg);
+CALL assert_eq('update_payment', '8.3 Already paid booking returns ALREADY_PAID', 'ALREADY_PAID', @pay_status);
