@@ -408,3 +408,10 @@ CALL make_booking('T1', '2030-08-10', '14:00:00', 'test_sr1', @sr_id1, @s, @m);
 CALL make_booking('T2', '2030-08-10', '14:00:00', 'test_sr1', @sr_id2, @s, @m);
 CALL search_room('Tennis Court', '2030-08-10', '14:00:00', @sr_status, @sr_msg);
 CALL assert_eq('search_room', '10.3 All rooms of type booked returns NO_ROOMS', 'NO_ROOMS', @sr_status);
+
+
+-- 10.4 When only one of two rooms is booked, still returns SUCCESS (other is available)
+CALL make_booking('T1', '2030-08-11', '14:00:00', 'test_sr1', @sr_id3, @s, @m);
+CALL search_room('Tennis Court', '2030-08-11', '14:00:00', @sr_status, @sr_msg);
+CALL assert_eq('search_room', '10.4 Partial availability still returns SUCCESS', 'SUCCESS', @sr_status);
+
