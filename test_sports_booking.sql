@@ -325,3 +325,8 @@ CALL assert_eq('make_booking', '7.4 Invalid room ID returns ROOM_NOT_FOUND', 'RO
 -- 7.5 Non-existent member returns MEMBER_NOT_FOUND
 CALL make_booking('B2', '2030-06-03', '10:00:00', 'test_nobody', @bk_id, @bk_status, @bk_msg);
 CALL assert_eq('make_booking', '7.5 Non-existent member returns MEMBER_NOT_FOUND', 'MEMBER_NOT_FOUND', @bk_status);
+
+
+-- 7.6 Booking a past date returns INVALID_DATE
+CALL make_booking('B2', '2000-01-01', '10:00:00', 'test_bk1', @bk_id, @bk_status, @bk_msg);
+CALL assert_eq('make_booking', '7.6 Past date returns INVALID_DATE', 'INVALID_DATE', @bk_status);
