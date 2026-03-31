@@ -394,3 +394,8 @@ CALL assert_eq('view_bookings', '9.2 Non-existent member returns MEMBER_NOT_FOUN
 -- 10.1 Valid search with available rooms returns SUCCESS
 CALL search_room('Tennis Court', '2030-08-01', '09:00:00', @sr_status, @sr_msg);
 CALL assert_eq('search_room', '10.1 Available rooms found returns SUCCESS', 'SUCCESS', @sr_status);
+
+
+-- 10.2 Past date returns INVALID_DATE
+CALL search_room('Tennis Court', '2000-01-01', '09:00:00', @sr_status, @sr_msg);
+CALL assert_eq('search_room', '10.2 Past date returns INVALID_DATE', 'INVALID_DATE', @sr_status);
