@@ -354,3 +354,8 @@ CALL assert_decimal_eq('update_payment', '8.2 Payment reduces member payment_due
 -- 8.3 Paying an already-paid booking returns ALREADY_PAID
 CALL update_payment(@pay_bk_id, @pay_status, @pay_msg);
 CALL assert_eq('update_payment', '8.3 Already paid booking returns ALREADY_PAID', 'ALREADY_PAID', @pay_status);
+
+
+-- 8.4 Non-existent booking ID returns NOT_FOUND
+CALL update_payment(999999, @pay_status, @pay_msg);
+CALL assert_eq('update_payment', '8.4 Non-existent booking returns NOT_FOUND', 'NOT_FOUND', @pay_status);
