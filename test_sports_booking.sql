@@ -583,3 +583,11 @@ CALL assert_int_eq('booking_audit triggers',
     '14.2 UPDATE trigger: booking update creates UPDATE audit record',
     1, (SELECT COUNT(*) FROM booking_audit
         WHERE booking_id = @aud_bk_id AND action = 'UPDATE'));
+
+
+-- 14.3 CANCEL detection: cancelling a booking creates a CANCEL audit record (not UPDATE)
+CALL cancel_booking(@aud_bk_id, @can_msg);
+CALL assert_int_eq('booking_audit triggers',
+    '14.3 Cancel detection: cancellation creates CANCEL audit record',
+    1, (SELECT COUNT(*) FROM booking_audit
+        WHERE booking_id = @aud_bk_id AND action = 'CANCEL'));
