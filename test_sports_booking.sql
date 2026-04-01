@@ -529,3 +529,9 @@ VALUES
     ('T2', '2030-11-01', '09:00:00', 'test_chk1', '2030-01-01 10:00:00', 'CANCELLED', 10.00),
     ('T2', '2030-11-02', '09:00:00', 'test_chk1', '2030-01-01 11:00:00', 'PAID',      10.00),
     ('T2', '2030-11-03', '09:00:00', 'test_chk1', '2030-01-01 12:00:00', 'CANCELLED', 10.00);
+
+
+
+SET @chk_bk = (SELECT id FROM bookings WHERE member_id = 'test_chk1' AND booked_date = '2030-11-03');
+CALL assert_int_eq('check_cancellation', '12.4 Non-consecutive cancellations: count resets at non-cancelled',
+    1, check_cancellation(@chk_bk));
