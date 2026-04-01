@@ -559,3 +559,11 @@ CALL delete_member('test_trg2');
 CALL assert_int_eq('payment_check trigger',
     '13.2 Member with payment_due = 0 not added to pending_terminations',
     0, (SELECT COUNT(*) FROM pending_terminations WHERE id = 'test_trg2'));
+
+
+-- ============================================================
+-- SECTION 14: booking_audit TRIGGERS
+-- ============================================================
+
+-- Setup
+CALL insert_new_member('test_aud1', 'Pass123!', 'test_aud1@example.com');
