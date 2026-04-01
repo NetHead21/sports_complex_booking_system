@@ -510,3 +510,11 @@ CALL assert_decimal_eq('check_cancellation', '12.1 1st cancellation: no fine, pa
 CALL cancel_booking(@fine_bk2, @can_msg);
 CALL assert_decimal_eq('check_cancellation', '12.2 2nd cancellation: no fine, payment_due = 10.00',
     10.00, (SELECT payment_due FROM members WHERE id = 'test_fine'));
+
+
+-- 12.3 3rd consecutive cancellation: $10 fine is applied
+-- check_cancellation sees: bk3(CANCELLED), bk2(CANCELLED), bk1(CANCELLED) → count = 3 → FINE!
+-- payment_due: 10.00 - 10.00 (cancel) + 10.00 (fine) = 10.00
+CALL cancel_booking(@fine_bk1, @can_msg);
+CALL assert_decimal_eq('check_cancellation', '12.3 3rd cancellation: $10 fine applied, payment_due = 10.00',
+    10.00, (SELECT payment_due FROM members WHERE id = 'test_fine'));
