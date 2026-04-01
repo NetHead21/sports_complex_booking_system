@@ -503,3 +503,10 @@ SET @fine_bk3 = (SELECT id FROM bookings WHERE member_id = 'test_fine' AND booke
 CALL cancel_booking(@fine_bk3, @can_msg);
 CALL assert_decimal_eq('check_cancellation', '12.1 1st cancellation: no fine, payment_due = 20.00',
     20.00, (SELECT payment_due FROM members WHERE id = 'test_fine'));
+
+
+-- 12.2 2nd consecutive cancellation: still no fine
+-- check_cancellation sees: bk3(CANCELLED), bk2(CANCELLED), bk1(UNPAID) → count = 2 → no fine
+CALL cancel_booking(@fine_bk2, @can_msg);
+CALL assert_decimal_eq('check_cancellation', '12.2 2nd cancellation: no fine, payment_due = 10.00',
+    10.00, (SELECT payment_due FROM members WHERE id = 'test_fine'));
