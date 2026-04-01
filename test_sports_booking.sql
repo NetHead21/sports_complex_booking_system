@@ -518,3 +518,14 @@ CALL assert_decimal_eq('check_cancellation', '12.2 2nd cancellation: no fine, pa
 CALL cancel_booking(@fine_bk1, @can_msg);
 CALL assert_decimal_eq('check_cancellation', '12.3 3rd cancellation: $10 fine applied, payment_due = 10.00',
     10.00, (SELECT payment_due FROM members WHERE id = 'test_fine'));
+
+
+-- 12.4 check_cancellation resets the count when a non-cancelled booking is encountered
+-- Booking history (DESC by datetime): 12:00=CANCELLED, 11:00=PAID, 10:00=CANCELLED
+-- Expected count = 1 (stops at PAID)
+CALL insert_new_member('test_chk1', 'Pass123!', 'test_chk1@example.com');
+INSERT INTO bookings (room_id, booked_date, booked_time, member_id, datetime_of_booking, payment_status, total_amount)
+VALUES
+    ('T2', '2030-11-01', '09:00:00', 'test_chk1', '2030-01-01 10:00:00', 'CANCELLED', 10.00),
+    ('T2', '2030-11-02', '09:00:00', 'test_chk1', '2030-01-01 11:00:00', 'PAID',      10.00),
+    ('T2', '2030-11-03', '09:00:00', 'test_chk1', '2030-01-01 12:00:00', 'CANCELLED', 10.00);
