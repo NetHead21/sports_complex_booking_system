@@ -435,3 +435,9 @@ CALL assert_eq('cancel_booking', '11.1 Valid cancellation returns success messag
 -- 11.2 Cancelled booking status is set to CANCELLED
 CALL assert_eq('cancel_booking', '11.2 Booking status set to CANCELLED',
     'CANCELLED', (SELECT payment_status FROM bookings WHERE id = @can_bk_id1));
+
+
+-- 11.3 Cancelling an already-cancelled booking returns appropriate message
+CALL cancel_booking(@can_bk_id1, @can_msg);
+CALL assert_eq('cancel_booking', '11.3 Re-cancelling returns already cancelled message',
+    'Booking has already been cancelled or paid', @can_msg);
