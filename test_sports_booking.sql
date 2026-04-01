@@ -478,3 +478,7 @@ CALL assert_eq('cancel_booking', '11.6 Cancel on booked date returns appropriate
 -- which determines what check_cancellation counts as "consecutive".
 -- The function reads bookings DESC by datetime_of_booking and counts
 -- consecutive CANCELLED statuses from the most recent outward.
+
+
+CALL insert_new_member('test_fine', 'Pass123!', 'test_fine@example.com');
+UPDATE members SET payment_due = 30.00 WHERE id = 'test_fine';
