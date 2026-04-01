@@ -450,3 +450,12 @@ CALL update_payment(@can_bk_id2, @s, @m);
 CALL cancel_booking(@can_bk_id2, @can_msg);
 CALL assert_eq('cancel_booking', '11.4 Cancelling paid booking returns appropriate message',
     'Booking has already been cancelled or paid', @can_msg);
+
+
+-- 11.5 Cancellation reduces member payment_due by the room price (no fine on 1st cancel)
+CALL insert_new_member('test_can3', 'Pass123!', 'test_can3@example.com');
+CALL make_booking('B1', '2030-09-03', '10:00:00', 'test_can3', @can_bk_id3, @s, @m);
+-- payment_due is now 8.00; after cancel with no fine it should be 0.00
+CALL cancel_booking(@can_bk_id3, @can_msg);
+CALL assert_decimal_eq('cancel_booking', '11.5 Cancellation reduces payment_due (no fine on 1st)',
+    0.00, (SELECT payment_due FROM members WHERE id = 'test_can3'));
