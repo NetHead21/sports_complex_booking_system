@@ -495,3 +495,11 @@ VALUES
 SET @fine_bk1 = (SELECT id FROM bookings WHERE member_id = 'test_fine' AND booked_date = '2030-10-01');
 SET @fine_bk2 = (SELECT id FROM bookings WHERE member_id = 'test_fine' AND booked_date = '2030-10-02');
 SET @fine_bk3 = (SELECT id FROM bookings WHERE member_id = 'test_fine' AND booked_date = '2030-10-03');
+
+
+
+-- 12.1 1st consecutive cancellation: no fine (cancel most recent booking first)
+-- check_cancellation sees: bk3(CANCELLED), bk2(UNPAID) → stops → count = 1 → no fine
+CALL cancel_booking(@fine_bk3, @can_msg);
+CALL assert_decimal_eq('check_cancellation', '12.1 1st cancellation: no fine, payment_due = 20.00',
+    20.00, (SELECT payment_due FROM members WHERE id = 'test_fine'));
