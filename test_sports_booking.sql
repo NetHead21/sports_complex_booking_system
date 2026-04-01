@@ -567,3 +567,11 @@ CALL assert_int_eq('payment_check trigger',
 
 -- Setup
 CALL insert_new_member('test_aud1', 'Pass123!', 'test_aud1@example.com');
+
+
+-- 14.1 INSERT trigger: making a new booking creates an INSERT audit record
+CALL make_booking('B1', '2030-12-01', '09:00:00', 'test_aud1', @aud_bk_id, @s, @m);
+CALL assert_int_eq('booking_audit triggers',
+    '14.1 INSERT trigger: new booking creates INSERT audit record',
+    1, (SELECT COUNT(*) FROM booking_audit
+        WHERE booking_id = @aud_bk_id AND action = 'INSERT'));
