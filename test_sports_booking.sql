@@ -535,3 +535,18 @@ VALUES
 SET @chk_bk = (SELECT id FROM bookings WHERE member_id = 'test_chk1' AND booked_date = '2030-11-03');
 CALL assert_int_eq('check_cancellation', '12.4 Non-consecutive cancellations: count resets at non-cancelled',
     1, check_cancellation(@chk_bk));
+
+
+-- ============================================================
+-- SECTION 13: payment_check TRIGGER
+-- ============================================================
+
+
+-- 13.1 Deleting a member with payment_due > 0 inserts a row into pending_terminations
+CALL insert_new_member('test_trg1', 'Pass123!', 'test_trg1@example.com');
+UPDATE members SET payment_due = 15.00 WHERE id = 'test_trg1';
+CALL delete_member('test_trg1');
+CALL assert_int_eq('payment_check trigger',
+    '13.1 Member with payment_due > 0 added to pending_terminations',
+    1, (SELECT COUNT(*) FROM pending_terminations WHERE id = 'test_trg1'));
+DELETE FROM pending_terminations WHERE id = 'test_trg1';
