@@ -575,3 +575,11 @@ CALL assert_int_eq('booking_audit triggers',
     '14.1 INSERT trigger: new booking creates INSERT audit record',
     1, (SELECT COUNT(*) FROM booking_audit
         WHERE booking_id = @aud_bk_id AND action = 'INSERT'));
+
+
+-- 14.2 UPDATE trigger: updating a booking creates an UPDATE audit record
+UPDATE bookings SET notes = 'test update' WHERE id = @aud_bk_id;
+CALL assert_int_eq('booking_audit triggers',
+    '14.2 UPDATE trigger: booking update creates UPDATE audit record',
+    1, (SELECT COUNT(*) FROM booking_audit
+        WHERE booking_id = @aud_bk_id AND action = 'UPDATE'));
