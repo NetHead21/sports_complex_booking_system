@@ -468,3 +468,13 @@ CALL make_booking('MPF1', CURDATE(), '08:00:00', 'test_can4', @can_bk_id4, @s, @
 CALL cancel_booking(@can_bk_id4, @can_msg);
 CALL assert_eq('cancel_booking', '11.6 Cancel on booked date returns appropriate message',
     'Cancellation cannot be done on/after the booked date', @can_msg);
+
+
+-- ============================================================
+-- SECTION 12: Consecutive Cancellation Fine
+--             (cancel_booking + check_cancellation function)
+-- ============================================================
+-- Direct inserts are used here to control datetime_of_booking ordering,
+-- which determines what check_cancellation counts as "consecutive".
+-- The function reads bookings DESC by datetime_of_booking and counts
+-- consecutive CANCELLED statuses from the most recent outward.
