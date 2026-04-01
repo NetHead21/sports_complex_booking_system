@@ -489,3 +489,9 @@ VALUES
     ('T1', '2030-10-01', '09:00:00', 'test_fine', '2030-01-01 10:00:00', 'UNPAID', 10.00),
     ('T1', '2030-10-02', '09:00:00', 'test_fine', '2030-01-01 11:00:00', 'UNPAID', 10.00),
     ('T1', '2030-10-03', '09:00:00', 'test_fine', '2030-01-01 12:00:00', 'UNPAID', 10.00);
+
+
+-- Grab each booking ID
+SET @fine_bk1 = (SELECT id FROM bookings WHERE member_id = 'test_fine' AND booked_date = '2030-10-01');
+SET @fine_bk2 = (SELECT id FROM bookings WHERE member_id = 'test_fine' AND booked_date = '2030-10-02');
+SET @fine_bk3 = (SELECT id FROM bookings WHERE member_id = 'test_fine' AND booked_date = '2030-10-03');
