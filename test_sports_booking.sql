@@ -459,3 +459,12 @@ CALL make_booking('B1', '2030-09-03', '10:00:00', 'test_can3', @can_bk_id3, @s, 
 CALL cancel_booking(@can_bk_id3, @can_msg);
 CALL assert_decimal_eq('cancel_booking', '11.5 Cancellation reduces payment_due (no fine on 1st)',
     0.00, (SELECT payment_due FROM members WHERE id = 'test_can3'));
+
+
+-- 11.6 Cancelling a booking on the booked date itself returns appropriate message
+-- (make_booking allows today; cancel_booking blocks cancellation on/after the date)
+CALL insert_new_member('test_can4', 'Pass123!', 'test_can4@example.com');
+CALL make_booking('MPF1', CURDATE(), '08:00:00', 'test_can4', @can_bk_id4, @s, @m);
+CALL cancel_booking(@can_bk_id4, @can_msg);
+CALL assert_eq('cancel_booking', '11.6 Cancel on booked date returns appropriate message',
+    'Cancellation cannot be done on/after the booked date', @can_msg);
