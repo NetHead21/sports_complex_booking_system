@@ -482,3 +482,10 @@ CALL assert_eq('cancel_booking', '11.6 Cancel on booked date returns appropriate
 
 CALL insert_new_member('test_fine', 'Pass123!', 'test_fine@example.com');
 UPDATE members SET payment_due = 30.00 WHERE id = 'test_fine';
+
+
+INSERT INTO bookings (room_id, booked_date, booked_time, member_id, datetime_of_booking, payment_status, total_amount)
+VALUES
+    ('T1', '2030-10-01', '09:00:00', 'test_fine', '2030-01-01 10:00:00', 'UNPAID', 10.00),
+    ('T1', '2030-10-02', '09:00:00', 'test_fine', '2030-01-01 11:00:00', 'UNPAID', 10.00),
+    ('T1', '2030-10-03', '09:00:00', 'test_fine', '2030-01-01 12:00:00', 'UNPAID', 10.00);
