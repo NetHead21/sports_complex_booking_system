@@ -550,3 +550,12 @@ CALL assert_int_eq('payment_check trigger',
     '13.1 Member with payment_due > 0 added to pending_terminations',
     1, (SELECT COUNT(*) FROM pending_terminations WHERE id = 'test_trg1'));
 DELETE FROM pending_terminations WHERE id = 'test_trg1';
+
+
+-- 13.2 Deleting a member with payment_due = 0 does NOT insert into pending_terminations
+CALL insert_new_member('test_trg2', 'Pass123!', 'test_trg2@example.com');
+-- payment_due defaults to 0.00
+CALL delete_member('test_trg2');
+CALL assert_int_eq('payment_check trigger',
+    '13.2 Member with payment_due = 0 not added to pending_terminations',
+    0, (SELECT COUNT(*) FROM pending_terminations WHERE id = 'test_trg2'));
