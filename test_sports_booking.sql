@@ -441,3 +441,12 @@ CALL assert_eq('cancel_booking', '11.2 Booking status set to CANCELLED',
 CALL cancel_booking(@can_bk_id1, @can_msg);
 CALL assert_eq('cancel_booking', '11.3 Re-cancelling returns already cancelled message',
     'Booking has already been cancelled or paid', @can_msg);
+
+
+-- 11.4 Cancelling an already-paid booking returns appropriate message
+CALL insert_new_member('test_can2', 'Pass123!', 'test_can2@example.com');
+CALL make_booking('AR', '2030-09-02', '10:00:00', 'test_can2', @can_bk_id2, @s, @m);
+CALL update_payment(@can_bk_id2, @s, @m);
+CALL cancel_booking(@can_bk_id2, @can_msg);
+CALL assert_eq('cancel_booking', '11.4 Cancelling paid booking returns appropriate message',
+    'Booking has already been cancelled or paid', @can_msg);
