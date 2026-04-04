@@ -630,3 +630,13 @@ FROM test_results;
 -- Cleanup all test data
 CALL cleanup_test_data();
 DELETE FROM pending_terminations WHERE id LIKE 'test%';
+
+
+-- Cleanup test infrastructure
+DROP PROCEDURE IF EXISTS log_test;
+DROP PROCEDURE IF EXISTS assert_eq;
+DROP PROCEDURE IF EXISTS assert_int_eq;
+DROP PROCEDURE IF EXISTS assert_decimal_eq;
+DROP PROCEDURE IF EXISTS cleanup_test_data;
+-- Keep test_results so you can review results after running:
+--   SELECT * FROM test_results ORDER BY id;
