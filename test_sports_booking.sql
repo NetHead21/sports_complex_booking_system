@@ -616,3 +616,12 @@ SELECT
     message
 FROM test_results
 ORDER BY id;
+
+
+-- Summary
+SELECT
+    COUNT(*)                                                  AS total_tests,
+    SUM(status = 'PASS')                                      AS passed,
+    SUM(status = 'FAIL')                                      AS failed,
+    CONCAT(ROUND(SUM(status = 'PASS') / COUNT(*) * 100, 1), '%') AS pass_rate
+FROM test_results;
