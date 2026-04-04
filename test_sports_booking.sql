@@ -601,3 +601,18 @@ CALL assert_int_eq('booking_audit triggers',
     1, (SELECT COUNT(*) FROM booking_audit
         WHERE booking_id = @del_bk_id AND action = 'DELETE'));
 
+
+
+-- ============================================================
+-- SECTION 15: RESULTS & CLEANUP
+-- ============================================================
+
+-- Full results
+SELECT
+    id,
+    test_group,
+    test_name,
+    status,
+    message
+FROM test_results
+ORDER BY id;
