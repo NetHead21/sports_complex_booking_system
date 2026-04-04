@@ -625,3 +625,8 @@ SELECT
     SUM(status = 'FAIL')                                      AS failed,
     CONCAT(ROUND(SUM(status = 'PASS') / COUNT(*) * 100, 1), '%') AS pass_rate
 FROM test_results;
+
+
+-- Cleanup all test data
+CALL cleanup_test_data();
+DELETE FROM pending_terminations WHERE id LIKE 'test%';
