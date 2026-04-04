@@ -591,3 +591,13 @@ CALL assert_int_eq('booking_audit triggers',
     '14.3 Cancel detection: cancellation creates CANCEL audit record',
     1, (SELECT COUNT(*) FROM booking_audit
         WHERE booking_id = @aud_bk_id AND action = 'CANCEL'));
+
+
+-- 14.4 DELETE trigger: deleting a booking creates a DELETE audit record
+SET @del_bk_id = @aud_bk_id;
+DELETE FROM bookings WHERE id = @del_bk_id;
+CALL assert_int_eq('booking_audit triggers',
+    '14.4 DELETE trigger: deleting a booking creates DELETE audit record',
+    1, (SELECT COUNT(*) FROM booking_audit
+        WHERE booking_id = @del_bk_id AND action = 'DELETE'));
+
